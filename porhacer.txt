@@ -1,0 +1,15 @@
+crear rama DEV
+establecer en rama DEV
+poner codeclimate
+poner circleCI
+crear cada luchador
+establecer equipos
+estableces sus movimientos
+establecer posiciones predeterminadas de las fichas para cada equipo
+establecer que blanco se mueve primero 
+establecer ataque de peones
+establecer sistema de turnos
+establecer establecer perdida de soldado
+dibujar tablero
+TESTEAR ABSOLUTAMENTE TODO
+dar opcion de tirar la espada al mar (re de puto rendirse)
