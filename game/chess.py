@@ -1,6 +1,6 @@
 
 
-from board import Board
+from game.board import Board
 
 
 class Chess:
@@ -8,10 +8,8 @@ class Chess:
     def __init__(self):
 
         self.__board__ = Board()
-
         self.__turn__ = "WHITE"
         
-
     def move(
 
         self,
