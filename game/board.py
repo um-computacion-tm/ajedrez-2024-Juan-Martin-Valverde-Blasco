@@ -10,13 +10,11 @@ class Board:
                 col.append(None)
             self.__positions__.append(col)
 
-        #lugar de los alfiles
         self.__positions__[0][0] = Rook("BLACK") #alfil negro
         self.__positions__[0][7] = Rook("BLACK") #alfil negro
         self.__positions__[7][7] = Rook("WHITE") #alfil balnco
         self.__positions__[7][0] = Rook("WHITE") #alfil blanco
 
-        #lugares peon
         self.__positions__[1][0] = Pawn("BLACK") #peon negro
         self.__positions__[1][1] = Pawn("BLACK") #peon negro
         self.__positions__[1][2] = Pawn("BLACK") #peon negro
@@ -35,26 +33,28 @@ class Board:
         self.__positions__[6][7] = Pawn("WHITE") #peon blanco
 
         
-        self.__positions__[0][1] = Knight("BLACK") 
-        self.__positions__[0][6] = Knight("BLACK") 
-        self.__positions__[7][1] = Knight("WHITE") 
-        self.__positions__[7][6] = Knight("WHITE") 
+        self.__positions__[0][1] = Knight("BLACK") #caballo negro 
+        self.__positions__[0][6] = Knight("BLACK") #caballo negro
+        self.__positions__[7][1] = Knight("WHITE") #caballo blanco
+        self.__positions__[7][6] = Knight("WHITE") #caballo blanco
 
         
-        self.__positions__[0][2] = Bishop("BLACK") 
-        self.__positions__[0][5] = Bishop("BLACK") 
-        self.__positions__[7][2] = Bishop("WHITE") 
-        self.__positions__[7][5] = Bishop("WHITE") 
+        self.__positions__[0][2] = Bishop("BLACK") #torre negra
+        self.__positions__[0][5] = Bishop("BLACK") #torre negra
+        self.__positions__[7][2] = Bishop("WHITE") #torre blanca
+        self.__positions__[7][5] = Bishop("WHITE") #torre blanca
 
     
-        self.__positions__[0][3] = Queen("BLACK") 
-        self.__positions__[7][3] = Queen("WHITE") 
+        self.__positions__[0][3] = Queen("BLACK") #reina negra
+        self.__positions__[7][3] = Queen("WHITE") #reina blanca
 
 
         
-        self.__positions__[0][4] = King("BLACK") 
-        self.__positions__[7][4] = King("WHITE") 
+        self.__positions__[0][4] = King("BLACK") #rey negro
+        self.__positions__[7][4] = King("WHITE") #rey blanco
     
+
+
     def get_piece(self, row, col):
         piece = self.__positions__[row][col]
         if piece is None:
@@ -185,3 +185,41 @@ class Board:
 #╚═╧═╧═╧═╧═╧═╧═╧═╝┊
 #╰a┈b┈c┈d┈e┈f┈g┈h┈╯
 
+
+def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
+    # Verificar si el movimiento es en línea recta horizontal o vertical
+    if from_row != to_row and from_col != to_col:
+        return False
+
+    # Verificar si el camino está libre de otras piezas
+    if from_row == to_row:  # Movimiento horizontal
+        step = 1 if to_col > from_col else -1
+        for col in range(from_col + step, to_col, step):
+            if board[from_row][col] is not None:
+                return False
+    elif from_col == to_col:  # Movimiento vertical
+        step = 1 if to_row > from_row else -1
+        for row in range(from_row + step, to_row, step):
+            if board[row][from_col] is not None:
+                return False
+
+    return True
+
+# Ejemplo de uso:
+# Crear un tablero vacío (None representa una casilla vacía)
+board = [[None for _ in range(8)] for _ in range(8)]
+
+# Colocar una torre en la posición (0, 0)
+board[0][0] = "ROOK"
+
+# Verificar si el movimiento de (0, 0) a (0, 5) es válido
+print(is_valid_rook_move(board, 0, 0, 0, 5))  # Debería imprimir True
+
+# Verificar si el movimiento de (0, 0) a (5, 0) es válido
+print(is_valid_rook_move(board, 0, 0, 5, 0))  # Debería imprimir True
+
+# Colocar una pieza en el camino
+board[0][3] = "PAWN"
+
+# Verificar si el movimiento de (0, 0) a (0, 5) es válido
+print(is_valid_rook_move(board, 0, 0, 0, 5))  # Debería imprimir False

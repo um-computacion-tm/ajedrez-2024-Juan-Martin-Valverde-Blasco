@@ -1,26 +1,49 @@
-class Pieza:
-    def __init__(self, equipo, posicion):
-        self.equipo = equipo  # "blancas" o "negras"
-        self.posicion = posicion  # Posición en el tablero, como (fila, columna)
-        self.movimientos = []  # Movimientos posibles
-        self.ataques = []  # Movimientos de ataque posibles
 
-    def actualizar_movimientos(self):
-        raise NotImplementedError("Este método debe ser implementado por las clases hijas")
+class Piece:
+    def __init__(self, color):
+        self.__color__ = color
+        self.__type__ = None
 
-    def mover(self, nueva_posicion):
-        if nueva_posicion in self.movimientos:
-            self.posicion = nueva_posicion
-            self.actualizar_movimientos()
-            return True
-        return False
 
-    def atacar(self, objetivo_posicion):
-        if objetivo_posicion in self.ataques:
-            self.posicion = objetivo_posicion
-            self.actualizar_movimientos()
-            return True
-        return False
+class Rook(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "ROOK" 
 
-    def __repr__(self):
-        return f"{self.__class__.__name__}({self.equipo}, {self.posicion})"
+# No puedo hacer la funcion aca porque me da un error de importacion circular (En board importo piece y en piece importo board)
+    # def permited_move_rook(self, from_row, from_col, to_row, to_col):
+    #     piece = self.board.get_piece(from_row, from_col)
+    #     if piece.__type__ == "ROOK":
+    #         if to_row == from_row and to_col != from_col:
+    #             return True
+    #         elif to_col == from_col and to_row != from_row:
+    #             return True
+    #         else:
+    #             return False
+
+
+class Pawn(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "PAWN"
+
+class Knight(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "KNIGHT"
+
+
+class Bishop(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "BISHOP"
+
+class Queen(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "QUEEN"
+
+class King(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "KING"
