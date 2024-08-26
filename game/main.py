@@ -1,6 +1,4 @@
 from game.chess import Chess
-from game.board import Board
-from game.piece import Piece
 
 class Cli():
     def main(self):
@@ -12,18 +10,16 @@ class Cli():
             from_col = int(input("From col: "))
             print("The piece you have chosen is: ", chess.__board__.get_piece(from_row, from_col))
             
-            # Intentamos mover la pieza si es del color correcto
             move_by_color = chess.move_correct_color(from_row, from_col)
-            if move_by_color is None:  # Si no hay error, se seleccionó la pieza correcta
+            if move_by_color is None:  
                 return from_row, from_col
             else:
-                print(move_by_color)  # Si hay un error, se vuelve a pedir la pieza
+                print(move_by_color)  
 
 
 
     def play(self):
         chess = Chess() 
-        #board = Board() #No se usa porque si creo un board aca esoy inhiendo al otro board, estoy como creando un board nuevo que no le he movido ninguna pieza
         a = "y"
         try:
             while a == "y":

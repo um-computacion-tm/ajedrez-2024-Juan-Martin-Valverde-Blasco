@@ -1,6 +1,6 @@
 import unittest
 from game.chess import Chess
-from unittest.mock import patch, call, Mock
+from unittest.mock import patch
 
 class TestChess(unittest.TestCase):
     def setUp(self):
