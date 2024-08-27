@@ -130,31 +130,57 @@ class Board:
 
         self.show_board()
 
-    
     def show_board(self):
 
-        print("    ", end="")
-        for col in range(8):
-            print(f"    {col} ", end="")
-        print() 
-
+        top_border = "╔══╤══╤══╤══╤══╤══╤══╤══╗"
+        middle_border = "╟──┼──┼──┼──┼──┼──┼──┼──╢"
+        bottom_border = "╚══╧══╧══╧══╧══╧══╧══╧══╝"
+        
+        print(top_border)
+        
         for row in range(8):
-            print(f" {row} |", end="")  
-
+            # Imprime la fila de piezas con su respectivo número
+            print("║", end="")
             for col in range(8):
                 piece = self.__positions__[row][col]
                 if piece is None:
-                    print("    ", end=" |")  
+                    # Alternar entre espacios vacíos y casillas oscuras (░)
+                    if (row + col) % 2 == 0:
+                        print("  │", end="")
+                    else:
+                        print("░░│", end="")
                 else:
-                    print(f" {piece.__type__[0]}{piece.__color__[0]} ", end=" |")  
-            print()
-            print("    " + "------" * 8 + "")  
+                    print(f"{piece.__str__()}│", end="")
 
+            print(f"║{8 - row}")  # Imprimir el número de la fila al final
+
+            if row < 7:
+                print(middle_border)  # Imprime las líneas intermedias
+
+        print(bottom_border)  # Imprime la línea inferior
+
+        # Imprimir las coordenadas de las columnas (a-h)
+        print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")
+
+# se imprimira asi:
+# 
+# |
+# |
+# |
+# | 
+# |
+# |
+#
 # board = Board()
 # board.show_board()
 # print(board.get_piece(0,0))
 # print(board.get_piece(7,0))
-#   def inicializar_tablero(self):
+# 
+# 
+# 
+# 
+# 
+# def inicializar_tablero(self):
 #       return [
 #            ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
 #            ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
@@ -205,21 +231,3 @@ def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
 
     return True
 
-# Ejemplo de uso:
-# Crear un tablero vacío (None representa una casilla vacía)
-board = [[None for _ in range(8)] for _ in range(8)]
-
-# Colocar una torre en la posición (0, 0)
-board[0][0] = "ROOK"
-
-# Verificar si el movimiento de (0, 0) a (0, 5) es válido
-print(is_valid_rook_move(board, 0, 0, 0, 5))  # Debería imprimir True
-
-# Verificar si el movimiento de (0, 0) a (5, 0) es válido
-print(is_valid_rook_move(board, 0, 0, 5, 0))  # Debería imprimir True
-
-# Colocar una pieza en el camino
-board[0][3] = "PAWN"
-
-# Verificar si el movimiento de (0, 0) a (0, 5) es válido
-print(is_valid_rook_move(board, 0, 0, 0, 5))  # Debería imprimir False

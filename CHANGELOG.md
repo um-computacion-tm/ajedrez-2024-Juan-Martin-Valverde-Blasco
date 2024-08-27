@@ -50,3 +50,9 @@ ________________________________________________________________________________
                                                                    │ 26-Agosto 2024 19:08 │ 
                                                                    └──────────────────────┘
 - after almost 5 houers of coding i think the board is tested
+_____________________________________________________________________________________________________________________________________________________
+                                                                   ┌──────────────────────┐
+                                                                   │ 27-Agosto 2024 09:47 │ 
+                                                                   └──────────────────────┘
+- a lot of changes were made, and boar function and how the pieces are shown is also changed, sex
+- i also made coverage work, it was something so stupid that i noticed because a was bored during class and i started reading the files, it results that __init__.py for test file it wasn't a dot it was a "," so it never took it like a init, like charles lecler once said, "i am stupid"

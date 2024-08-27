@@ -40,6 +40,11 @@ class TestPiece(unittest.TestCase):
         self.assertEqual(king.__color__, "WHITE")
         self.assertEqual(king.__type__, "KING")
 
+    def test_str_not_implemented(self):
+        piece = Piece("WHITE")
+        with self.assertRaises(NotImplementedError):
+            str(piece)
+
 class TestMain(unittest.TestCase):  
     @patch('builtins.print')
     @patch ('builtins.input', side_effect = ["e"])
