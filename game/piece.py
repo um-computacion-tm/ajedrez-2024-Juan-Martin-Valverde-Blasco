@@ -1,26 +1,59 @@
-class Pieza:
-    def __init__(self, equipo, posicion):
-        self.equipo = equipo  # "blancas" o "negras"
-        self.posicion = posicion  # Posición en el tablero, como (fila, columna)
-        self.movimientos = []  # Movimientos posibles
-        self.ataques = []  # Movimientos de ataque posibles
+class Piece:
+    def __init__(self, color):
+        self.__color__ = color
+        self.__type__ = None
+    def __str__(self):
+        raise NotImplementedError("Subclasses must implement this method.")
 
-    def actualizar_movimientos(self):
-        raise NotImplementedError("Este método debe ser implementado por las clases hijas")
+class Rook(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "ROOK"
 
-    def mover(self, nueva_posicion):
-        if nueva_posicion in self.movimientos:
-            self.posicion = nueva_posicion
-            self.actualizar_movimientos()
-            return True
-        return False
+    def __str__(self):
+        return "♜" if self.__color__ == "white" else "♖"
 
-    def atacar(self, objetivo_posicion):
-        if objetivo_posicion in self.ataques:
-            self.posicion = objetivo_posicion
-            self.actualizar_movimientos()
-            return True
-        return False
+class Knight(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "KNIGHT"
 
-    def __repr__(self):
-        return f"{self.__class__.__name__}({self.equipo}, {self.posicion})"
+    def __str__(self):
+        return "♞" if self.__color__ == "white" else "♘"
+
+class Bishop(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "BISHOP"
+
+    def __str__(self):
+        return "♝" if self.__color__ == "white" else "♗"
+
+class Queen(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "QUEEN"
+
+    def __str__(self):
+        return "♛" if self.__color__ == "white" else "♕"
+
+class King(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "KING"
+
+    def __str__(self):
+        return "♚" if self.__color__ == "white" else "♔"
+
+class Pawn(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.__type__ = "PAWN"
+
+    def __str__(self):
+        return "♟" if self.__color__ == "white" else "♙"
+        
+        
+        
+        
+        

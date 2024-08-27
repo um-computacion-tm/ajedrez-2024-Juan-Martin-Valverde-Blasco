@@ -1,35 +1,233 @@
-from game.rook import Rook
-class Ajedrez:
-    def __init__(self):
-        self.tablero = self.inicializar_tablero()
-        self.turno = "blancas"
+from game.piece import Rook, Pawn, Knight, Bishop, Queen, King
 
-    def inicializar_tablero(self):
-        return [
-            ["r", "n", "b", "q", "k", "b", "n", "r"],
-            ["p", "p", "p", "p", "p", "p", "p", "p"],
-            [" ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " "],
-            ["P", "P", "P", "P", "P", "P", "P", "P"],
-            ["R", "N", "B", "Q", "K", "B", "N", "R"]
-        ]
+#esta funcion inicia el tablero y establece las posiciones de las piezas
+class Board:
+    def __init__(self): 
+        self.__positions__ = []
+        for _ in range(8):
+            col = []
+            for _ in range(8):
+                col.append(None)
+            self.__positions__.append(col)
 
-    def imprimir_tablero(self):
-        for fila in self.tablero:
-            print(" ".join(fila))
-        print()
+        self.__positions__[0][0] = Rook("BLACK") #alfil negro
+        self.__positions__[0][7] = Rook("BLACK") #alfil negro
+        self.__positions__[7][7] = Rook("WHITE") #alfil balnco
+        self.__positions__[7][0] = Rook("WHITE") #alfil blanco
 
-    def convertir_coordenadas(self, coordenada):
-        columnas = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7}
-        filas = {"1": 7, "2": 6, "3": 5, "4": 4, "5": 3, "6": 2, "7": 1, "8": 0}
-        columna = columnas[coordenada[0]]
-        fila = filas[coordenada[1]]
-        return (fila, columna)
+        self.__positions__[1][0] = Pawn("BLACK") #peon negro
+        self.__positions__[1][1] = Pawn("BLACK") #peon negro
+        self.__positions__[1][2] = Pawn("BLACK") #peon negro
+        self.__positions__[1][3] = Pawn("BLACK") #peon negro
+        self.__positions__[1][4] = Pawn("BLACK") #peon negro
+        self.__positions__[1][5] = Pawn("BLACK") #peon negro
+        self.__positions__[1][6] = Pawn("BLACK") #peon negro
+        self.__positions__[1][7] = Pawn("BLACK") #peon negro
+        self.__positions__[6][0] = Pawn("WHITE") #peon blanco
+        self.__positions__[6][1] = Pawn("WHITE") #peon blanco
+        self.__positions__[6][2] = Pawn("WHITE") #peon blanco
+        self.__positions__[6][3] = Pawn("WHITE") #peon blanco
+        self.__positions__[6][4] = Pawn("WHITE") #peon blanco
+        self.__positions__[6][5] = Pawn("WHITE") #peon blanco
+        self.__positions__[6][6] = Pawn("WHITE") #peon blanco
+        self.__positions__[6][7] = Pawn("WHITE") #peon blanco
+
+        
+        self.__positions__[0][1] = Knight("BLACK") #caballo negro 
+        self.__positions__[0][6] = Knight("BLACK") #caballo negro
+        self.__positions__[7][1] = Knight("WHITE") #caballo blanco
+        self.__positions__[7][6] = Knight("WHITE") #caballo blanco
+
+        
+        self.__positions__[0][2] = Bishop("BLACK") #torre negra
+        self.__positions__[0][5] = Bishop("BLACK") #torre negra
+        self.__positions__[7][2] = Bishop("WHITE") #torre blanca
+        self.__positions__[7][5] = Bishop("WHITE") #torre blanca
+
+    
+        self.__positions__[0][3] = Queen("BLACK") #reina negra
+        self.__positions__[7][3] = Queen("WHITE") #reina blanca
 
 
+        
+        self.__positions__[0][4] = King("BLACK") #rey negro
+        self.__positions__[7][4] = King("WHITE") #rey blanco
+    
 
-if __name__ == "__main__":
-    juego = Ajedrez()
-    juego.jugar()
+
+    def get_piece(self, row, col):
+        piece = self.__positions__[row][col]
+        if piece is None:
+            return "No piece"
+        return ({piece.__type__}, {piece.__color__})
+    
+    def permited_move(self, from_row, from_col, to_row, to_col):
+        piece = self.__positions__[from_row][from_col]
+
+
+        if piece.__type__ == "ROOK":
+            if to_row == from_row and to_col != from_col:
+                return True
+            elif to_col == from_col and to_row != from_row:
+                return True
+            else:
+                return False
+        if piece.__type__ == "KNIGHT":
+
+            valid_moves = [
+                (2, 1), (2, -1), (-2, 1), (-2, -1),
+                (1, 2), (1, -2), (-1, 2), (-1, -2)]
+            if (from_row - to_row, from_col - to_col) in valid_moves:
+                return True
+            else:
+                return False
+
+        
+        if piece.__type__ == "BISHOP":
+            if abs(to_row - from_row) == abs(to_col - from_col):
+                return True
+            else:
+                return False
+        
+        
+        if piece.__type__ == "QUEEN":
+
+        
+            n = []
+            if to_row == from_row and to_col != from_col:
+                return True
+            elif to_col == from_col and to_row != from_row:
+                return True
+            elif abs(to_row - from_row) == abs(to_col - from_col):
+                return True
+            else:
+                return False
+
+        
+        if piece.__type__ == "KING":
+
+            if abs(from_row - to_row) <= 1 and abs(from_col - to_col) <= 1 and not (from_row == to_row and from_col == to_col):
+                return True
+            else: 
+                return False
+        
+    def move_piece(self, from_row, from_col, to_row, to_col):
+        
+        piece = self.__positions__[from_row][from_col]
+
+        if piece is None:
+            print("No piece to move")
+            return "No piece to move"
+        elif self.permited_move(from_row, from_col, to_row, to_col) == False:
+            print("The piece cannot be moved in this position")
+            return "The piece cannot be moved in this position"
+
+        self.__positions__[to_row][to_col] = piece
+
+        self.__positions__[from_row][from_col] = None
+
+        print(f"Moved piece from: ", {from_row}, {from_col}, "to: ", {to_row}, {to_col})
+
+        self.show_board()
+
+    def show_board(self):
+
+        top_border = "╔══╤══╤══╤══╤══╤══╤══╤══╗"
+        middle_border = "╟──┼──┼──┼──┼──┼──┼──┼──╢"
+        bottom_border = "╚══╧══╧══╧══╧══╧══╧══╧══╝"
+        
+        print(top_border)
+        
+        for row in range(8):
+            # Imprime la fila de piezas con su respectivo número
+            print("║", end="")
+            for col in range(8):
+                piece = self.__positions__[row][col]
+                if piece is None:
+                    # Alternar entre espacios vacíos y casillas oscuras (░)
+                    if (row + col) % 2 == 0:
+                        print("  │", end="")
+                    else:
+                        print("░░│", end="")
+                else:
+                    print(f"{piece.__str__()}│", end="")
+
+            print(f"║{8 - row}")  # Imprimir el número de la fila al final
+
+            if row < 7:
+                print(middle_border)  # Imprime las líneas intermedias
+
+        print(bottom_border)  # Imprime la línea inferior
+
+        # Imprimir las coordenadas de las columnas (a-h)
+        print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")
+
+# se imprimira asi:
+# 
+# |
+# |
+# |
+# | 
+# |
+# |
+#
+# board = Board()
+# board.show_board()
+# print(board.get_piece(0,0))
+# print(board.get_piece(7,0))
+# 
+# 
+# 
+# 
+# 
+# def inicializar_tablero(self):
+#       return [
+#            ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
+#            ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
+#            [" ", " ", " ", " ", " ", " ", " ", " "],
+#            [" ", " ", " ", " ", " ", " ", " ", " "],
+#            [" ", " ", " ", " ", " ", " ", " ", " "],
+#            [" ", " ", " ", " ", " ", " ", " ", " "],
+#            ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
+#            ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
+#        ]
+#print[
+#╔═╤═╤═╤═╤═╤═╤═╤═╗╮
+#║♜│♞│♝│♛│♚│♝│♞│♜║8
+#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
+#║♟│♟│♟│♟│♟│♟│♟│♟║7
+#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
+#║ │░│ │░│ │░│ │░║6
+#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
+#║░│ │░│ │░│ │░│ ║5
+#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
+#║ │░│ │░│ │░│ │░║4
+#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
+#║░│ │░│ │░│ │░│ ║3
+#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
+#║♙│♙│♙│♙│♙│♙│♙│♙║2
+#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
+#║♖│♘│♗│♕│♔│♗│♘│♖║1
+#╚═╧═╧═╧═╧═╧═╧═╧═╝┊
+#╰a┈b┈c┈d┈e┈f┈g┈h┈╯
+
+
+def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
+    # Verificar si el movimiento es en línea recta horizontal o vertical
+    if from_row != to_row and from_col != to_col:
+        return False
+
+    # Verificar si el camino está libre de otras piezas
+    if from_row == to_row:  # Movimiento horizontal
+        step = 1 if to_col > from_col else -1
+        for col in range(from_col + step, to_col, step):
+            if board[from_row][col] is not None:
+                return False
+    elif from_col == to_col:  # Movimiento vertical
+        step = 1 if to_row > from_row else -1
+        for row in range(from_row + step, to_row, step):
+            if board[row][from_col] is not None:
+                return False
+
+    return True
+
