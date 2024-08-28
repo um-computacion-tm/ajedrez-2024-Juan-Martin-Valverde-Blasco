@@ -1,56 +1,57 @@
 import unittest
-
-from unittest.mock import patch, call, Mock
+from unittest.mock import patch, call, MagicMock
 from io import StringIO
-from game.piece import Piece, Rook, Pawn, Knight, Bishop, Queen, King
-from game.main import Cli
+from game.main import Cli, Chess
 
-class TestPiece(unittest.TestCase):
-    def test_piece_init(self):
-        piece = Piece("BLACK")
-        self.assertEqual(piece.__color__, "BLACK")
-        self.assertEqual(piece.__type__, None)
-    def test_rook_init(self):
-        rook = Rook("BLACK")
-        self.assertEqual(rook.__color__, "BLACK")
-        self.assertEqual(rook.__type__, "ROOK")
-
-    def test_pawn_init(self):
-        pawn = Pawn("WHITE")
-        self.assertEqual(pawn.__color__, "WHITE")
-        self.assertEqual(pawn.__type__, "PAWN")
-
-    def test_knight_init(self):
-        knight = Knight("WHITE")
-        self.assertEqual(knight.__color__, "WHITE")
-        self.assertEqual(knight.__type__, "KNIGHT")
-
-    def test_bishop_init(self):
-        bishop = Bishop("WHITE")
-        self.assertEqual(bishop.__color__, "WHITE")
-        self.assertEqual(bishop.__type__, "BISHOP")
-
-    def test_queen_init(self):
-        queen = Queen("WHITE")
-        self.assertEqual(queen.__color__, "WHITE")
-        self.assertEqual(queen.__type__, "QUEEN")
-
-    def test_king_init(self):
-        king = King("WHITE")
-        self.assertEqual(king.__color__, "WHITE")
-        self.assertEqual(king.__type__, "KING")
-
-    def test_str_not_implemented(self):
-        piece = Piece("WHITE")
-        with self.assertRaises(NotImplementedError):
-            str(piece)
 
 class TestMain(unittest.TestCase):  
+
+    def test_main(self):
+        instance = Cli()
+        instance.play = MagicMock()
+        instance.main()
+        instance.play.assert_called_once()
+
     @patch('builtins.print')
     @patch ('builtins.input', side_effect = ["e"])
+
     def test_play_error(self,patched_print, mock_input):
         cli = Cli()
         cli.play()
 
         self.assertEqual(cli.play(), "error")
+    @patch('builtins.input', side_effect=["1", "2"])
+    @patch('builtins.print')
+    def test_verify_move_correct(self, mock_print, mock_input):
+        cli = Cli()
+        chess_mock = MagicMock()
+        chess_mock.__board__ = MagicMock()
+        chess_mock.__board__.get_piece.return_value = "Knight"
+        chess_mock.move_correct_color.return_value = None
 
+        from_row, from_col = cli.verify_move(chess_mock)
+
+        self.assertEqual(from_row, 1)
+        self.assertEqual(from_col, 2)
+        chess_mock.__board__.get_piece.assert_called_once_with(1, 2)
+        chess_mock.move_correct_color.assert_called_once_with(1, 2)
+        mock_print.assert_any_call("The piece you have chosen is: ", "Knight")
+
+    @patch('builtins.input', side_effect=["1", "2", "3", "4"])
+    @patch('builtins.print')
+    def test_verify_move_incorrect_then_correct(self, mock_print, mock_input):
+        cli = Cli()
+        chess_mock = MagicMock()
+        chess_mock.__board__ = MagicMock()
+        chess_mock.__board__.get_piece.side_effect = ["Knight", "Bishop"]
+        chess_mock.move_correct_color.side_effect = ["Wrong color", None]
+
+        from_row, from_col = cli.verify_move(chess_mock)
+
+        self.assertEqual(from_row, 3)
+        self.assertEqual(from_col, 4)
+        self.assertEqual(chess_mock.__board__.get_piece.call_count, 2)
+        self.assertEqual(chess_mock.move_correct_color.call_count, 2)
+        mock_print.assert_any_call("The piece you have chosen is: ", "Knight")
+        mock_print.assert_any_call("Wrong color")
+        mock_print.assert_any_call("The piece you have chosen is: ", "Bishop")

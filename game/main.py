@@ -17,33 +17,29 @@ class Cli():
             else:
                 print(move_by_color)  
 
-
-
     def play(self):
-        chess = Chess() 
+        chess = Chess()
         a = "y"
         try:
-            while a == "y":
-                
+            while a.lower() == "y":
                 from_row, from_col = self.verify_move(chess)
 
                 to_row = int(input("To row: "))
                 to_col = int(input("To col: "))
 
-                chess.move(from_row, from_col,to_row,to_col)
+                chess.move(from_row, from_col, to_row, to_col)
                 print("La pieza que quedo en la posicion es: ", chess.__board__.get_piece(from_row, from_col))
-
                 print("La pieza que esta en la nueva posicion es: ", chess.__board__.get_piece(to_row, to_col))
-                
+
                 a = input("Do you want to continue? (y/n): ")
-                
+
                 chess.change_turn()
                 print("Es turno de: ", chess.__turn__)
 
         except Exception as e:
-            print("error", e)
+            print("Error:", e)
             return "error"
-                
+
 if __name__ == "__main__":
     cli = Cli()
     cli.play()
