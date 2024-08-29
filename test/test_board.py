@@ -100,3 +100,19 @@ class TestBoard(unittest.TestCase):
                
 
         self.assertEqual(self.board.permited_move(4, 4, 2, 4), False)
+
+    def test_move_piece_valid(self):
+        self.board.__positions__[0][0] = Rook("WHITE")
+        result = self.board.move_piece(0, 0, 0, 1)
+        self.assertIsNone(result)
+        self.assertIsNone(self.board.__positions__[0][0])
+        self.assertIsInstance(self.board.__positions__[0][1], Rook)
+
+    def test_move_piece_no_piece(self):
+        result = self.board.move_piece(3, 3, 4, 4)
+        self.assertEqual(result, "No piece to move")
+
+    def test_move_piece_invalid_move(self):
+        self.board.__positions__[0][0] = Rook("WHITE")
+        result = self.board.move_piece(0, 0, 1, 1)  # Movimiento inválido para una torre
+        self.assertEqual(result, "The piece cannot be moved in this position")

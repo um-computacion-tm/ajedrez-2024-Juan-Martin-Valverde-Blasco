@@ -230,4 +230,3 @@ def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
                 return False
 
     return True
-

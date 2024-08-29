@@ -63,3 +63,11 @@ ________________________________________________________________________________
 - piece tested at %100
 - main coverage upgraded to %71
 - global coverge upgraded to %89
+_____________________________________________________________________________________________________________________________________________________
+                                                                   ┌──────────────────────┐
+                                                                   │ 28-Agosto 2024 11:40 │ 
+                                                                   └──────────────────────┘
+- Board tested 
+- board coverage rised to %89
+- global coveragee raised to %90
+- pip version upgraded and coverage also
