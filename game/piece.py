@@ -11,7 +11,7 @@ class Rook(Piece):
         self.__type__ = "ROOK"
 
     def __str__(self):
-        return "♜" if self.__color__ == "white" else "♖"
+        return " ♜" if self.__color__ == "WHITE" else " ♖"
 
 class Knight(Piece):
     def __init__(self, color):
@@ -19,7 +19,7 @@ class Knight(Piece):
         self.__type__ = "KNIGHT"
 
     def __str__(self):
-        return "♞" if self.__color__ == "white" else "♘"
+        return " ♞" if self.__color__ == "WHITE" else " ♘"
 
 class Bishop(Piece):
     def __init__(self, color):
@@ -27,7 +27,7 @@ class Bishop(Piece):
         self.__type__ = "BISHOP"
 
     def __str__(self):
-        return "♝" if self.__color__ == "white" else "♗"
+        return " ♝" if self.__color__ == "WHITE" else " ♗"
 
 class Queen(Piece):
     def __init__(self, color):
@@ -35,7 +35,7 @@ class Queen(Piece):
         self.__type__ = "QUEEN"
 
     def __str__(self):
-        return "♛" if self.__color__ == "white" else "♕"
+        return " ♛" if self.__color__ == "WHITE" else " ♕"
 
 class King(Piece):
     def __init__(self, color):
@@ -43,7 +43,7 @@ class King(Piece):
         self.__type__ = "KING"
 
     def __str__(self):
-        return "♚" if self.__color__ == "white" else "♔"
+        return " ♚" if self.__color__ == "WHITE" else " ♔"
 
 class Pawn(Piece):
     def __init__(self, color):
@@ -51,7 +51,7 @@ class Pawn(Piece):
         self.__type__ = "PAWN"
 
     def __str__(self):
-        return "♟" if self.__color__ == "white" else "♙"
+        return " ♟" if self.__color__ == "WHITE" else " ♙"
         
         
         
