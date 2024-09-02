@@ -134,7 +134,13 @@ Then realiced that the white team was printed on black pieces, it seems that the
 ╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯
 
 BUT NOW THIS GOD DEAM PIECE OF SHIT DOESN'T PRINT THE MOTHERFUCKING BLACK HORSE FROM 8B AND THE TOWER FROM 8A IS WHITE AND ON 8A AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
-
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌─────────────────────────┐
+                                                                  │ 2-Septiembre 2024 20:47 │ 
+                                                                  └─────────────────────────┘
+- Not going to work in the board that will be a problem for te future JMVB
+- Pawn movement added
+- And changed the words to spanish because my dad is testing it ir IRL i have him like a QA
 
 
 

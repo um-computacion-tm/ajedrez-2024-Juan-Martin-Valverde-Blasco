@@ -35,7 +35,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(from_col, 2)
         chess_mock.__board__.get_piece.assert_called_once_with(1, 2)
         chess_mock.move_correct_color.assert_called_once_with(1, 2)
-        mock_print.assert_any_call("The piece you have chosen is: ", "Knight")
+        mock_print.assert_any_call("La pieza que elegiste es: ", "Knight")
 
     @patch('builtins.input', side_effect=["1", "2", "3", "4"])
     @patch('builtins.print')
@@ -52,6 +52,6 @@ class TestMain(unittest.TestCase):
         self.assertEqual(from_col, 4)
         self.assertEqual(chess_mock.__board__.get_piece.call_count, 2)
         self.assertEqual(chess_mock.move_correct_color.call_count, 2)
-        mock_print.assert_any_call("The piece you have chosen is: ", "Knight")
+        mock_print.assert_any_call("La pieza que elegiste es: ", "Knight")
         mock_print.assert_any_call("Wrong color")
-        mock_print.assert_any_call("The piece you have chosen is: ", "Bishop")
+        mock_print.assert_any_call("La pieza que elegiste es: ", "Bishop")
