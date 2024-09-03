@@ -141,7 +141,13 @@ ________________________________________________________________________________
 - Not going to work in the board that will be a problem for te future JMVB
 - Pawn movement added
 - And changed the words to spanish because my dad is testing it ir IRL i have him like a QA
-
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌─────────────────────────┐
+                                                                  │ 3-Septiembre 2024 17:40 │ 
+                                                                  └─────────────────────────┘
+- Circle CI now is working fine 
+- After talking whit walter i decided to put my permited move func inside o they respectives pieces
+- but codeclimate stills not reading my coverage, but locally it is working so, dont know what to do, i gues im going to send my issue right to slank and let the bigs mans work in it
 
 
 
