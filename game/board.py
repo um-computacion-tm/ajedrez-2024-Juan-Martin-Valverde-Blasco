@@ -63,7 +63,7 @@ class Board:
     
     
     # Esta funcion establece el como se va a mover cada pieza alta fiaca explicarlo uno por uno
-    def permited_move(self, from_row, from_col, to_row, to_col):
+    def permited_move(self, from_row, from_col, to_row, to_col): #me va a romper las pelotas con la complejidad? que me conviene mas en board o en pieces
         piece = self.__positions__[from_row][from_col]
 
         if piece.__type__ == 'PAWN':
