@@ -147,7 +147,11 @@ ________________________________________________________________________________
                                                                   └─────────────────────────┘
 - Circle CI now is working fine 
 - After talking whit walter i decided to put my permited move func inside o they respectives pieces
-- but codeclimate stills not reading my coverage, but locally it is working so, dont know what to do, i gues im going to send my issue right to slank and let the bigs mans work in it
+- but codeclimate stills not reading my coverage, but locally it is working so, dont know what to do, i gues im going to send my issue right to slank _____________________________________________________________________________________________________________________________________________________
+                                                                  ┌─────────────────────────┐
+                                                                  │ 4-Septiembre 2024 21:40 │ 
+                                                                  └─────────────────────────┘
+- every movement test was moved from board to piece, wasnt a big change but i came late from the uni and was working on a programing proyect so didnt have enough time to make a fine work here 
 
 
 
