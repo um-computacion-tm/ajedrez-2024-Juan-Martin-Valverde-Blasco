@@ -152,7 +152,11 @@ ________________________________________________________________________________
                                                                   │ 4-Septiembre 2024 21:40 │ 
                                                                   └─────────────────────────┘
 - every movement test was moved from board to piece, wasnt a big change but i came late from the uni and was working on a programing proyect so didnt have enough time to make a fine work here 
-
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌─────────────────────────┐
+                                                                  │ 5-Septiembre 2024 22:00 │ 
+                                                                  └─────────────────────────┘
+- Play function tested in main
 
 
 

@@ -55,3 +55,26 @@ class TestMain(unittest.TestCase):
         mock_print.assert_any_call("La pieza que elegiste es: ", "Knight")
         mock_print.assert_any_call("Wrong color")
         mock_print.assert_any_call("La pieza que elegiste es: ", "Bishop")
+        
+    
+    @patch('builtins.input', side_effect=['6', '0', '5', '0', 'n'])
+    @patch('builtins.print')
+    def test_play(self, mock_print, mock_input):
+        # Mock the Chess class and its methods
+        mock_chess = MagicMock(spec=Chess)
+        mock_chess.__board__.get_piece.side_effect = ["No piece", "Pawn"]
+        mock_chess.__turn__ = "white"
+        # Mock the Cli class and its methods
+        mock_cli = MagicMock(spec=Cli)
+        mock_cli.verify_move.return_value = (6, 0)
+        mock_cli.play = Cli.play.__get__(mock_cli)  # Bind the play method to the mock_cli instance
+        with patch('game.main.Chess', return_value=mock_chess):
+            mock_cli.play()
+        # Verificar que los métodos se llamaron con los argumentos correctos
+        mock_cli.verify_move.assert_called_once_with(mock_chess)
+        mock_chess.move.assert_called_once_with(6, 0, 5, 0)
+        mock_chess.change_turn.assert_called_once()
+        # Verificar las salidas impresas
+        mock_print.assert_any_call("La pieza que quedo en la posicion es: ", "No piece")
+        mock_print.assert_any_call("La pieza que esta en la nueva posicion es: ", "Pawn")
+        mock_print.assert_any_call("Es turno de: ", "white")
