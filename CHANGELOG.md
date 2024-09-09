@@ -164,7 +164,10 @@ ________________________________________________________________________________
 
 - Move piece tested
 - Show board tested
-
-sex
-
-
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌─────────────────────────┐
+                                                                  │ 6-Septiembre 2024 21:00 │ 
+                                                                  └─────────────────────────┘
+- Circular call passed fixing duty
+- Also seen if any of the piece has something else to add
+- Now that i don't have any circular problen i have to start redifining all the tests to get them working, so from now on im on debugging duty

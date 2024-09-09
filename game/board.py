@@ -1,4 +1,11 @@
-from game.piece import Rook, Pawn, Knight, Bishop, Queen, King
+from game.piece import Piece
+from game.rook import Rook
+from game.knight import Knight
+from game.bishop import Bishop
+from game.queen import Queen
+from game.king import King
+from game.pawn import Pawn
+
 
 #esta funcion inicia el tablero y establece las posiciones de las piezas
 class Board:
