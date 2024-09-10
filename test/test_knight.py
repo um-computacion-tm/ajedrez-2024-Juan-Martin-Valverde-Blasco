@@ -12,7 +12,7 @@ from game.pawn import Pawn
 
 
 #class TestKnight(unittest.TestCase):
-#    
+    
 #    def test_permited_move_knight(self):
 #
 #        self.assertEqual(self.board.permited_move(0, 1, 2, 2), True)
@@ -24,10 +24,6 @@ from game.pawn import Pawn
 #        self.assertEqual(self.board.permited_move(4, 4, 2, 5), True)
 #        self.assertEqual(self.board.permited_move(4, 4, 6, 5), True)
 #        self.assertEqual(self.board.permited_move(4, 4, 6, 3), True)
-#        #self.assertEqual(self.board.permited_move(4, 4, 3, 6), True)
-#        #self.assertEqual(self.board.permited_move(4, 4, 3, 2), True)
-#
-#
 #        self.assertEqual(self.board.permited_move(4, 4, 3, 5), False)      
 #
 #    def test_permited_move_line_77(self): 
@@ -35,5 +31,4 @@ from game.pawn import Pawn
 #        self.assertEqual(self.board.__positions__[2][2].__type__, "KNIGHT")
 #        
 #        self.assertEqual(self.board.get_piece(2, 2), ({'KNIGHT'}, {'BLACK'}))
-#        self.assertEqual(self.board.permited_move(2, 2, 4, 3), True)
-#
+#        self.assertEqual(self.board.permited_move(2, 2, 4, 3), True)  

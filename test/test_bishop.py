@@ -10,11 +10,11 @@ from game.queen import Queen
 from game.king import King
 from game.pawn import Pawn
 
-#class TestBishop(unittest.TestCase):
-#
-#    def setUp(self):
-#        self.bishop = Bishop("BLACK")
-#
+class TestBishop(unittest.TestCase):
+
+    def setUp(self):
+        self.bishop = Bishop("BLACK")
+
 #    def test_permited_move_bishop(self):
 #        self.assertEqual(self.bishop.permited_move(3, 3, 4, 4), True)
 #        self.assertEqual(self.bishop.permited_move(3, 3, 2, 4), True)

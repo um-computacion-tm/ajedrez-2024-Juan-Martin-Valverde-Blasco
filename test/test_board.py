@@ -6,19 +6,44 @@ from game.piece import Piece
 from game.rook import Rook
 from game.knight import Knight
 from game.bishop import Bishop
-#from game.queen import Queen
-#from game.king import King
-#from game.pawn import Pawn
-#
-#
-#class TestBoard(unittest.TestCase):
-#    def setUp(self):
-#        self.board = Board()
-#
-#
-#    def test_init_board(self):
-#        self.assertEqual(self.board.__positions__[0][0].__type__, "ROOK")
+from game.queen import Queen
+from game.king import King
+from game.pawn import Pawn
+
+
+class TestBoard(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+
+
+    def test_init_board(self):
+        self.assertEqual(self.board.__positions__[0][0].__type__, "ROOK")
+
+#    @patch('builtins.print')
+#    def test_move_piece(self, patched_print):
+#        self.board.move_piece(0, 0, 0, 1)
+#        self.assertEqual(self.board.get_piece(0, 1), ({'ROOK'}, {'BLACK'}))
+#        self.assertEqual(self.board.get_piece(0, 0), "No piece")
+
+    @patch('builtins.print')
+    def test_move_piece_no_piece(self, patched_print):
+
+        self.assertEqual(self.board.move_piece(3, 3, 4, 4), "No piece to move")
+
+        self.assertEqual(self.board.get_piece(3, 3), "No piece")
+        self.assertEqual(self.board.get_piece(4, 4), "No piece")
 #        
+#    def test_permited_move_knight(self):
+#
+#        self.assertEqual(self.board.permited_move(0, 1, 2, 2), True)
+#        self.assertEqual(self.board.permited_move(0, 1, 2, 0), True)
+#        self.board.__positions__[4][4] = Knight("BLACK")
+#        self.assertEqual(self.board.permited_move(4, 4, 2, 3), True)
+#        self.assertEqual(self.board.permited_move(4, 4, 2, 5), True)
+#        self.assertEqual(self.board.permited_move(4, 4, 6, 5), True)
+#        self.assertEqual(self.board.permited_move(4, 4, 6, 3), True)
+#        self.assertEqual(self.board.permited_move(4, 4, 3, 5), False)      
+#
 #
 #    def test_get_piece_empty(self):
 #        self.assertEqual(self.board.get_piece(3, 3), "No piece")
@@ -31,17 +56,15 @@ from game.bishop import Bishop
 #        self.assertEqual(self.board.get_piece(0, 1), ({'ROOK'}, {'BLACK'}))
 #
 #        self.assertEqual(self.board.get_piece(0, 0), "No piece")
-#
-#    @patch('builtins.print')
-#    def test_move_piece_no_piece(self, patched_print):
-#
-#        self.assertEqual(self.board.move_piece(3, 3, 4, 4), "No piece to move")
-#
-#        self.assertEqual(self.board.get_piece(3, 3), "No piece")
-#        self.assertEqual(self.board.get_piece(4, 4), "No piece")
-#
-#
-#
+
+    @patch('builtins.print')
+    def test_move_piece_no_piece(self, patched_print):
+
+        self.assertEqual(self.board.move_piece(3, 3, 4, 4), "No piece to move")
+
+        self.assertEqual(self.board.get_piece(3, 3), "No piece")
+        self.assertEqual(self.board.get_piece(4, 4), "No piece")
+        
 #    def test_move_piece_valid(self):
 #        self.board.__positions__[0][0] = Rook("WHITE")
 #        result = self.board.move_piece(0, 0, 0, 1)
@@ -49,25 +72,25 @@ from game.bishop import Bishop
 #        self.assertIsNone(self.board.__positions__[0][0])
 #        self.assertIsInstance(self.board.__positions__[0][1], Rook)
 #
-#    def test_move_piece_no_piece(self):
-#        result = self.board.move_piece(3, 3, 4, 4)
-#        self.assertEqual(result, "No piece to move")
-#
+    def test_move_piece_no_piece(self):
+        result = self.board.move_piece(3, 3, 4, 4)
+        self.assertEqual(result, "No piece to move")
+
 #    def test_move_piece_invalid_move(self):
 #        self.board.__positions__[0][0] = Rook("WHITE")
 #        result = self.board.move_piece(0, 0, 1, 1)  # Movimiento inválido para una torre
 #        self.assertEqual(result, "The piece cannot be moved in this position")
 #
-#    @patch('builtins.print')
-#    def test_move_piece_no_piece(self, mock_print):
-#        board = Board()
-#        board.__positions__ = [[None for _ in range(8)] for _ in range(8)]
-#        
-#        result = board.move_piece(0, 0, 1, 0)
-#        
-#        self.assertEqual(result, "No piece to move")
-#        mock_print.assert_called_with("No piece to move")
-#
+    @patch('builtins.print')
+    def test_move_piece_no_piece(self, mock_print):
+        board = Board()
+        board.__positions__ = [[None for _ in range(8)] for _ in range(8)]
+        
+        result = board.move_piece(0, 0, 1, 0)
+        
+        self.assertEqual(result, "No piece to move")
+        mock_print.assert_called_with("No piece to move")
+
 #    @patch('builtins.print')
 #    def test_move_piece_invalid_move(self, mock_print):
 #        board = Board()
@@ -97,9 +120,7 @@ from game.bishop import Bishop
 #        self.assertIsInstance(board.__positions__[1][0], Rook)
 #        mock_print.assert_any_call(f"Moved piece from: ", {0}, {0}, "to: ", {1}, {0})
 #        board.show_board.assert_called_once()
-#
-#
-#
+
 #    @patch('sys.stdout', new_callable=StringIO)
 #    def test_show_board(self, mock_stdout):
 #        board = Board()
