@@ -10,12 +10,7 @@ from game.pawn import Pawn
 #esta funcion inicia el tablero y establece las posiciones de las piezas
 class Board:
     def __init__(self): 
-        self.__positions__ = []
-        for _ in range(8):
-            col = []
-            for _ in range(8):
-                col.append(None)
-            self.__positions__.append(col)
+        self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
 
         self.__positions__[0][0] = Rook("BLACK") #alfil negro
         self.__positions__[0][7] = Rook("BLACK") #alfil negro
@@ -94,37 +89,25 @@ class Board:
 
     # Esta funcion lo que hace es mostrar el tablero
     def show_board(self):
-
-        top_border = "╔══╤══╤══╤══╤══╤══╤══╤══╗"
-        middle_border = "╟──┼──┼──┼──┼──┼──┼──┼──╢"
-        bottom_border = "╚══╧══╧══╧══╧══╧══╧══╧══╝"
-        
-        print(top_border)
-        
-        for row in range(8):
-            
-            print("║", end="")
-            for col in range(8):
-                piece = self.__positions__[row][col]
-                if piece is None:
-                    
-                    if (row + col) % 2 == 0:
-                        print("  │", end="")
+            print("╔══╤══╤══╤══╤══╤══╤══╤══╗")
+            for row in range(8):
+                print("║", end="")
+                for col in range(8):
+                    piece = self.__positions__[row][col]
+                    if piece is None:
+                        if (row + col) % 2 == 0:
+                            print("  ", end="")
+                        else:
+                            print("░░", end="")
                     else:
-                        print("░░│", end="")
-                else:
-                    print(f"{piece.__str__()}│", end="")
-
-            print(f"║{8 - row}")  
-
-            if row < 7:
-                print(middle_border)  
-
-        print(bottom_border)  
-
-        
-        print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")
-    
+                        print(f" {piece}", end="")
+                    if col < 7:
+                        print("│", end="")
+                print(f"║{8 - row}")
+                if row < 7:
+                    print("╟──┼──┼──┼──┼──┼──┼──┼──╢")
+            print("╚══╧══╧══╧══╧══╧══╧══╧══╝")
+            print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")    
     # Esta funcion lo que hace es verificar si el movimiento de la torre es valido
     def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
         
@@ -144,3 +127,13 @@ class Board:
                     return False
 
         return True
+
+    def permited_move(self, from_row, from_col, to_row, to_col):
+        piece = self.__positions__[from_row][from_col]
+
+        piece = self.__positions__[from_row][from_col]
+        if piece is None:
+            return False  # No hay pieza para mover
+        return piece.permited_move(from_row, from_col, to_row, to_col, self)
+    
+    
