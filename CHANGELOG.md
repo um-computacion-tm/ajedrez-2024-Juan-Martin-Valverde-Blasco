@@ -178,6 +178,14 @@ ________________________________________________________________________________
 - Upgrading test coverage before debugging
 _____________________________________________________________________________________________________________________________________________________
                                                                   ┌──────────────────────────┐
-                                                                  │ 11-Septiembre 2024 20:23 │ 
+                                                                  │ 11-Septiembre 2024 09:11 │ 
                                                                   └──────────────────────────┘
 - Some test could get to work again, still trying to understand why my posible moves test are not working again
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 12-Septiembre 2024 15:00 │ 
+                                                                  └──────────────────────────┘
+- Bishop's testing completed
+- Gabi's exceptios were added, just need to deploy them on my code
+- King testing completed
+- Knight testing completed

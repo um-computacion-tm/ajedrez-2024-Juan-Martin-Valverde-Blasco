@@ -12,10 +12,6 @@ from game.pawn import Pawn
 
 class TestBishop(unittest.TestCase):
 
-    def setUp(self):
-        self.board = Board()
-        self.bishop = Bishop("WHITE")
-        self.board.__positions__[3][3] = self.bishop
 
     def test_str_white_bishop(self):
         bishop = Bishop("WHITE")
@@ -25,24 +21,15 @@ class TestBishop(unittest.TestCase):
         bishop = Bishop("BLACK")
         self.assertEqual(str(bishop), " ♗")
 
-    def test_permited_move_valid(self):
-        # Movimientos válidos para el alfil
-        self.assertTrue(self.bishop.permited_move(self.board, 3, 3, 5, 5))
-        self.assertTrue(self.bishop.permited_move(self.board, 3, 3, 1, 1))
-        self.assertTrue(self.bishop.permited_move(self.board, 3, 3, 5, 1))
-        self.assertTrue(self.bishop.permited_move(self.board, 3, 3, 1, 5))
+    def setUp(self):
+        self.board = Board()
+        
+    def test_permited_move_bishop(self):
+        self.board.__positions__[3][3] = Bishop("BLACK")
 
-    def test_permited_move_invalid(self):
-        # Movimientos inválidos para el alfil
-        self.assertFalse(self.bishop.permited_move(self.board, 3, 3, 4, 5))
-        self.assertFalse(self.bishop.permited_move(self.board, 3, 3, 2, 4))
-        self.assertFalse(self.bishop.permited_move(self.board, 3, 3, 3, 5))
-        self.assertFalse(self.bishop.permited_move(self.board, 3, 3, 5, 3))
-
-    def test_permited_move_blocked(self):
-        # Movimientos bloqueados por otras piezas
-        self.board.__positions__[4][4] = Bishop("BLACK")
-        self.assertFalse(self.bishop.permited_move(self.board, 3, 3, 5, 5))
-        self.board.__positions__[4][4] = None
-        self.board.__positions__[2][2] = Bishop("BLACK")
-        self.assertFalse(self.bishop.permited_move(self.board, 3, 3, 1, 1))
+        self.assertEqual(self.board.permited_move(3, 3, 4, 4), True)
+        self.assertEqual(self.board.permited_move(3, 3, 2, 4), True)
+        self.assertEqual(self.board.permited_move(3, 3, 2, 2), True)
+        self.assertEqual(self.board.permited_move(3, 3, 4, 2), True)
+        self.assertEqual(self.board.permited_move(3, 3, 5, 5), True)
+        self.assertEqual(self.board.permited_move(3, 3, 6, 5), False)

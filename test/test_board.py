@@ -32,18 +32,7 @@ class TestBoard(unittest.TestCase):
 
         self.assertEqual(self.board.get_piece(3, 3), "No piece")
         self.assertEqual(self.board.get_piece(4, 4), "No piece")
-#        
-#    def test_permited_move_knight(self):
-#
-#        self.assertEqual(self.board.permited_move(0, 1, 2, 2), True)
-#        self.assertEqual(self.board.permited_move(0, 1, 2, 0), True)
-#        self.board.__positions__[4][4] = Knight("BLACK")
-#        self.assertEqual(self.board.permited_move(4, 4, 2, 3), True)
-#        self.assertEqual(self.board.permited_move(4, 4, 2, 5), True)
-#        self.assertEqual(self.board.permited_move(4, 4, 6, 5), True)
-#        self.assertEqual(self.board.permited_move(4, 4, 6, 3), True)
-#        self.assertEqual(self.board.permited_move(4, 4, 3, 5), False)      
-#
+
 #
 #    def test_get_piece_empty(self):
 #        self.assertEqual(self.board.get_piece(3, 3), "No piece")
