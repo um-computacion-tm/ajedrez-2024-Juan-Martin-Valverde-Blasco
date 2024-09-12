@@ -1,19 +1,22 @@
-from game.piece import Rook, Pawn, Knight, Bishop, Queen, King
+from game.piece import Piece
+from game.rook import Rook
+from game.knight import Knight
+from game.bishop import Bishop
+from game.queen import Queen
+from game.king import King
+from game.pawn import Pawn
+
 
 #esta funcion inicia el tablero y establece las posiciones de las piezas
 class Board:
     def __init__(self): 
-        self.__positions__ = []
-        for _ in range(8):
-            col = []
-            for _ in range(8):
-                col.append(None)
-            self.__positions__.append(col)
+        self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
 
         self.__positions__[0][0] = Rook("BLACK") #alfil negro
         self.__positions__[0][7] = Rook("BLACK") #alfil negro
         self.__positions__[7][7] = Rook("WHITE") #alfil balnco
         self.__positions__[7][0] = Rook("WHITE") #alfil blanco
+
 
         self.__positions__[1][0] = Pawn("BLACK") #peon negro
         self.__positions__[1][1] = Pawn("BLACK") #peon negro
@@ -49,68 +52,21 @@ class Board:
         self.__positions__[7][3] = Queen("WHITE") #reina blanca
 
 
-        
         self.__positions__[0][4] = King("BLACK") #rey negro
         self.__positions__[7][4] = King("WHITE") #rey blanco
     
 
-
+    # Esta funcion lo que hace es obtener las piezas y los equipos
     def get_piece(self, row, col):
         piece = self.__positions__[row][col]
         if piece is None:
             return "No piece"
         return ({piece.__type__}, {piece.__color__})
     
-    def permited_move(self, from_row, from_col, to_row, to_col):
-        piece = self.__positions__[from_row][from_col]
-
-
-        if piece.__type__ == "ROOK":
-            if to_row == from_row and to_col != from_col:
-                return True
-            elif to_col == from_col and to_row != from_row:
-                return True
-            else:
-                return False
-        if piece.__type__ == "KNIGHT":
-
-            valid_moves = [
-                (2, 1), (2, -1), (-2, 1), (-2, -1),
-                (1, 2), (1, -2), (-1, 2), (-1, -2)]
-            if (from_row - to_row, from_col - to_col) in valid_moves:
-                return True
-            else:
-                return False
-
-        
-        if piece.__type__ == "BISHOP":
-            if abs(to_row - from_row) == abs(to_col - from_col):
-                return True
-            else:
-                return False
+    
         
         
-        if piece.__type__ == "QUEEN":
-
-        
-            n = []
-            if to_row == from_row and to_col != from_col:
-                return True
-            elif to_col == from_col and to_row != from_row:
-                return True
-            elif abs(to_row - from_row) == abs(to_col - from_col):
-                return True
-            else:
-                return False
-
-        
-        if piece.__type__ == "KING":
-
-            if abs(from_row - to_row) <= 1 and abs(from_col - to_col) <= 1 and not (from_row == to_row and from_col == to_col):
-                return True
-            else: 
-                return False
-        
+    # Esta funcion lo que hace es mover las piezas        
     def move_piece(self, from_row, from_col, to_row, to_col):
         
         piece = self.__positions__[from_row][from_col]
@@ -130,104 +86,54 @@ class Board:
 
         self.show_board()
 
+
+    # Esta funcion lo que hace es mostrar el tablero
     def show_board(self):
-
-        top_border = "╔══╤══╤══╤══╤══╤══╤══╤══╗"
-        middle_border = "╟──┼──┼──┼──┼──┼──┼──┼──╢"
-        bottom_border = "╚══╧══╧══╧══╧══╧══╧══╧══╝"
-        
-        print(top_border)
-        
-        for row in range(8):
-            # Imprime la fila de piezas con su respectivo número
-            print("║", end="")
-            for col in range(8):
-                piece = self.__positions__[row][col]
-                if piece is None:
-                    # Alternar entre espacios vacíos y casillas oscuras (░)
-                    if (row + col) % 2 == 0:
-                        print("  │", end="")
+            print("╔══╤══╤══╤══╤══╤══╤══╤══╗")
+            for row in range(8):
+                print("║", end="")
+                for col in range(8):
+                    piece = self.__positions__[row][col]
+                    if piece is None:
+                        if (row + col) % 2 == 0:
+                            print("  ", end="")
+                        else:
+                            print("░░", end="")
                     else:
-                        print("░░│", end="")
-                else:
-                    print(f"{piece.__str__()}│", end="")
+                        print(f" {piece}", end="")
+                    if col < 7:
+                        print("│", end="")
+                print(f"║{8 - row}")
+                if row < 7:
+                    print("╟──┼──┼──┼──┼──┼──┼──┼──╢")
+            print("╚══╧══╧══╧══╧══╧══╧══╧══╝")
+            print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")    
+    # Esta funcion lo que hace es verificar si el movimiento de la torre es valido
+    def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
+        
+        if from_row != to_row and from_col != to_col:
+            return False
+        
+        if from_row == to_row:
+            step = 1 if to_col > from_col else -1
+            for col in range(from_col + step, to_col, step):
+                if board[from_row][col] is not None:
+                    return False
+        
+        elif from_col == to_col:
+            step = 1 if to_row > from_row else -1
+            for row in range(from_row + step, to_row, step):
+                if board[row][from_col] is not None:
+                    return False
 
-            print(f"║{8 - row}")  # Imprimir el número de la fila al final
+        return True
 
-            if row < 7:
-                print(middle_border)  # Imprime las líneas intermedias
+    def permited_move(self, from_row, from_col, to_row, to_col):
+        piece = self.__positions__[from_row][from_col]
 
-        print(bottom_border)  # Imprime la línea inferior
-
-        # Imprimir las coordenadas de las columnas (a-h)
-        print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")
-
-# se imprimira asi:
-# 
-# |
-# |
-# |
-# | 
-# |
-# |
-#
-# board = Board()
-# board.show_board()
-# print(board.get_piece(0,0))
-# print(board.get_piece(7,0))
-# 
-# 
-# 
-# 
-# 
-# def inicializar_tablero(self):
-#       return [
-#            ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
-#            ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
-#            [" ", " ", " ", " ", " ", " ", " ", " "],
-#            [" ", " ", " ", " ", " ", " ", " ", " "],
-#            [" ", " ", " ", " ", " ", " ", " ", " "],
-#            [" ", " ", " ", " ", " ", " ", " ", " "],
-#            ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
-#            ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
-#        ]
-#print[
-#╔═╤═╤═╤═╤═╤═╤═╤═╗╮
-#║♜│♞│♝│♛│♚│♝│♞│♜║8
-#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
-#║♟│♟│♟│♟│♟│♟│♟│♟║7
-#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
-#║ │░│ │░│ │░│ │░║6
-#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
-#║░│ │░│ │░│ │░│ ║5
-#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
-#║ │░│ │░│ │░│ │░║4
-#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
-#║░│ │░│ │░│ │░│ ║3
-#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
-#║♙│♙│♙│♙│♙│♙│♙│♙║2
-#╟─┼─┼─┼─┼─┼─┼─┼─╢┊
-#║♖│♘│♗│♕│♔│♗│♘│♖║1
-#╚═╧═╧═╧═╧═╧═╧═╧═╝┊
-#╰a┈b┈c┈d┈e┈f┈g┈h┈╯
-
-
-def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
-    # Verificar si el movimiento es en línea recta horizontal o vertical
-    if from_row != to_row and from_col != to_col:
-        return False
-
-    # Verificar si el camino está libre de otras piezas
-    if from_row == to_row:  # Movimiento horizontal
-        step = 1 if to_col > from_col else -1
-        for col in range(from_col + step, to_col, step):
-            if board[from_row][col] is not None:
-                return False
-    elif from_col == to_col:  # Movimiento vertical
-        step = 1 if to_row > from_row else -1
-        for row in range(from_row + step, to_row, step):
-            if board[row][from_col] is not None:
-                return False
-
-    return True
-
+        piece = self.__positions__[from_row][from_col]
+        if piece is None:
+            return False  # No hay pieza para mover
+        return piece.permited_move(from_row, from_col, to_row, to_col, self)
+    
+    
