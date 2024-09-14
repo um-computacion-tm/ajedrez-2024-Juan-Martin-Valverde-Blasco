@@ -189,3 +189,10 @@ ________________________________________________________________________________
 - Gabi's exceptios were added, just need to deploy them on my code
 - King testing completed
 - Knight testing completed
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 13-Septiembre 2024 22:50 │ 
+                                                                  └──────────────────────────┘
+- Queen testing completed
+- Rook testing completed
+- had to redifine every piece movement to get them passing the tests
