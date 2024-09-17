@@ -203,4 +203,4 @@ ________________________________________________________________________________
 - Rook coverage raised to %100
 - I always forget the poor pawn
 - Pawn testing completed
-- Global coverage raised to %100
+- Global coverage raised to %78
