@@ -29,3 +29,4 @@ class TestRook(unittest.TestCase):
         self.board.__positions__[4][4] = Rook("BLACK")
         self.assertEqual(self.board.permited_move(4, 4, 4, 2), True)
         self.assertEqual(self.board.permited_move(4, 4, 2, 4), True)
+

@@ -9,23 +9,33 @@ class Pawn(Piece):
     def __str__(self):
         return " ♟" if self.__color__ == "WHITE" else " ♙"
         
-    def permited_move(self, from_row, from_col, to_row, to_col): 
-        piece = self.__positions__[from_row][from_col]
+    def can_do_double_step(self, from_row, to_row, direction):
+        return (to_row - from_row) == 2 * direction
 
-        if piece.__type__ == 'PAWN':
-            direction = -1 if piece.__color__ == "white" else 1
-        if to_col == from_col: 
-            if (to_row - from_row) == direction and self.get_piece(to_row, to_col) == "No piece":
+    def is_valid_starting_row(self, from_row):
+        return (from_row == 6 and self.__color__ == "WHITE") or (from_row == 1 and self.__color__ == "BLACK")
+
+    def empty_square(self, board, to_row, to_col):
+        return board.get_piece(to_row, to_col) == "No piece"
+
+
+    def is_enemy_piece(self, board, to_row, to_col):
+        destination_piece = board.get_piece(to_row, to_col)
+        return destination_piece != "No piece" and destination_piece[1] != self.__color__
+
+
+    def permited_move(self, from_row, from_col, to_row, to_col, board):
+        direction = -1 if self.__color__ == "WHITE" else 1
+        if to_col == from_col:  
+            if (to_row - from_row) == direction and board.get_piece(to_row, to_col) == "No piece":
                 return True
-            if (from_row == 6 and piece.__color__ == "white") or (from_row == 1 and piece.__color__ == "black"):
-                if (to_row - from_row) == 2 * direction and self.get_piece(to_row, to_col) == "No piece":
-                    return True
+            
+            if self.is_valid_starting_row(from_row) and self.can_do_double_step(from_row, to_row, direction) and self.empty_square(board, to_row, to_col):
+                return True
+                
         if abs(to_col - from_col) == 1 and (to_row - from_row) == direction:
-            destination_piece = self.get_piece(to_row, to_col)
-            if destination_piece != "No piece" and destination_piece.__color__ != piece.__color__:
-                return True
-        else:
-            return False
-        
-        
+            if self.is_enemy_piece(board, to_row, to_col):
+                return True        
+
+        return False 
         

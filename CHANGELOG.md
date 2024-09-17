@@ -196,3 +196,11 @@ ________________________________________________________________________________
 - Queen testing completed
 - Rook testing completed
 - had to redifine every piece movement to get them passing the tests
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 16-Septiembre 2024 21:10 │ 
+                                                                  └──────────────────────────┘
+- Rook coverage raised to %100
+- I always forget the poor pawn
+- Pawn testing completed
+- Global coverage raised to %100
