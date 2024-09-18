@@ -14,6 +14,7 @@ class Board:
 
         self.__positions__[0][0] = Rook("BLACK") #alfil negro
         self.__positions__[0][7] = Rook("BLACK") #alfil negro
+       
         self.__positions__[7][7] = Rook("WHITE") #alfil balnco
         self.__positions__[7][0] = Rook("WHITE") #alfil blanco
 
@@ -26,6 +27,7 @@ class Board:
         self.__positions__[1][5] = Pawn("BLACK") #peon negro
         self.__positions__[1][6] = Pawn("BLACK") #peon negro
         self.__positions__[1][7] = Pawn("BLACK") #peon negro
+       
         self.__positions__[6][0] = Pawn("WHITE") #peon blanco
         self.__positions__[6][1] = Pawn("WHITE") #peon blanco
         self.__positions__[6][2] = Pawn("WHITE") #peon blanco
@@ -38,23 +40,28 @@ class Board:
         
         self.__positions__[0][1] = Knight("BLACK") #caballo negro 
         self.__positions__[0][6] = Knight("BLACK") #caballo negro
+       
         self.__positions__[7][1] = Knight("WHITE") #caballo blanco
         self.__positions__[7][6] = Knight("WHITE") #caballo blanco
 
         
         self.__positions__[0][2] = Bishop("BLACK") #torre negra
         self.__positions__[0][5] = Bishop("BLACK") #torre negra
+       
         self.__positions__[7][2] = Bishop("WHITE") #torre blanca
         self.__positions__[7][5] = Bishop("WHITE") #torre blanca
 
     
         self.__positions__[0][3] = Queen("BLACK") #reina negra
+       
         self.__positions__[7][3] = Queen("WHITE") #reina blanca
 
 
         self.__positions__[0][4] = King("BLACK") #rey negro
+       
         self.__positions__[7][4] = King("WHITE") #rey blanco
     
+
 
     # Esta funcion lo que hace es obtener las piezas y los equipos
     def get_piece(self, row, col):
@@ -63,9 +70,8 @@ class Board:
             return "No piece"
         return ({piece.__type__}, {piece.__color__})
     
-    
-        
-        
+
+
     # Esta funcion lo que hace es mover las piezas        
     def move_piece(self, from_row, from_col, to_row, to_col):
         
@@ -85,6 +91,7 @@ class Board:
         print(f"Moved piece from: ", {from_row}, {from_col}, "to: ", {to_row}, {to_col})
 
         self.show_board()
+
 
 
     # Esta funcion lo que hace es mostrar el tablero
@@ -108,6 +115,9 @@ class Board:
                     print("╟──┼──┼──┼──┼──┼──┼──┼──╢")
             print("╚══╧══╧══╧══╧══╧══╧══╧══╝")
             print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")    
+
+
+
     # Esta funcion lo que hace es verificar si el movimiento de la torre es valido
     def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
         
@@ -127,6 +137,8 @@ class Board:
                     return False
 
         return True
+
+
 
     def permited_move(self, from_row, from_col, to_row, to_col):
         piece = self.__positions__[from_row][from_col]
