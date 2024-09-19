@@ -9,7 +9,8 @@ class Bishop(Piece):
         return " ♝" if self.__color__ == "WHITE" else " ♗"
 
     def permited_move(self, from_row, from_col, to_row, to_col, board):
-        if abs(to_row - from_row) == abs(to_col - from_col):
+        permited_move_diag = self.permited_move_diagonal(from_row, from_col, to_row, to_col, board)
+        if permited_move_diag == True:
             return True
         else:
             return False

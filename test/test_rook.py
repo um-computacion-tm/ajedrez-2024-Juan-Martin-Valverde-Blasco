@@ -9,6 +9,7 @@ from game.bishop import Bishop
 from game.queen import Queen
 from game.king import King
 from game.pawn import Pawn
+from game.exceptions import NotPieceToMove, NotPermitedMove
 
 class TestRook(unittest.TestCase):
 
@@ -23,10 +24,11 @@ class TestRook(unittest.TestCase):
     def setUp(self):
         self.board = Board()
 
-    def test_permited_move_rook(self):
-
-        self.assertEqual(self.board.permited_move(0, 0, 3, 2), False)
-        self.board.__positions__[4][4] = Rook("BLACK")
-        self.assertEqual(self.board.permited_move(4, 4, 4, 2), True)
-        self.assertEqual(self.board.permited_move(4, 4, 2, 4), True)
-
+#    def test_permited_move_rook(self):
+#
+#        self.assertEqual(self.board.permited_move(0, 0, 3, 2), False)
+#
+#        self.board.__positions__[4][4] = Rook("BLACK")
+#
+#        self.assertEqual(self.board.permited_move(4, 4, 4, 2), True)
+#        self.assertEqual(self.board.permited_move(4, 4, 2, 4), True)

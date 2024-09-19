@@ -209,3 +209,10 @@ ________________________________________________________________________________
                                                                   │ 17-Septiembre 2024 21:06 │ 
                                                                   └──────────────────────────┘
 - I was talking whit github copilot asking him what fuction could i make better and he told me that i should try making the movement of the pieces in a separated way, like making a function to ortogonal pieces and making another one just to pieces that moves on a diagonal, so i follow his call and here we are, now i gotta make the right calls on each pieces and test them all again
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 17-Septiembre 2024 21:06 │ 
+                                                                  └──────────────────────────┘
+- Ortogonal and diagonal functions implemented on every piece
+- Exceptions added to board
+- Global coverage raised to %87

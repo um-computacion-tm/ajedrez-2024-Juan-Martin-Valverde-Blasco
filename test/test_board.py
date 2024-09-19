@@ -9,7 +9,7 @@ from game.bishop import Bishop
 from game.queen import Queen
 from game.king import King
 from game.pawn import Pawn
-
+from game.exceptions import NotPieceToMove, NotPermitedMove
 
 class TestBoard(unittest.TestCase):
     def setUp(self):
@@ -18,97 +18,6 @@ class TestBoard(unittest.TestCase):
 
     def test_init_board(self):
         self.assertEqual(self.board.__positions__[0][0].__type__, "ROOK")
-
-#    @patch('builtins.print')
-#    def test_move_piece(self, patched_print):
-#        self.board.move_piece(0, 0, 0, 1)
-#        self.assertEqual(self.board.get_piece(0, 1), ({'ROOK'}, {'BLACK'}))
-#        self.assertEqual(self.board.get_piece(0, 0), "No piece")
-
-    @patch('builtins.print')
-    def test_move_piece_no_piece(self, patched_print):
-
-        self.assertEqual(self.board.move_piece(3, 3, 4, 4), "No piece to move")
-
-        self.assertEqual(self.board.get_piece(3, 3), "No piece")
-        self.assertEqual(self.board.get_piece(4, 4), "No piece")
-
-#
-#    def test_get_piece_empty(self):
-#        self.assertEqual(self.board.get_piece(3, 3), "No piece")
-#
-#    @patch('builtins.print')
-#    def test_move_piece(self, patched_print):
-#        self.board.move_piece(0, 0, 0, 1)
-#        
-#
-#        self.assertEqual(self.board.get_piece(0, 1), ({'ROOK'}, {'BLACK'}))
-#
-#        self.assertEqual(self.board.get_piece(0, 0), "No piece")
-
-    @patch('builtins.print')
-    def test_move_piece_no_piece(self, patched_print):
-
-        self.assertEqual(self.board.move_piece(3, 3, 4, 4), "No piece to move")
-
-        self.assertEqual(self.board.get_piece(3, 3), "No piece")
-        self.assertEqual(self.board.get_piece(4, 4), "No piece")
-        
-#    def test_move_piece_valid(self):
-#        self.board.__positions__[0][0] = Rook("WHITE")
-#        result = self.board.move_piece(0, 0, 0, 1)
-#        self.assertIsNone(result)
-#        self.assertIsNone(self.board.__positions__[0][0])
-#        self.assertIsInstance(self.board.__positions__[0][1], Rook)
-#
-    def test_move_piece_no_piece(self):
-        result = self.board.move_piece(3, 3, 4, 4)
-        self.assertEqual(result, "No piece to move")
-
-#    def test_move_piece_invalid_move(self):
-#        self.board.__positions__[0][0] = Rook("WHITE")
-#        result = self.board.move_piece(0, 0, 1, 1)  # Movimiento inválido para una torre
-#        self.assertEqual(result, "The piece cannot be moved in this position")
-#
-    @patch('builtins.print')
-    def test_move_piece_no_piece(self, mock_print):
-        board = Board()
-        board.__positions__ = [[None for _ in range(8)] for _ in range(8)]
-        
-        result = board.move_piece(0, 0, 1, 0)
-        
-        self.assertEqual(result, "No piece to move")
-        mock_print.assert_called_with("No piece to move")
-
-#    @patch('builtins.print')
-#    def test_move_piece_invalid_move(self, mock_print):
-#        board = Board()
-#        board.__positions__ = [[None for _ in range(8)] for _ in range(8)]
-#        board.__positions__[0][0] = Rook("white")
-#        
-#        Rook.permited_move = MagicMock(return_value=False)
-#        
-#        result = board.move_piece(0, 0, 1, 0)
-#        
-#        self.assertEqual(result, "The piece cannot be moved in this position")
-#        mock_print.assert_called_with("The piece cannot be moved in this position")
-#
-#    @patch('builtins.print')
-#    def test_move_piece_success(self, mock_print):
-#        board = Board()
-#        board.__positions__ = [[None for _ in range(8)] for _ in range(8)]
-#        board.__positions__[0][0] = Rook("white")
-#        
-#        self.permited_move = MagicMock(return_value=True)
-#        board.show_board = MagicMock()
-#        
-#        result = board.move_piece(0, 0, 1, 0)
-#        
-#        self.assertIsNone(result)
-#        self.assertIsNone(board.__positions__[0][0])
-#        self.assertIsInstance(board.__positions__[1][0], Rook)
-#        mock_print.assert_any_call(f"Moved piece from: ", {0}, {0}, "to: ", {1}, {0})
-#        board.show_board.assert_called_once()
 
 #   @patch('sys.stdout', new_callable=StringIO)
 #   def test_show_board(self, mock_stdout):
@@ -157,3 +66,39 @@ class TestBoard(unittest.TestCase):
 #           "╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯\n"
 #       )
 ##       self.assertEqual(mock_stdout.getvalue(), expected_output)#
+
+class TestBoardMovePiece(unittest.TestCase):
+
+    def setUp(self):
+        self.board = Board()
+        self.board.__positions__[0][0] = Rook("WHITE")
+        self.board.__positions__[1][0] = Pawn("BLACK")
+
+    @patch('builtins.print')
+    def test_move_piece_valid(self, mock_print):
+        # Mockear permited_move para permitir el movimiento
+        with patch.object(Board, 'permited_move', return_value=True):
+            self.board.move_piece(0, 0, 0, 1)
+            self.assertIsInstance(self.board.__positions__[0][1], Rook)
+            self.assertIsNone(self.board.__positions__[0][0])
+            mock_print.assert_called_with("Moved piece from: 0, 0 to: 0, 1")
+
+    def test_move_piece_no_piece(self):
+        # Intentar mover una pieza desde una posición vacía
+        with self.assertRaises(NotPieceToMove):
+            self.board.move_piece(2, 2, 3, 3)
+
+    @patch('builtins.print')
+    def test_move_piece_same_color(self, mock_print):
+        # Intentar mover una pieza a una posición ocupada por una pieza del mismo color
+        self.board.__positions__[0][1] = Pawn("WHITE")
+        with self.assertRaises(NotPermitedMove):
+            self.board.move_piece(0, 0, 0, 1)
+
+    @patch('builtins.print')
+    def test_move_piece_invalid_move(self, mock_print):
+        # Intentar mover una pieza a una posición inválida
+        Rook.permited_move = MagicMock(return_value=False)
+        with self.assertRaises(NotPermitedMove):
+            self.board.move_piece(0, 0, 3, 3)
+

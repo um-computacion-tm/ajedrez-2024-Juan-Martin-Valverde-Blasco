@@ -5,10 +5,10 @@ from game.bishop import Bishop
 from game.queen import Queen
 from game.king import King
 from game.pawn import Pawn
+from game.exceptions import NotPieceToMove, NotPermitedMove
 
-
-#esta funcion inicia el tablero y establece las posiciones de las piezas
 class Board:
+    #esta funcion inicia el tablero y establece las posiciones de las piezas
     def __init__(self): 
         self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
 
@@ -74,24 +74,21 @@ class Board:
 
     # Esta funcion lo que hace es mover las piezas        
     def move_piece(self, from_row, from_col, to_row, to_col):
-        
         piece = self.__positions__[from_row][from_col]
-
         if piece is None:
-            print("No piece to move")
-            return "No piece to move"
-        elif self.permited_move(from_row, from_col, to_row, to_col) == False:
-            print("The piece cannot be moved in this position")
-            return "The piece cannot be moved in this position"
+            raise NotPieceToMove("No piece to move")
+        destination = self.__positions__[to_row][to_col]
+
+        if destination is not None and destination.__color__ == piece.__color__:
+            raise NotPermitedMove("Cannot move to a position occupied by a piece with the same color")
+
+        if not self.permited_move(from_row, from_col, to_row, to_col):
+            raise NotPermitedMove("The piece cannot be moved in this position")
 
         self.__positions__[to_row][to_col] = piece
-
         self.__positions__[from_row][from_col] = None
 
-        print(f"Moved piece from: ", {from_row}, {from_col}, "to: ", {to_row}, {to_col})
-
-        self.show_board()
-
+        print(f"Moved piece from: {from_row}, {from_col} to: {to_row}, {to_col}")
 
 
     # Esta funcion lo que hace es mostrar el tablero
@@ -116,36 +113,11 @@ class Board:
             print("╚══╧══╧══╧══╧══╧══╧══╧══╝")
             print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")    
 
-
-
-    # Esta funcion lo que hace es verificar si el movimiento de la torre es valido
-    def is_valid_rook_move(board, from_row, from_col, to_row, to_col):
-        
-        if from_row != to_row and from_col != to_col:
-            return False
-        
-        if from_row == to_row:
-            step = 1 if to_col > from_col else -1
-            for col in range(from_col + step, to_col, step):
-                if board[from_row][col] is not None:
-                    return False
-        
-        elif from_col == to_col:
-            step = 1 if to_row > from_row else -1
-            for row in range(from_row + step, to_row, step):
-                if board[row][from_col] is not None:
-                    return False
-
-        return True
-
-
-
+    # Esta funcion lo que hace es verificar si el movimiento es permitido
     def permited_move(self, from_row, from_col, to_row, to_col):
         piece = self.__positions__[from_row][from_col]
-
         piece = self.__positions__[from_row][from_col]
         if piece is None:
-            return False  # No hay pieza para mover
+            return False
         return piece.permited_move(from_row, from_col, to_row, to_col, self)
-    
-    
+
