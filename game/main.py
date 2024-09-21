@@ -1,21 +1,25 @@
 from game.chess import Chess
-from game.board import Board
+from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace
 
 class Cli():
     def main(self):
         self.play()
 
-    def verify_move(self, chess):
+    def verify_move(self, chess): #Verifica el color del movimeinto
+
         while True:
-            from_row = int(input("De fila: "))
-            from_col = int(input("De columna: "))
-            print("La pieza que elegiste es: ", chess.__board__.get_piece(from_row, from_col))
-            
-            move_by_color = chess.move_correct_color(from_row, from_col)
-            if move_by_color is None:  
-                return from_row, from_col
-            else:
-                print(move_by_color)  
+            try:
+                from_row = int(input("From row: "))
+                from_col = int(input("From col: "))
+                if not (0 <= from_row <= 7) or not (0 <= from_col <= 7):
+                    raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
+                print("The piece you have chosen is: ", chess.__board__.get_piece(from_row, from_col))
+                if self.verify_color(chess, from_row, from_col):
+                    return from_row, from_col 
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+            except InvalidPosition as e:
+                print(e)
 
     def play(self):
         chess = Chess()
@@ -40,6 +44,25 @@ class Cli():
         except Exception as e:
             print("Error:", e)
             return "error"
+
+    def validate_range_to(self):
+        try:
+            while True:
+                to_row = int(input("To row: "))
+                to_col = int(input("To col: "))
+
+                # Validar que los valores estén dentro de los límites del tablero
+                if not (0 <= to_row <= 7) or not (0 <= to_col <= 7):
+                    raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
+                break 
+
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+        except InvalidPosition as e:
+            print(e)
+
+        return to_row, to_col
+
 
 if __name__ == "__main__":
     cli = Cli()

@@ -1,4 +1,5 @@
 from game.board import Board
+from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace
 
 class Chess:
     def __init__(self):
@@ -6,15 +7,12 @@ class Chess:
         self.__turn__ = "WHITE"
 
     def move(self,from_row, from_col, to_row, to_col):
+        
         piece = self.__board__.get_piece(from_row, from_col)
-
-        if piece == "No piece":
-            print("You can't move a piece that doesn't exist")
-            return "You can't move a piece that doesn't exist"
-
-    
-        self.__board__.move_piece(from_row, from_col, to_row, to_col)
-       
+        if not (0 <= to_row <= 7) or not (0 <= to_col <= 7):
+            raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
+        return ("Esto devuelve move: ", self.__board__.move_piece(from_row, from_col, to_row, to_col))
+        
     def move_correct_color(self, from_row, from_col):
 
         print(self.__board__.get_piece(from_row, from_col))
@@ -36,3 +34,4 @@ class Chess:
             self.__turn__ = "BLACK"
         else:
             self.__turn__ = "WHITE"
+            

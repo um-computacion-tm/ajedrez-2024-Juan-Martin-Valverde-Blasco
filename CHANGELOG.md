@@ -211,8 +211,14 @@ ________________________________________________________________________________
 - I was talking whit github copilot asking him what fuction could i make better and he told me that i should try making the movement of the pieces in a separated way, like making a function to ortogonal pieces and making another one just to pieces that moves on a diagonal, so i follow his call and here we are, now i gotta make the right calls on each pieces and test them all again
 _____________________________________________________________________________________________________________________________________________________
                                                                   ┌──────────────────────────┐
-                                                                  │ 17-Septiembre 2024 21:06 │ 
+                                                                  │ 18-Septiembre 2024 21:06 │ 
                                                                   └──────────────────────────┘
 - Ortogonal and diagonal functions implemented on every piece
 - Exceptions added to board
 - Global coverage raised to %87
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 21-Septiembre 2024 17:34 │ 
+                                                                  └──────────────────────────┘
+- Fighting agianst the func permite move from rook but i lose i don't know why it is failing when it is suposed to pass whitout problem
+- Some exceptions were implemented on main and chess just need to test them

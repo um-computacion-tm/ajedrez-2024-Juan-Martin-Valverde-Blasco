@@ -22,13 +22,13 @@ class TestChess(unittest.TestCase):
 #
 #        self.assertEqual(self.chess.__turn__, "WHITE")
 
-    @patch('builtins.print')
-    def test_move_no_piece(self, patched_print):
-
-        self.chess.__board__.get_piece(7, 0)
-
-        self.assertEqual(self.chess.move(5,7,2,2), "You can't move a piece that doesn't exist")
-
+#    @patch('builtins.print')
+#    def test_move_no_piece(self, patched_print):
+#
+#        self.chess.__board__.get_piece(7, 0)
+#
+#        self.assertEqual(self.chess.move(5,7,2,2), "You can't move a piece that doesn't exist")
+#
     @patch('builtins.print')
     def test_move_correct_color_white_turn(self, patched_print):
 

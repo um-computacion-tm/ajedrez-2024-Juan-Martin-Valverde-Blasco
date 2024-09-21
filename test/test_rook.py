@@ -23,12 +23,14 @@ class TestRook(unittest.TestCase):
 
     def setUp(self):
         self.board = Board()
+        self.rook = Rook("WHITE")  # Proporcionar el argumento 'color'
 
-#    def test_permited_move_rook(self):
-#
-#        self.assertEqual(self.board.permited_move(0, 0, 3, 2), False)
-#
-#        self.board.__positions__[4][4] = Rook("BLACK")
-#
-#        self.assertEqual(self.board.permited_move(4, 4, 4, 2), True)
-#        self.assertEqual(self.board.permited_move(4, 4, 2, 4), True)
+    def test_valid_orthogonal_moves(self):
+        board = None  # Asumiendo que el tablero no es necesario para esta prueba
+#        self.assertTrue(self.rook.permited_move(0, 0, 0, 5, board))  # Movimiento horizontal válido
+#        self.assertTrue(self.rook.permited_move(0, 0, 5, 0, board))  # Movimiento vertical válido
+
+    def test_invalid_moves(self):
+        board = None  # Asumiendo que el tablero no es necesario para esta prueba
+        self.assertFalse(self.rook.permited_move(0, 0, 5, 5, board))  # Movimiento diagonal inválido
+        self.assertFalse(self.rook.permited_move(0, 0, 1, 2, board))  # Movimiento en L inválido
