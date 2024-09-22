@@ -1,4 +1,5 @@
 from game.chess import Chess
+from game.piece import Piece
 from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace
 
 class Cli():
@@ -50,8 +51,6 @@ class Cli():
             while True:
                 to_row = int(input("To row: "))
                 to_col = int(input("To col: "))
-
-                # Validar que los valores estén dentro de los límites del tablero
                 if not (0 <= to_row <= 7) or not (0 <= to_col <= 7):
                     raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
                 break 

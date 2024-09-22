@@ -222,3 +222,10 @@ ________________________________________________________________________________
                                                                   └──────────────────────────┘
 - Fighting agianst the func permite move from rook but i lose i don't know why it is failing when it is suposed to pass whitout problem
 - Some exceptions were implemented on main and chess just need to test them
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 22-Septiembre 2024 13:06 │ 
+                                                                  └──────────────────────────┘
+- Wake up early today just to code eat pieces func just need to test them
+- Some func were a little bit modified at board 
+- coverage dowgraded to %72 because of these changes tomorro will be a full testing day

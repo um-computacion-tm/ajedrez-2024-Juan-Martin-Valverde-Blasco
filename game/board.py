@@ -10,8 +10,23 @@ from game.exceptions import NotPieceToMove, NotPermitedMove
 class Board:
     #esta funcion inicia el tablero y establece las posiciones de las piezas
     def __init__(self): 
-        self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
-
+        self.__positions__ = []
+        for _ in range(8):
+            col = []
+            for _ in range(8):
+                col.append(None)
+            self.__positions__.append(col)
+        
+        self.pieces_from_white = [] #Las piezas que capturo Negro
+        
+        self.pieces_from_black = [] #La piezas que capturo Blanco
+       
+       
+        self.pieces_from_white_piece = [] #Las piezas que tiene Blanco
+       
+        self.pieces_from_black_piece = [] #Las piezas que tiene NEGRO
+     
+     
         self.__positions__[0][0] = Rook("BLACK") #alfil negro
         self.__positions__[0][7] = Rook("BLACK") #alfil negro
        
@@ -78,16 +93,12 @@ class Board:
         if piece is None:
             raise NotPieceToMove("No piece to move")
         destination = self.__positions__[to_row][to_col]
-
         if destination is not None and destination.__color__ == piece.__color__:
             raise NotPermitedMove("Cannot move to a position occupied by a piece with the same color")
-
         if not self.permited_move(from_row, from_col, to_row, to_col):
             raise NotPermitedMove("The piece cannot be moved in this position")
-
         self.__positions__[to_row][to_col] = piece
         self.__positions__[from_row][from_col] = None
-
         print(f"Moved piece from: {from_row}, {from_col} to: {to_row}, {to_col}")
 
 
@@ -116,8 +127,21 @@ class Board:
     # Esta funcion lo que hace es verificar si el movimiento es permitido
     def permited_move(self, from_row, from_col, to_row, to_col):
         piece = self.__positions__[from_row][from_col]
-        piece = self.__positions__[from_row][from_col]
         if piece is None:
             return False
         return piece.permited_move(from_row, from_col, to_row, to_col, self)
 
+    # Con esta funcion damos vida al sistema de ataque
+    def eat_piece(self, from_row, from_col, to_row, to_col):
+        piece = self.__positions__[from_row][from_col]
+        destination = self.__positions__[to_row][to_col]
+        if destination is not None:
+            if destination.__color__ != piece.__color__:
+                if piece.__color__ == "WHITE":
+                    self.pieces_from_black.append(destination.__str__())
+                    self.pieces_from_black_piece.append(destination)
+                    print("Las piezas que Blanco capturo son: ")
+                    return self.pieces_from_black
+                else:
+                    # Código para piezas negras capturando piezas blancas
+                    pass
