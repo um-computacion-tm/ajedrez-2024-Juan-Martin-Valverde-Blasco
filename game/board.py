@@ -86,7 +86,6 @@ class Board:
         return ({piece.__type__}, {piece.__color__})
     
 
-
     # Esta funcion lo que hace es mover las piezas        
     def move_piece(self, from_row, from_col, to_row, to_col):
         piece = self.__positions__[from_row][from_col]
@@ -124,12 +123,14 @@ class Board:
             print("╚══╧══╧══╧══╧══╧══╧══╧══╝")
             print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")    
 
+
     # Esta funcion lo que hace es verificar si el movimiento es permitido
     def permited_move(self, from_row, from_col, to_row, to_col):
         piece = self.__positions__[from_row][from_col]
         if piece is None:
             return False
         return piece.permited_move(from_row, from_col, to_row, to_col, self)
+
 
     # Con esta funcion damos vida al sistema de ataque
     def eat_piece(self, from_row, from_col, to_row, to_col):
@@ -143,5 +144,5 @@ class Board:
                     print("Las piezas que Blanco capturo son: ")
                     return self.pieces_from_black
                 else:
-                    # Código para piezas negras capturando piezas blancas
+                    
                     pass

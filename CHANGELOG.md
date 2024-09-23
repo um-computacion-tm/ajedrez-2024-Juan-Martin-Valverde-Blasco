@@ -229,3 +229,8 @@ ________________________________________________________________________________
 - Wake up early today just to code eat pieces func just need to test them
 - Some func were a little bit modified at board 
 - coverage dowgraded to %72 because of these changes tomorro will be a full testing day
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 23-Septiembre 2024 20:52 │ 
+                                                                  └──────────────────────────┘
+- Test coverage raised to %77
