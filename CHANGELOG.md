@@ -234,3 +234,12 @@ ________________________________________________________________________________
                                                                   │ 23-Septiembre 2024 20:52 │ 
                                                                   └──────────────────────────┘
 - Test coverage raised to %77
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 26-Septiembre 2024 20:52 │ 
+                                                                  └──────────────────────────┘
+- Having so much trouble testing some functios i think its because they are badly made, i dont know, so gotta ask to copilot what to do and how could 
+  i make different some functions
+- Some other functios were added, due that i was unactive this week i will have to work this weekend :(
+
+    

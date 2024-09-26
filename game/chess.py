@@ -13,23 +13,18 @@ class Chess:
         piece = self.__board__.get_piece(from_row, from_col)
         if not (0 <= to_row <= 7) or not (0 <= to_col <= 7):
             raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
-        return ("Esto devuelve move: ", self.__board__.move_piece(from_row, from_col, to_row, to_col))
+        return ("The movement will be: ", self.__board__.move_piece(from_row, from_col, to_row, to_col))
         
 
     def move_correct_color(self, from_row, from_col):
 
         print(self.__board__.get_piece(from_row, from_col))
         piece = self.__board__.get_piece(from_row, from_col)
-
         piece_type, piece_color = piece
-        
-        
         color = list(piece_color)[0]
-
         if color == self.__turn__:
             True
         else:
-            
             return "You can't move a piece that is not your color"
 
 
@@ -72,4 +67,27 @@ class Chess:
                 print("Pieza definida en la posicion es : ", new_piece.__str__())
 
                 return new_piece
+
             
+    def error_out_of_range(self, row, col):
+        if not (0 <= row <= 7) or not (0 <= col <= 7):
+            raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
+
+     
+    def show_captured_pieces(self):
+         if self.__turn__ == "WHITE" and len(self.__board__.pieces_from_black) > 0:
+              return "The captured pieces from black are: ", self.__board__.pieces_from_black
+         elif self.__turn__ == "BLACK" and len(self.__board__.pieces_from_white) > 0:
+              return "The captured pieces from white are: ", self.__board__.pieces_from_white
+         else:
+              return "No pieces have been captured yet"
+         
+         
+    def verify_winner(self):
+         if len(self.__board__.pieces_from_black_piece) == 16:
+              return "WHITE IS THE OUTLAW KING"
+         elif len(self.__board__.pieces_from_white_piece) == 16:
+              return "BLACK IS THE OUTLAW KING"
+         else:
+              return False
+              

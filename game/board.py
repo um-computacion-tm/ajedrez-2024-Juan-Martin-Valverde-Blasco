@@ -17,9 +17,9 @@ class Board:
                 col.append(None)
             self.__positions__.append(col)
         
-        self.pieces_from_white = [] #Las piezas que capturo Negro
+        self.pieces_from_white = [] #las piezas que capturo Negro
         
-        self.pieces_from_black = [] #La piezas que capturo Blanco
+        self.pieces_from_black = [] #la piezas que capturo Blanco
        
        
         self.pieces_from_white_piece = [] #Las piezas que tiene Blanco
@@ -141,8 +141,24 @@ class Board:
                 if piece.__color__ == "WHITE":
                     self.pieces_from_black.append(destination.__str__())
                     self.pieces_from_black_piece.append(destination)
-                    print("Las piezas que Blanco capturo son: ")
-                    return self.pieces_from_black
+                    print("La pieza que blanco capturo es: ")
+                    return (self.pieces_from_black)
                 else:
-                    
-                    pass
+                    self.pieces_from_white.append(destination.__str__())
+                    self.pieces_from_white_piece.append(destination)
+                    print("La pieza que negro capturo es: ")
+                    return (self.pieces_from_white)
+        else:
+            return False
+
+ 
+    
+    
+    def get_piece_to_show(self, row, col):
+        piece = self.__positions__[row][col]
+        
+        if piece is None:
+            return "No piece"
+        else:
+            return ({piece.__type__}, {piece.__color__})
+        
