@@ -5,7 +5,12 @@ class Piece:
 
 #Preguntandole al sabio de la montana llegue a la conclucion que esto es para que cada pieza tenga su representacion en el tablero
     def __str__(self):
-        raise NotImplementedError("Subclasses must implement this method.")
+        if self.__color__ == "WHITE":
+            return self.WHITE
+        elif self.__color__ == "BLACK":
+            return self.BLACK
+        else:
+            raise NotImplementedError("Subclasses must implement this method.")
         
 #Funcion creada por el sabio de la montana
 

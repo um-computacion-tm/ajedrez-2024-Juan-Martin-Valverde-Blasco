@@ -241,5 +241,10 @@ ________________________________________________________________________________
 - Having so much trouble testing some functios i think its because they are badly made, i dont know, so gotta ask to copilot what to do and how could 
   i make different some functions
 - Some other functios were added, due that i was unactive this week i will have to work this weekend :(
-
-    
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 27-Septiembre 2024 21:52 │ 
+                                                                  └──────────────────────────┘
+- some little changes made 
+- some file got a better documentatio
+- define new piece now is only uno function    

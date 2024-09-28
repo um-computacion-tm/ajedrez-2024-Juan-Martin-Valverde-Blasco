@@ -90,7 +90,7 @@ class TestChess(unittest.TestCase):
         self.chess.__board__.pieces_from_white_piece = [Rook("WHITE"), Queen("WHITE")]
         self.chess.__board__.pieces_from_white = ["♜", "♛"]
 
-        self.chess.move(1, 7, 0, 7)
+        self.chess.movement_fits(1, 7, 0, 7)
 
         self.assertEqual(self.chess.__board__.get_piece(0, 7), ({'PAWN'}, {'WHITE'}))
 
