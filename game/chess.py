@@ -39,18 +39,21 @@ class Chess:
     # Esta funcion me costo un huevo hacerla y tambien pedircela a copilot 
     # Es para que el peon que llega al otro lado se convierta en otra pieza diferente
     def change_pawn_for_other(self, from_row, from_col, to_row, to_col):
-        destination = self.__board__.get_piece(to_row, to_col)  
-        if "PAWN" in destination[0] and "WHITE" in destination[1] and to_row == 0:
-            if self.__board__.pieces_from_black_piece:  
-                self.define_new_piece_white(from_row, from_col, to_row, to_col)
-            else:
-                raise NotPieceToReplace("No pieces have been eaten from WHITE")        
-        elif "PAWN" in destination[0] and "BLACK" in destination[1] and to_row == 7:
-            if self.__board__.pieces_from_white_piece: 
-                self.define_new_piece_black(from_row, from_col, to_row, to_col)
-            else:
-                raise NotPieceToReplace("No pieces have been eaten from BLACK")
-
+        destination = self.__board__.get_piece(to_row, to_col)  # Obtener la pieza en la posición final
+        
+        # Verificar si el peón es blanco y ha llegado a la fila 0
+        if destination.__type__ == "PAWN" and destination.__color__ == "WHITE" and to_row == 0:
+            pieces_from_piece = self.__board__.pieces_from_white_piece
+        elif destination.__type__ == "PAWN" and destination.__color__ == "BLACK" and to_row == 7:
+            pieces_from_piece = self.__board__.pieces_from_black_piece
+        else:
+            return
+    
+        if pieces_from_piece:  # Verificar si hay piezas disponibles
+            self.define_new_piece(from_row, from_col, to_row, to_col, pieces_from_piece)
+        else:
+            raise NotPieceToReplace("No pieces have been eaten from " + destination[0])
+        
 
     # Esta funcion lo que hace es que una vez que el peon cambia de pieza
     # aca podes elejir a cual del equipo que le corresponde a cada uno
@@ -60,7 +63,7 @@ class Chess:
                 index = int(input("Enter the NUMBER of position in the list of piece you want to change: "))
                 new_piece =pieces_from_piece[index]
                 self.__board__.__positions__[to_row][to_col] = new_piece
-                print("Pieza definida en la posicion es : ", new_piece.show())
+                print("Pieza definida en la posicion es : ", new_piece.__str__())
                 
                 return new_piece
     
