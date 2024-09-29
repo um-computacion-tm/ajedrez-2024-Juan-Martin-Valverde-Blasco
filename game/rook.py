@@ -1,9 +1,7 @@
 from game.piece import Piece as piece
 
 class Rook(piece):
-    def __init__(self, color):
-        super().__init__(color)
-        self.__type__ = "ROOK"
+    __type__ = "ROOK" 
 
     def __str__(self):
         return " ♜" if self.__color__ == "WHITE" else " ♖"

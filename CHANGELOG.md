@@ -252,4 +252,9 @@ ________________________________________________________________________________
                                                                   ┌──────────────────────────┐
                                                                   │ 28-Septiembre 2024 21:52 │ 
                                                                   └──────────────────────────┘
-- Variable type modificada para que sea compartida
+- Variable type modified to be a shared one, afte talking whit copilot (the mountain wise), we get to the conclusion that some functions were ardly working becuase of type so decided to make it a shared variable
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 29-Septiembre 2024 17:15 │ 
+                                                                  └──────────────────────────┘
+- Type variable fully aplied
