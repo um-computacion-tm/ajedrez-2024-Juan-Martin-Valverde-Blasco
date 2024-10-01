@@ -3,10 +3,13 @@ from game.piece import Piece
 from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace
 
 class Cli():
+    def __init__(self):
+        self.chess = Chess()
+
     def main(self):
         self.play()
 
-    def verify_move(self, chess): #Verifica el color del movimeinto
+    def verify_move(self, chess): 
 
         while True:
             try:
@@ -23,28 +26,43 @@ class Cli():
                 print(e)
 
     def play(self):
-        chess = Chess()
-        a = "s"
-        try:
-            while a.lower() == "s":
-                from_row, from_col = self.verify_move(chess)
+        a = "y"
+        
+        while a == "y":
+            self.chess.__board__.show_board() 
+            try:
+                from_row, from_col = self.verify_move(self.chess)
 
-                to_row = int(input("A fil: "))
-                to_col = int(input("A columna: "))
+                to_row, to_col = self.validate_range_to()
 
-                chess.move(from_row, from_col, to_row, to_col)
-                print("La pieza que quedo en la posicion es: ", chess.__board__.get_piece(from_row, from_col))
-                print("La pieza que esta en la nueva posicion es: ", chess.__board__.get_piece(to_row, to_col))
+                print(self.chess.__board__.eat_piece(from_row, from_col, to_row, to_col))
+                self.chess.movement_fits(from_row, from_col,to_row,to_col) 
 
-                a = input("Queres seguir jugando? (s/n): ")
+                self.chess.change_pawn_for_other(from_row, from_col, to_row, to_col)
 
-                if a.lower() == "s":
-                    chess.change_turn()
-                    print("Es turno de: ", chess.__turn__)
+                self.chess.__board__.show_board() 
+            
+                print(self.chess.show_captured_pieces())
 
-        except Exception as e:
-            print("Error:", e)
-            return "error"
+                if self.chess.verify_winner() is not False:
+                    print(self.chess.verify_winner())
+                    a = "n"
+                    break
+                a = input("Do you want to continue? (y/n): ")
+                if a == "y":
+                    self.chess.change_turn()
+                    print("Es turno de: ", self.chess.__turn__)
+
+            except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
+                print("Error:", e)
+                print("Try again", "It's still ", self.chess.__turn__, "turn")
+
+            except Exception as e:
+                print("error", e)
+                return "error"
+            
+        print("Game ended")
+
 
     def validate_range_to(self):
         try:
@@ -61,6 +79,18 @@ class Cli():
             print(e)
 
         return to_row, to_col
+
+    def verify_color(self, chess, from_row, from_col):
+        move_by_color = chess.move_correct_color(from_row, from_col)
+        
+        if move_by_color is None:
+            return True  
+        elif move_by_color == "You can't move a piece that doesn't exist":
+            print("You can't move a piece that doesn't exist")
+        else:
+            print(move_by_color)
+        
+        return False
 
 
 if __name__ == "__main__":

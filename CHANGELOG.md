@@ -264,3 +264,8 @@ ________________________________________________________________________________
                                                                   └──────────────────────────┘
 - Str function optimized
 - Some little changes were made
+_____________________________________________________________________________________________________________________________________________________
+                                                                     ┌──────────────────────┐
+                                                                     │ 1-Octubre 2024 20:16 │ 
+                                                                     └──────────────────────┘
+- Play function upgraded, i don't know what would i have done whitout copilot, chat gpt and stackoverflow these tools are saving my ass in many moments
