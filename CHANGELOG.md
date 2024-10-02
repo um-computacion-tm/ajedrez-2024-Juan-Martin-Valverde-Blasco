@@ -269,3 +269,8 @@ ________________________________________________________________________________
                                                                      │ 1-Octubre 2024 20:16 │ 
                                                                      └──────────────────────┘
 - Play function upgraded, i don't know what would i have done whitout copilot, chat gpt and stackoverflow these tools are saving my ass in many moments
+_____________________________________________________________________________________________________________________________________________________
+                                                                     ┌──────────────────────┐
+                                                                     │ 2-Octubre 2024 20:32 │ 
+                                                                     └──────────────────────┘
+- Main and board upgraded

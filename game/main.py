@@ -13,22 +13,21 @@ class Cli():
 
         while True:
             try:
-                from_row = int(input("From row: "))
-                from_col = int(input("From col: "))
+                from_row = int(input("De fila: "))
+                from_col = int(input("De columna: "))
                 if not (0 <= from_row <= 7) or not (0 <= from_col <= 7):
-                    raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
-                print("The piece you have chosen is: ", chess.__board__.get_piece(from_row, from_col))
+                    raise InvalidPosition("Posicion invalida el valor debe estar entre 0 y 7.")
+                print("La pieza que elejiste es: ", chess.__board__.get_piece(from_row, from_col))
                 if self.verify_color(chess, from_row, from_col):
                     return from_row, from_col 
             except ValueError:
-                print("Invalid input. Please enter a number.")
+                print("Flasheasye, mete un numero.")
             except InvalidPosition as e:
                 print(e)
 
     def play(self):
-        a = "y"
-        
-        while a == "y":
+        a = "s"        
+        while a == "s":
             self.chess.__board__.show_board() 
             try:
                 from_row, from_col = self.verify_move(self.chess)
@@ -48,33 +47,33 @@ class Cli():
                     print(self.chess.verify_winner())
                     a = "n"
                     break
-                a = input("Do you want to continue? (y/n): ")
-                if a == "y":
+                a = input("Quieres seguir jugando? (s/n): ")
+                if a == "s":
                     self.chess.change_turn()
                     print("Es turno de: ", self.chess.__turn__)
 
             except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
                 print("Error:", e)
-                print("Try again", "It's still ", self.chess.__turn__, "turn")
+                print("Proba de nuevo", "sigue siendo el turno de ", self.chess.__turn__)
 
             except Exception as e:
                 print("error", e)
                 return "error"
             
-        print("Game ended")
+        print("Fin del juego")
 
 
     def validate_range_to(self):
         try:
             while True:
-                to_row = int(input("To row: "))
-                to_col = int(input("To col: "))
+                to_row = int(input("A fila: "))
+                to_col = int(input("A columna: "))
                 if not (0 <= to_row <= 7) or not (0 <= to_col <= 7):
-                    raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
+                    raise InvalidPosition("Posicion invalida, debe estar entre 0 y 7.")
                 break 
 
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print("Flasheaste, mete un numero")
         except InvalidPosition as e:
             print(e)
 
@@ -85,8 +84,8 @@ class Cli():
         
         if move_by_color is None:
             return True  
-        elif move_by_color == "You can't move a piece that doesn't exist":
-            print("You can't move a piece that doesn't exist")
+        elif move_by_color == "No podes mover una pieza que no existe":
+            print("No podes mover una pieza que no existe")
         else:
             print(move_by_color)
         

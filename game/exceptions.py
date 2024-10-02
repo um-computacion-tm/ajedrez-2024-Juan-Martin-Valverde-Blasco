@@ -6,7 +6,9 @@ class NotPieceToMove(Exception):
 
 class NotPermitedMove(Exception):
     pass
+
 class NotPieceToReplace(Exception):
     pass
+
 
 

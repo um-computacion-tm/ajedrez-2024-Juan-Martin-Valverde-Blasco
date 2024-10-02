@@ -81,9 +81,11 @@ class Board:
     # Esta funcion lo que hace es obtener las piezas y los equipos
     def get_piece(self, row, col):
         piece = self.__positions__[row][col]
+
         if piece is None:
             return "No piece"
-        return ({piece.__type__}, {piece.__color__})
+        else:
+            return piece
     
 
     # Esta funcion lo que hace es mover las piezas        
