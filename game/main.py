@@ -9,22 +9,23 @@ class Cli():
     def main(self):
         self.play()
 
-    def verify_move(self, chess): 
-
+    def verify_move(self, chess):
         while True:
             try:
                 from_row = int(input("De fila: "))
                 from_col = int(input("De columna: "))
-                if not (0 <= from_row <= 7) or not (0 <= from_col <= 7):
-                    raise InvalidPosition("Posicion invalida el valor debe estar entre 0 y 7.")
-                print("La pieza que elejiste es: ", chess.__board__.get_piece(from_row, from_col))
+                self.chess.error_out_of_range(from_row, from_col)
+                print("La pieza que elejiste es: ", chess.__board__.get_piece_to_show(from_row, from_col))
                 if self.verify_color(chess, from_row, from_col):
-                    return from_row, from_col 
-            except ValueError:
-                print("Flasheasye, mete un numero.")
-            except InvalidPosition as e:
-                print(e)
+                    return from_row, from_col
+    
 
+            except ValueError:
+                print("Flasehaste, mete un numero")
+            except InvalidPosition as e: #porque e? no se el gabi lo puso asi xd
+                print(e)
+                
+                
     def play(self):
         a = "s"        
         while a == "s":
