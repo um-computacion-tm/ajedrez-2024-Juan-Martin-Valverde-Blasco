@@ -1,5 +1,5 @@
 from game.board import Board
-from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace
+from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace, IsNotYourColor
 
 class Chess:
     # Esta funcion inicia el funcionamiento del ajedrez como iniciar el tablero y el turno de blanco que es el que siempre mueve primero
@@ -10,24 +10,27 @@ class Chess:
 
     # Esta funcion es otra verificacion de que la pieza a mover entre en el tablero
     def movement_fits(self,from_row, from_col, to_row, to_col):
-        
+
         piece = self.__board__.get_piece(from_row, from_col)
-        if not (0 <= to_row <= 7) or not (0 <= to_col <= 7):
-            raise InvalidPosition("Invalid position. Please enter a value between 0 and 7.")
-        return ("The movement will be: ", self.__board__.move_piece(from_row, from_col, to_row, to_col))
-        
+
+        self.error_out_of_range(to_row, to_col)
+
+        return ("El movimiento va a ser: ", self.__board__.move_piece(from_row, from_col, to_row, to_col))
+                
     # Esta funcion verifica que la pieza que se va a mover pertenese a tu equipo
     def move_correct_color(self, from_row, from_col):
-
-        print(self.__board__.get_piece(from_row, from_col))
         piece = self.__board__.get_piece(from_row, from_col)
-        piece_type, piece_color = piece
-        color = list(piece_color)[0]
-        if color == self.__turn__:
-            True
-        else:
-            return "You can't move a piece that is not your color"
+        if piece is None:
+            raise NotPieceToMove("There is no piece at the given position.")
 
+        __type__, piece_color = piece
+        color = list(piece_color)[0]
+
+        if color != self.__turn__:
+            raise IsNotYourColor(f"You can't move a piece that is not your color. It's {self.__turn__}'s turn.")
+
+        return True
+    
     # Esta funcion es la que proboca que los turnos cambien
     def change_turn(self):
         if self.__turn__ == "WHITE":
@@ -84,10 +87,17 @@ class Chess:
          
          
     def verify_winner(self):
-         if len(self.__board__.pieces_from_black_piece) == 16:
-              return "WHITE IS THE OUTLAW KING"
-         elif len(self.__board__.pieces_from_white_piece) == 16:
-              return "BLACK IS THE OUTLAW KING"
-         else:
-              return False
-              
+        # Verificar si todas las piezas negras han sido capturadas
+        if len(self.__board__.pieces_from_black_piece) == 16:
+            return "WHITE WINS"
+        # Verificar si todas las piezas blancas han sido capturadas
+        elif len(self.__board__.pieces_from_white_piece) == 16:
+            return "BLACK WINS"
+        # Verificar si el rey negro ha sido capturado
+        elif not any(piece.__type__ == 'king' and piece.__color__ == 'black' for piece in self.__board__.pieces_from_black_piece):
+            return "WHITE WINS"
+        # Verificar si el rey blanco ha sido capturado
+        elif not any(piece.__type__ == 'king' and piece.__color__ == 'white' for piece in self.__board__.pieces_from_white_piece):
+            return "BLACK WINS"
+        else:
+            return False          
