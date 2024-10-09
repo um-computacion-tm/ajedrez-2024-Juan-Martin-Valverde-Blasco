@@ -41,7 +41,7 @@ class Chess:
             
     # Esta funcion me costo un huevo hacerla y tambien pedircela a copilot 
     # Es para que el peon que llega al otro lado se convierta en otra pieza diferente
-    def change_pawn_for_other(self, from_row, from_col, to_row, to_col):
+    def change_pawn_to_other(self, from_row, from_col, to_row, to_col):
         destination = self.__board__.get_piece(to_row, to_col)  # Obtener la pieza en la posición final
         
         # Verificar si el peón es blanco y ha llegado a la fila 0

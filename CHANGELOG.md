@@ -285,3 +285,10 @@ ________________________________________________________________________________
                                                                         └─────────────────┘
 - Exception added when is not players color
 - Verify winner upgraded, just need to optimice it
+_____________________________________________________________________________________________________________________________________________________
+                                                                     ┌──────────────────────┐
+                                                                     │ 9-Octubre 2024 20:04 │ 
+                                                                     └──────────────────────┘
+- I'm thinking about putting the redis aptitud it i could, like and extencion of the play func
+- Documenting the code and fixing some little troubles i had whit some functions
+- I was having problems whit the king's movement so decided to make a step back

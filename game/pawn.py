@@ -1,43 +1,41 @@
 from game.piece import Piece
 
-
 class Pawn(Piece):
     __type__ = "PAWN"
-    __white_str__ = " ♟"
-    __black_str__ = " ♙"
-        
-    def starting_row(self, from_row):
-        return (from_row == 6 and self.__color__ == "WHITE") or (from_row == 1 and self.__color__ == "BLACK")
+    __white_show__ = "♟" 
+    __black_show__ = "♙"
 
 
-    def can_do_double_step(self, from_row, to_row, direction):
+    #Doble salto cuando es su primer movimiento
+    def first_movement(self, from_row, to_row, direction):
         return (to_row - from_row) == 2 * direction
 
 
-    def empty_square(self, board, to_row, to_col):
+    #habilita el ataque en caso de que un enemigo este cerca
+    def enemy_piece_nerby(self, board, to_row, to_col):
+        destination_piece = board.get_piece(to_row, to_col)
+        return destination_piece != "No piece" and destination_piece.__color__ != self.__color__
+
+
+    #verifica que el lugar este vacio
+    def empty_place(self, board, to_row, to_col):
         return board.get_piece(to_row, to_col) == "No piece"
 
 
-    def is_enemy_piece(self, board, to_row, to_col):
-        destination_piece = board.get_piece(to_row, to_col)
-        return destination_piece != "No piece" and destination_piece[1] != self.__color__
+    #verifica que este bien puesta la pieza
+    def init_position_valid(self, from_row):
+        return (from_row == 6 and self.__color__ == "WHITE") or (from_row == 1 and self.__color__ == "BLACK")
 
 
+    #Esta funcion lo que hace es el movimiento del peon utilizando la funciones que tenemos en piece y las que creamos aca
     def permited_move(self, from_row, from_col, to_row, to_col, board):
-        direction = -1 if self.__color__ == "WHITE" else 1
-        
-        # Movimiento ortogonal (avance)
+        direction = -1 if self.__color__ == "WHITE" else 1        
         if self.permited_move_orthogonal(from_row, from_col, to_row, to_col, board):
-            if (to_row - from_row) == direction and self.empty_square(board, to_row, to_col):
+            if (to_row - from_row) == direction and self.empty_place(board, to_row, to_col):
                 return True
-            if self.starting_row(from_row) and self.can_do_double_step(from_row, to_row, direction) and self.empty_square(board, to_row, to_col):
+            if self.init_position_valid(from_row) and self.first_movement(from_row, to_row, direction) and self.empty_place(board, to_row, to_col):
                 return True
-        
-        # Movimiento diagonal (captura)
         if self.permited_move_diagonal(from_row, from_col, to_row, to_col, board):
-            if (to_row - from_row) == direction and self.is_enemy_piece(board, to_row, to_col):
+            if (to_row - from_row) == direction and self.enemy_piece_nerby(board, to_row, to_col):
                 return True
-        
         return False
-
-        

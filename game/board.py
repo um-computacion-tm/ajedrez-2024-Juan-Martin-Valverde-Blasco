@@ -135,7 +135,7 @@ class Board:
 
 
     # Con esta funcion damos vida al sistema de ataque
-    def eat_piece(self, from_row, from_col, to_row, to_col):
+    def capture_piece(self, from_row, from_col, to_row, to_col):
         piece = self.__positions__[from_row][from_col]
         destination = self.__positions__[to_row][to_col]
         if destination is not None:
