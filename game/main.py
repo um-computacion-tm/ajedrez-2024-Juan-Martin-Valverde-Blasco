@@ -40,9 +40,9 @@ class Cli():
                 to_row, to_col = self.validate_range_to()
                 print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
                 self.chess.movement_fits(from_row, from_col,to_row,to_col) 
-                self.chess.change_pawn_to_other(from_row, from_col, to_row, to_col)
+                self.chess.change_pawn(from_row, from_col, to_row, to_col)
                 self.chess.__board__.show_board() 
-                print(self.chess.show_captured_pieces())
+                print(self.chess.STR_captured_pieces())
                 if self.chess.verify_winner() is not False:
                     print(self.chess.verify_winner())
                     a = "n"
@@ -86,7 +86,7 @@ class Cli():
 
     #Verifica que el color de la pieza que queres mover sea tuyo
     def verify_color(self, chess, from_row, from_col):
-        move_by_color = chess.move_correct_color(from_row, from_col)
+        move_by_color = chess.right_color(from_row, from_col)
         
         if move_by_color is None:
             return True  

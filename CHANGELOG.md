@@ -292,3 +292,8 @@ ________________________________________________________________________________
 - I'm thinking about putting the redis aptitud it i could, like and extencion of the play func
 - Documenting the code and fixing some little troubles i had whit some functions
 - I was having problems whit the king's movement so decided to make a step back
+_____________________________________________________________________________________________________________________________________________________
+                                                                    ┌───────────────────────┐
+                                                                    │ 10-Octubre 2024 21:04 │ 
+                                                                    └───────────────────────┘
+- Board upgraded

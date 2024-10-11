@@ -8,6 +8,7 @@ from game.pawn import Pawn
 from game.exceptions import NotPieceToMove, NotPermitedMove
 
 class Board:
+   
     #esta funcion inicia el tablero y establece las posiciones de las piezas
     def __init__(self): 
         self.__positions__ = []
@@ -100,30 +101,35 @@ class Board:
             raise NotPermitedMove("The piece cannot be moved in this position")
         self.__positions__[to_row][to_col] = piece
         self.__positions__[from_row][from_col] = None
-        print(f"Moved piece from: {from_row}, {from_col} to: {to_row}, {to_col}")
+        print(f"Moved piece from: ", {from_row}, {from_col},     "to: ", {to_row}, {to_col})
 
 
     # Esta funcion lo que hace es mostrar el tablero
     def show_board(self):
-            print("╔══╤══╤══╤══╤══╤══╤══╤══╗")
-            for row in range(8):
-                print("║", end="")
-                for col in range(8):
-                    piece = self.__positions__[row][col]
-                    if piece is None:
-                        if (row + col) % 2 == 0:
-                            print("  ", end="")
-                        else:
-                            print("░░", end="")
+        print("    ", end="")
+        for col in range(8):
+            print(f"    {chr(97 + col)} ", end="")  # Imprime las letras de 'a' a 'h'
+        print()
+
+        print("╔══╤══╤══╤══╤══╤══╤══╤══╗")
+        for row in range(8):
+            print(f" {8 - row} ║", end="")  
+            for col in range(8):
+                piece = self.__positions__[row][col]
+                if piece is None:
+                    if (row + col) % 2 == 0:
+                        print("    ", end="")  
                     else:
-                        print(f" {piece}", end="")
-                    if col < 7:
-                        print("│", end="")
-                print(f"║{8 - row}")
-                if row < 7:
-                    print("╟──┼──┼──┼──┼──┼──┼──┼──╢")
-            print("╚══╧══╧══╧══╧══╧══╧══╧══╝")
-            print("╰a─┈b─┈c─┈d─┈e─┈f─┈g─┈h─┈╯")    
+                        print(" ░░ ", end="")  
+                else:
+                    print(f" {piece.show()} ", end="")
+                if col < 7:
+                    print("│", end="")
+            print(f"║ {8 - row}")
+            if row < 7:
+                print("╟──┼──┼──┼──┼──┼──┼──┼──╢")
+        print("╚══╧══╧══╧══╧══╧══╧══╧══╝")
+        print("    a    b    c    d    e    f    g    h")
 
 
     # Esta funcion lo que hace es verificar si el movimiento es permitido
@@ -156,7 +162,7 @@ class Board:
  
     
     
-    def get_piece_to_show(self, row, col):
+    def piece_to_STR(self, row, col):
         piece = self.__positions__[row][col]
         
         if piece is None:
