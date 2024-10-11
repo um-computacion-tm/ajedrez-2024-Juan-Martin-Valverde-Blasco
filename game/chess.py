@@ -73,7 +73,7 @@ class Chess:
         if not (0 <= row <= 7) or not (0 <= col <= 7):
             raise InvalidPosition("Posicion invalida, tiene que estar entre los valores 0 a 7.")
 
-     
+    #Esra funcion sirve para cuando queres cambiar un peon te muestre el dieno de las piezas que podes elejir, es una boludes pero le da un toque mas de diseno al juego
     def STR_captured_pieces(self):
          if self.__turn__ == "WHITE" and len(self.__board__.pieces_from_black) > 0:
               return "Las piezas capturadas del BLACK son: ", self.__board__.pieces_from_black
@@ -82,7 +82,7 @@ class Chess:
          else:
               return "El equipo esta completo"
          
-         
+    #Esta funcion valida las dos posibilidades de ganar, 1 que es capturando al equipo completo y otra que es capturando al rey         
     def verify_winner(self):
         # Verificar si todas las piezas negras han sido capturadas
         if len(self.__board__.pieces_from_black_piece) == 16:

@@ -159,9 +159,7 @@ class Board:
         else:
             return False
 
- 
-    
-    
+    #Esta funcion lo que hace es mostrar con el str la pieza que elejiste en el tablero, en caso de aberte equivocado al elegir la pieza te va a decir que no hay ninguna    
     def piece_to_STR(self, row, col):
         piece = self.__positions__[row][col]
         
