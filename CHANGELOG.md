@@ -189,3 +189,128 @@ ________________________________________________________________________________
 - Gabi's exceptios were added, just need to deploy them on my code
 - King testing completed
 - Knight testing completed
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 13-Septiembre 2024 22:50 │ 
+                                                                  └──────────────────────────┘
+- Queen testing completed
+- Rook testing completed
+- had to redifine every piece movement to get them passing the tests
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 16-Septiembre 2024 21:10 │ 
+                                                                  └──────────────────────────┘
+- Rook coverage raised to %100
+- I always forget the poor pawn
+- Pawn testing completed
+- Global coverage raised to %78
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 17-Septiembre 2024 21:06 │ 
+                                                                  └──────────────────────────┘
+- I was talking whit github copilot asking him what fuction could i make better and he told me that i should try making the movement of the pieces in a separated way, like making a function to ortogonal pieces and making another one just to pieces that moves on a diagonal, so i follow his call and here we are, now i gotta make the right calls on each pieces and test them all again
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 18-Septiembre 2024 21:06 │ 
+                                                                  └──────────────────────────┘
+- Ortogonal and diagonal functions implemented on every piece
+- Exceptions added to board
+- Global coverage raised to %87
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 21-Septiembre 2024 17:34 │ 
+                                                                  └──────────────────────────┘
+- Fighting agianst the func permite move from rook but i lose i don't know why it is failing when it is suposed to pass whitout problem
+- Some exceptions were implemented on main and chess just need to test them
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 22-Septiembre 2024 13:06 │ 
+                                                                  └──────────────────────────┘
+- Wake up early today just to code eat pieces func just need to test them
+- Some func were a little bit modified at board 
+- coverage dowgraded to %72 because of these changes tomorro will be a full testing day
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 23-Septiembre 2024 20:52 │ 
+                                                                  └──────────────────────────┘
+- Test coverage raised to %77
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐8
+                                                                  │ 26-Septiembre 2024 20:52 │ 
+                                                                  └──────────────────────────┘
+- Having so much trouble testing some functios i think its because they are badly made, i dont know, so gotta ask to copilot what to do and how could 
+  i make different some functions
+- Some other functios were added, due that i was unactive this week i will have to work this weekend :(
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 27-Septiembre 2024 21:52 │ 
+                                                                  └──────────────────────────┘
+- some little changes made 
+- some file got a better documentatio
+- define new piece now is only uno function    
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 28-Septiembre 2024 21:52 │ 
+                                                                  └──────────────────────────┘
+- Variable type modified to be a shared one, afte talking whit copilot (the mountain wise), we get to the conclusion that some functions were ardly working becuase of type so decided to make it a shared variable
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 29-Septiembre 2024 17:15 │ 
+                                                                  └──────────────────────────┘
+- Type variable fully aplied
+_____________________________________________________________________________________________________________________________________________________
+                                                                  ┌──────────────────────────┐
+                                                                  │ 30-Septiembre 2024 13:46 │ 
+                                                                  └──────────────────────────┘
+- Str function optimized
+- Some little changes were made
+_____________________________________________________________________________________________________________________________________________________
+                                                                     ┌──────────────────────┐
+                                                                     │ 1-Octubre 2024 20:16 │ 
+                                                                     └──────────────────────┘
+- Play function upgraded, i don't know what would i have done whitout copilot, chat gpt and stackoverflow these tools are saving my ass in many moments
+_____________________________________________________________________________________________________________________________________________________
+                                                                     ┌──────────────────────┐
+                                                                     │ 2-Octubre 2024 20:32 │ 
+                                                                     └──────────────────────┘
+- Main and board upgraded
+_____________________________________________________________________________________________________________________________________________________
+                                                                     ┌──────────────────────┐
+                                                                     │ 3-Octubre 2024 15:00 │ 
+                                                                     └──────────────────────┘
+- Verify move upgraded
+_____________________________________________________________________________________________________________________________________________________
+                                                                        ┌─────────────────┐
+                                                                        │ 4-Octubre 2024  │ 
+                                                                        └─────────────────┘
+- Exception added when is not players color
+- Verify winner upgraded, just need to optimice it
+_____________________________________________________________________________________________________________________________________________________
+                                                                     ┌──────────────────────┐
+                                                                     │ 9-Octubre 2024 20:04 │ 
+                                                                     └──────────────────────┘
+- I'm thinking about putting the redis aptitud it i could, like and extencion of the play func
+- Documenting the code and fixing some little troubles i had whit some functions
+- I was having problems whit the king's movement so decided to make a step back
+_____________________________________________________________________________________________________________________________________________________
+                                                                    ┌───────────────────────┐
+                                                                    │ 10-Octubre 2024 21:04 │ 
+                                                                    └───────────────────────┘
+- Board upgraded
+_____________________________________________________________________________________________________________________________________________________
+                                                                    ┌───────────────────────┐
+                                                                    │ 11-Octubre 2024 11:30 │ 
+                                                                    └───────────────────────┘
+- Docker added
+_____________________________________________________________________________________________________________________________________________________
+                                                                    ┌───────────────────────┐
+                                                                    │ 12-Octubre 2024 10:32 │ 
+                                                                    └───────────────────────┘
+- Thinking about adding a new method to present the game like i did whit the scrabble
+- Testing other classes like chess raised to %91 and global is on %66
+_____________________________________________________________________________________________________________________________________________________
+                                                                    ┌───────────────────────┐
+                                                                    │ 13-Octubre 2024 13:21 │ 
+                                                                    └───────────────────────┘
+- Testing board raised to %83 global coverge up to %75
+- I tried to test some things, like how the board is printed, but they didn't wanted to work like the used to, so i think that maybe i have to test  hem by playing, it's not like i would like it to be but i don't have any choice

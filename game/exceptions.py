@@ -7,5 +7,10 @@ class NotPieceToMove(Exception):
 class NotPermitedMove(Exception):
     pass
 
+class NotPieceToReplace(Exception):
+    pass
+
+class IsNotYourColor(Exception) :
+    pass
 
 
