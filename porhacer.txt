@@ -1,15 +1,21 @@
-crear rama DEV
-establecer en rama DEV
-poner codeclimate
-poner circleCI
-crear cada luchador
-establecer equipos
-estableces sus movimientos
-establecer posiciones predeterminadas de las fichas para cada equipo
-establecer que blanco se mueve primero 
-establecer ataque de peones
-establecer sistema de turnos
-establecer establecer perdida de soldado
-dibujar tablero
 TESTEAR ABSOLUTAMENTE TODO
 dar opcion de tirar la espada al mar (re de puto rendirse)
+"      a    b    c    d    e    f    g    h\n"
+"   ╔════╤════╤════╤════╤════╤════╤════╤════╗\n"
+" 8 ║    │    │    │    │    │    │    │    ║ 8\n"
+"   ╟────┼────┼────┼────┼────┼────┼────┼────╢\n"
+" 7 ║    │    │    │    │    │    │    │    ║ 7\n"
+"   ╟────┼────┼────┼────┼────┼────┼────┼────╢\n"
+" 6 ║    │    │    │    │    │    │    │    ║ 6\n"
+"   ╟────┼────┼────┼────┼────┼────┼────┼────╢\n"
+" 5 ║    │    │    │    │    │    │    │    ║ 5\n"
+"   ╟────┼────┼────┼────┼────┼────┼────┼────╢\n"
+" 4 ║    │    │    │    │    │    │    │    ║ 4\n"
+"   ╟────┼────┼────┼────┼────┼────┼────┼────╢\n"
+" 3 ║    │    │    │    │    │    │    │    ║ 3\n"
+"   ╟────┼────┼────┼────┼────┼────┼────┼────╢\n"
+" 2 ║    │    │    │    │    │    │    │    ║ 2\n"
+"   ╟────┼────┼────┼────┼────┼────┼────┼────╢\n"
+" 1 ║    │    │    │    │    │    │    │    ║ 1\n"
+"   ╚════╧════╧════╧════╧════╧════╧════╧════╝\n"
+"      a    b    c    d    e    f    g    h\n"

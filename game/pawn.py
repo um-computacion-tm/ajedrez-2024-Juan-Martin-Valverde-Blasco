@@ -2,8 +2,8 @@ from game.piece import Piece
 
 class Pawn(Piece):
     __type__ = "PAWN"
-    __white_show__ = "♟" 
-    __black_show__ = "♙"
+    __white_str__ = "♟" 
+    __black_str__ = "♙"
 
 
     #Doble salto cuando es su primer movimiento

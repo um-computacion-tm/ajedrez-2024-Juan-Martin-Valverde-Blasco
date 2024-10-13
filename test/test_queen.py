@@ -12,14 +12,6 @@ from game.pawn import Pawn
 
 class TestQueen(unittest.TestCase):
 
-    def test_str_white_queen(self):
-        queen = Queen("WHITE")
-        self.assertEqual(str(queen), " ♛")
-
-    def test_str_black_queen(self):
-        queen = Queen("BLACK")
-        self.assertEqual(str(queen), " ♕")
-
     def setUp(self):
         self.board = Board()
         

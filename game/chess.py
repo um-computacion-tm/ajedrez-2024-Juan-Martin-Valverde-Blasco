@@ -13,21 +13,19 @@ class Chess:
 
         self.error_out_of_range(to_row, to_col)
 
-        return ("El movimiento va a aser: ", self.__board__.move_piece(from_row, from_col, to_row, to_col))
+        return ("El movimiento va a ser: ", self.__board__.move_piece(from_row, from_col, to_row, to_col))
+                      
                         
     # Esta funcion verifica que la pieza que se va a mover pertenese a tu equipo
     def right_color(self, from_row, from_col):
         piece = self.__board__.get_piece(from_row, from_col)
-        if piece is None:
-            raise NotPieceToMove("No hay una pieza en la posicion especificada.")
+        if piece == "No piece":
+            return "La pieza no existe"
+        if piece.__color__ == self.__turn__:
+            True
+        else:
+            return "No podes mover una pieza que no es de tu color"
 
-        __type__, piece_color = piece
-        color = list(piece_color)[0]
-
-        if color != self.__turn__:
-            raise IsNotYourColor(f"No podes mover una pieza que no es la de tu color, tiene que ser color {self.__turn__}.")
-
-        return True
     
     # Esta funcion es la que proboca que los turnos cambien
     def change_turn(self):
@@ -91,10 +89,12 @@ class Chess:
         elif len(self.__board__.pieces_from_white_piece) == 16:
             return "Equipo BLACK gana"
         # Verificar si el rey negro ha sido capturado
-        elif not any(piece.__type__ == 'KING' and piece.__color__ == 'BLACK' for piece in self.__board__.pieces_from_black_piece):
+        elif any(piece.__type__ == 'KING' and piece.__color__ == 'BLACK' for piece in self.__board__.pieces_from_black_piece):
             return "Equipo WHITE gana"
         # Verificar si el rey blanco ha sido capturado
-        elif not any(piece.__type__ == 'KING' and piece.__color__ == 'WHITE' for piece in self.__board__.pieces_from_white_piece):
+        elif any(piece.__type__ == 'KING' and piece.__color__ == 'WHITE' for piece in self.__board__.pieces_from_white_piece):
             return "Equipo BLACK gana"
         else:
-            return False          
+            return False
+
+

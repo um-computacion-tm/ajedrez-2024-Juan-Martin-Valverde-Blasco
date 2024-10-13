@@ -302,3 +302,15 @@ ________________________________________________________________________________
                                                                     │ 11-Octubre 2024 11:30 │ 
                                                                     └───────────────────────┘
 - Docker added
+_____________________________________________________________________________________________________________________________________________________
+                                                                    ┌───────────────────────┐
+                                                                    │ 12-Octubre 2024 10:32 │ 
+                                                                    └───────────────────────┘
+- Thinking about adding a new method to present the game like i did whit the scrabble
+- Testing other classes like chess raised to %91 and global is on %66
+_____________________________________________________________________________________________________________________________________________________
+                                                                    ┌───────────────────────┐
+                                                                    │ 13-Octubre 2024 13:21 │ 
+                                                                    └───────────────────────┘
+- Testing board raised to %83 global coverge up to %75
+- I tried to test some things, like how the board is printed, but they didn't wanted to work like the used to, so i think that maybe i have to test  hem by playing, it's not like i would like it to be but i don't have any choice

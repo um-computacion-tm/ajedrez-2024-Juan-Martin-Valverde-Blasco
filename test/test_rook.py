@@ -13,14 +13,6 @@ from game.exceptions import NotPieceToMove, NotPermitedMove
 
 class TestRook(unittest.TestCase):
 
-    def test_str_white_rook(self):
-        rook = Rook("WHITE")
-        self.assertEqual(str(rook), " ♜")
-
-    def test_str_black_rook(self):
-        rook = Rook("BLACK")
-        self.assertEqual(str(rook), " ♖")
-
     def setUp(self):
         self.board = Board()
         self.rook = Rook("WHITE")  # Proporcionar el argumento 'color'

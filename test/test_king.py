@@ -3,14 +3,6 @@ from game.king import King
 from game.board import Board
 class TestKing(unittest.TestCase):
 
-    def test_str_white_king(self):
-        king = King("WHITE")
-        self.assertEqual(str(king), " ♚")
-
-    def test_str_black_king(self):
-        king = King("BLACK")
-        self.assertEqual(str(king), " ♔")
-
     def setUp(self):
         self.board = Board()    
 

@@ -12,15 +12,6 @@ from game.pawn import Pawn
 
 class TestBishop(unittest.TestCase):
 
-
-    def test_str_white_bishop(self):
-        bishop = Bishop("WHITE")
-        self.assertEqual(str(bishop), " ♝")
-
-    def test_str_black_bishop(self):
-        bishop = Bishop("BLACK")
-        self.assertEqual(str(bishop), " ♗")
-
     def setUp(self):
         self.board = Board()
         

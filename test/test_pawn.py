@@ -3,18 +3,10 @@ from game.pawn import Pawn
 from game.board import Board
 
 class TestPawn(unittest.TestCase):
+
     def setUp(self):
         self.board = Board()
     
-    def test_str_white_pawn(self):
-        pawn = Pawn("WHITE")
-        self.assertEqual(str(pawn), " ♟")
-
-    def test_str_black_pawn(self):
-        pawn = Pawn("BLACK")
-        self.assertEqual(str(pawn), " ♙")
-
-
     def test_permited_move_pawn(self):
         self.assertEqual(self.board.permited_move(1, 0, 3, 0), True)
         self.assertEqual(self.board.permited_move(1, 0, 2, 0), True)

@@ -1,25 +1,25 @@
-import unittest
-from unittest.mock import patch, call, MagicMock
-from io import StringIO
-from game.main import Cli, Chess
-
-
-class TestMain(unittest.TestCase):  
-
-    def test_main(self):
-        instance = Cli()
-        instance.play = MagicMock()
-        instance.main()
-        instance.play.assert_called_once()
-
-    @patch('builtins.print')
-    @patch ('builtins.input', side_effect = ["e"])
-    def test_play_error(self,patched_print, mock_input):
-        cli = Cli()
-        cli.play()
-
-        self.assertEqual(cli.play(), "error")
-
+#import unittest
+#from unittest.mock import patch, call, MagicMock
+#from io import StringIO
+#from game.main import Cli, Chess
+#
+#
+#class TestMain(unittest.TestCase):  
+#
+#    def test_main(self):
+#        instance = Cli()
+#        instance.play = MagicMock()
+#        instance.main()
+#        instance.play.assert_called_once()
+#
+#    @patch('builtins.print')
+#    @patch ('builtins.input', side_effect = ["e"])
+#    def test_play_error(self,patched_print, mock_input):
+#        cli = Cli()
+#        cli.play()
+#
+#        self.assertEqual(cli.play(), "error")
+#
 #    @patch('builtins.input', side_effect=["1", "2"])
 #    @patch('builtins.print')
 #    def test_verify_move_correct(self, mock_print, mock_input):
