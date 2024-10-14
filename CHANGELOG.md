@@ -314,3 +314,11 @@ ________________________________________________________________________________
                                                                     └───────────────────────┘
 - Testing board raised to %83 global coverge up to %75
 - I tried to test some things, like how the board is printed, but they didn't wanted to work like the used to, so i think that maybe i have to test  hem by playing, it's not like i would like it to be but i don't have any choice
+_____________________________________________________________________________________________________________________________________________________
+                                                                    ┌───────────────────────┐
+                                                                    │ 14-Octubre 2024 12:12 │ 
+                                                                    └───────────────────────┘
+- Almost finished
+- Global coverage up to %94 
+- Main tested, to %79
+- 

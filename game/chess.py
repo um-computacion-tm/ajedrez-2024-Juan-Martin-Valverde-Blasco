@@ -82,14 +82,9 @@ class Chess:
          
     #Esta funcion valida las dos posibilidades de ganar, 1 que es capturando al equipo completo y otra que es capturando al rey         
     def verify_winner(self):
-        # Verificar si todas las piezas negras han sido capturadas
-        if len(self.__board__.pieces_from_black_piece) == 16:
-            return "Equipo WHITE gana"
-        # Verificar si todas las piezas blancas han sido capturadas
-        elif len(self.__board__.pieces_from_white_piece) == 16:
-            return "Equipo BLACK gana"
+        
         # Verificar si el rey negro ha sido capturado
-        elif any(piece.__type__ == 'KING' and piece.__color__ == 'BLACK' for piece in self.__board__.pieces_from_black_piece):
+        if any(piece.__type__ == 'KING' and piece.__color__ == 'BLACK' for piece in self.__board__.pieces_from_black_piece):
             return "Equipo WHITE gana"
         # Verificar si el rey blanco ha sido capturado
         elif any(piece.__type__ == 'KING' and piece.__color__ == 'WHITE' for piece in self.__board__.pieces_from_white_piece):
