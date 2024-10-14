@@ -3,8 +3,8 @@ from game.piece import Piece
 
 class King(Piece):
     __type__ = "KING"
-    __white_str__ = " ♚"
-    __black_str__ = " ♔"
+    __white_str__ = "♚"
+    __black_str__ = "♔"
 
 
     #Esta funcion lo que hace es el movimiento del rey utilizando la funciones que tenemos en piece

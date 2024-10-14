@@ -21,7 +21,7 @@ class Cli():
                 from_row = int(input("De fila: "))
                 from_col = int(input("De columna: "))
                 self.chess.error_out_of_range(from_row, from_col)
-                print("La pieza que elejiste es: ", chess.__board__.get_piece_to_show(from_row, from_col))
+                print("La pieza que elejiste es: ", chess.__board__.piece_to_STR(from_row, from_col))
                 if self.verify_color(chess, from_row, from_col):
                     return from_row, from_col
             except ValueError:

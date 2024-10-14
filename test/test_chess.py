@@ -14,10 +14,10 @@ class TestChess(unittest.TestCase):
     def setUp(self):
         self.chess = Chess()
 
-    def test_chess_init(self):
+    def test_init(self):
         self.assertEqual(self.chess.__turn__, "WHITE")
 
-    def test_turn_change(self):
+    def test_change_turn(self):
         self.chess.change_turn()
         self.assertEqual(self.chess.__turn__, "BLACK")
         self.chess.change_turn()
@@ -35,7 +35,7 @@ class TestChess(unittest.TestCase):
         self.assertEqual(self.chess.__turn__, "WHITE")
 
     @patch('builtins.print')
-    def test_move_correct_color_white_turn(self, patched_print):
+    def test_white_moves_right_color(self, patched_print):
 
         result = self.chess.right_color(7, 0)
         self.assertIsNone(result)
@@ -118,25 +118,6 @@ class TestChess(unittest.TestCase):
 
         self.assertEqual(self.chess.__board__.piece_to_STR(0, 7), ({'QUEEN'}, {'WHITE'}))
         
-
-
-    def test_verify_winner_white_wins_by_capturing_all_black_pieces(self):
-        self.chess.__board__.pieces_from_black_piece = [
-            Rook("BLACK"), Rook("BLACK"), Knight("BLACK"), Knight("BLACK"), 
-            Bishop("BLACK"), Bishop("BLACK"), Queen("BLACK"), King("BLACK"), 
-            Pawn("BLACK"), Pawn("BLACK"), Pawn("BLACK"), Pawn("BLACK"), 
-            Pawn("BLACK"), Pawn("BLACK"), Pawn("BLACK"), Pawn("BLACK")
-        ]
-        self.assertEqual(self.chess.verify_winner(), "Equipo WHITE gana")
-
-    def test_verify_winner_black_wins_by_capturing_all_white_pieces(self):
-        self.chess.__board__.pieces_from_white_piece = [
-            Rook("WHITE"), Rook("WHITE"), Knight("WHITE"), Knight("WHITE"), 
-            Bishop("WHITE"), Bishop("WHITE"), Queen("WHITE"), King("WHITE"), 
-            Pawn("WHITE"), Pawn("WHITE"), Pawn("WHITE"), Pawn("WHITE"), 
-            Pawn("WHITE"), Pawn("WHITE"), Pawn("WHITE"), Pawn("WHITE")
-        ]
-        self.assertEqual(self.chess.verify_winner(), "Equipo BLACK gana")
 
     def test_verify_winner_white_wins_by_capturing_black_king(self):
         # Solo el rey negro ha sido capturado

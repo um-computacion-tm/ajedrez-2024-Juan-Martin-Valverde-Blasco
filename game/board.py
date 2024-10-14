@@ -91,26 +91,43 @@ class Board:
         print(f"Moved piece from: ", {from_row}, {from_col},     "to: ", {to_row}, {to_col})
 
 
-    # Esta funcion lo que hace es mostrar el tablero
+
     def show_board(self):
-        print("      a    b    c    d    e    f    g    h")
-        print("   ╔════╤════╤════╤════╤════╤════╤════╤════╗")
+        # Imprimir la fila superior de números de columna
+        print("    ", end="")
+        for col in range(8):
+            print(f"  {col}  ", end="")
+        print()
+    
+        # Imprimir la primera línea del borde superior del tablero
+        print("  ╔" + "═════╤" * 7 + "═════╗")
+    
+        # Imprimir las filas con las piezas
         for row in range(8):
-            print(f" {8 - row} ║", end="")
+            # Imprimir las piezas y los bordes verticales
+            print(f" {row}║", end="")
             for col in range(8):
                 piece = self.__positions__[row][col]
                 if piece is None:
-                    print("    ", end="")
+                    print("     ║", end="")  # Espacio en blanco si no hay pieza
                 else:
-                    print(f"{piece}", end="")
-                if col < 7:
-                    print(" │", end="")
-            print(f" ║ {8 - row}")
+                    piece_str = str(piece)  # Obtener la representación en string de la pieza
+                    # Reemplazar el espacio vacío con el str de la pieza, manteniendo alineación
+                    print(f"  {piece_str:^3} ║", end="")  # Centrar la pieza dentro de la celda
+            print()
+    
+            # Imprimir la línea separadora entre filas (excepto después de la última fila)
             if row < 7:
-                print("   ╟────┼────┼────┼────┼────┼────┼────┼────╢")
-        print("   ╚════╧════╧════╧════╧════╧════╧════╧════╝")
-        print("      a    b    c    d    e    f    g    h")
-        
+                print("  ╟" + "─────┼" * 7 + "─────╢")
+            else:
+                # Imprimir el borde inferior del tablero
+                print("  ╚" + "═════╧" * 7 + "═════╝")
+    
+        # Imprimir la fila inferior de números de columna
+        print("    ", end="")
+        for col in range(8):
+            print(f"  {col}  ", end="")
+        print()
         
     # Esta funcion lo que hace es verificar si el movimiento es permitido
     def permited_move(self, from_row, from_col, to_row, to_col):

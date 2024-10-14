@@ -15,7 +15,7 @@ class TestKnight(unittest.TestCase):
     def setUp(self):
         self.board = Board()
         
-    def test_permited_move_knight(self):
+    def test_permited_move(self):
 
         self.assertEqual(self.board.permited_move(0, 1, 2, 2), True)
         self.assertEqual(self.board.permited_move(0, 1, 2, 0), True)

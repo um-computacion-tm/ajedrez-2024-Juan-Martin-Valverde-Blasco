@@ -6,7 +6,7 @@ class TestKing(unittest.TestCase):
     def setUp(self):
         self.board = Board()    
 
-    def test_permited_move_king(self):
+    def test_permited_move(self):
         self.board.__positions__[4][4] = King("BLACK")
 
         self.assertEqual(self.board.permited_move(4, 4, 4, 3), True)
