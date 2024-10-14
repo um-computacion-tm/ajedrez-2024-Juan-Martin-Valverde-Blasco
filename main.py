@@ -2,7 +2,7 @@ from game.main import Cli
 
 def main():
     client = Cli()
-    client.client()
+    client.play()
 
 if __name__ == '__main__':
     main()
