@@ -327,4 +327,6 @@ ________________________________________________________________________________
                                                                     └───────────────────────┘
 - Main Menu added
 - Tryng to  understand why my docker isn't working
-- Board fixed
+- Board fixed and tested
+- Some test fixed
+- Main menu tested

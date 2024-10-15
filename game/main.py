@@ -8,12 +8,6 @@ class Cli():
     def __init__(self):
         self.chess = Chess()
 
-    
-    #Inicia la funcion play
-    def main(self):
-        self.play()
-
-
     #Pide la posicion de la pieza que queres elegir, se fija que este dentro del tablero y si esta bien te imprime en la terminal la pieza que elejiste
     def verify_move(self, chess):
         while True:
@@ -130,15 +124,18 @@ class Cli():
         while True:
             self.main_menu()
             option = int(input("Ingresa una opcion: "))
-            
+
             if option == 1:
                 self.handle_user_input(option)
             elif option == 2:
                 self.handle_option_2()
+            elif option == 3:
+                print("Hasta luego")
+                break
             else:
                 print("Opcion invalida")
                 continue
-
+            
 if __name__ == "__main__":
     cli = Cli()
     cli.client()
