@@ -29,13 +29,26 @@ class Pawn(Piece):
 
     #Esta funcion lo que hace es el movimiento del peon utilizando la funciones que tenemos en piece y las que creamos aca
     def permited_move(self, from_row, from_col, to_row, to_col, board):
-        direction = -1 if self.__color__ == "WHITE" else 1        
+        direction = -1 if self.__color__ == "WHITE" else 1
+        
+        if self.is_valid_orthogonal_move(from_row, from_col, to_row, to_col, board, direction):
+            return True
+        
+        if self.is_valid_diagonal_move(from_row, from_col, to_row, to_col, board, direction):
+            return True
+        
+        return False
+    
+    def is_valid_orthogonal_move(self, from_row, from_col, to_row, to_col, board, direction):
         if self.permited_move_orthogonal(from_row, from_col, to_row, to_col, board):
             if (to_row - from_row) == direction and self.empty_place(board, to_row, to_col):
                 return True
             if self.init_position_valid(from_row) and self.first_movement(from_row, to_row, direction) and self.empty_place(board, to_row, to_col):
                 return True
+        return False
+    
+    def is_valid_diagonal_move(self, from_row, from_col, to_row, to_col, board, direction):
         if self.permited_move_diagonal(from_row, from_col, to_row, to_col, board):
             if (to_row - from_row) == direction and self.enemy_piece_nerby(board, to_row, to_col):
                 return True
-        return False
+        return False    

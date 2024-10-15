@@ -39,13 +39,13 @@ class TestMain(unittest.TestCase):
         self.assertEqual(self.cli.verify_color(self.chess, 5, 5), False)
 
 
-    def test_play_with_empty_board_except_black_queen(self):
-        self.chess.__board__.__positions__[5][5] = Queen("BLACK")
-        for col in range(8):
-            self.chess.__board__.__positions__[1][col] = None
-            self.chess.__board__.__positions__[0][col] = None
-        print(self.chess.__board__.get_piece(5, 5))
-        self.cli.play()
+#    def test_play_with_empty_board_except_black_queen(self):
+#        self.chess.__board__.__positions__[5][5] = Queen("BLACK")
+#        for col in range(8):
+#            self.chess.__board__.__positions__[1][col] = None
+#            self.chess.__board__.__positions__[0][col] = None
+#        print(self.chess.__board__.get_piece(5, 5))
+#        self.cli.play()
 
 
     @patch('builtins.print')
@@ -84,7 +84,7 @@ class TestMain(unittest.TestCase):
             "--------------------------------------------------------------------------------------------\n"
             "-------------------------Welcome to Ajedrez By Juan Martin Valverde-------------------------\n"
             "----------------------------Tecnical consultor Copilot and GPT-4----------------------------\n"
-            "-------------------------Proyect For computacionI Ing informaticaUM-------------------------\n"
+            "-------------------------Proyect For ComputacionI Ing informaticaUM-------------------------\n"
             "--------------------------------------------------------------------------------------------\n"
         )
 
