@@ -130,6 +130,7 @@ class Cli():
         while True:
             self.main_menu()
             option = int(input("Ingresa una opcion: "))
+            
             if option == 1:
                 self.handle_user_input(option)
             elif option == 2:
