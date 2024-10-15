@@ -91,43 +91,25 @@ class Board:
         print(f"Moved piece from: ", {from_row}, {from_col},     "to: ", {to_row}, {to_col})
 
 
-
     def show_board(self):
-        # Imprimir la fila superior de números de columna
+
         print("    ", end="")
         for col in range(8):
-            print(f"  {col}  ", end="")
-        print()
-    
-        # Imprimir la primera línea del borde superior del tablero
-        print("  ╔" + "═════╤" * 7 + "═════╗")
-    
-        # Imprimir las filas con las piezas
+            print(f"    {col} ", end="")
+        print() 
+
         for row in range(8):
-            # Imprimir las piezas y los bordes verticales
-            print(f" {row}║", end="")
+            print(f" {row} ║", end="")  
+
             for col in range(8):
                 piece = self.__positions__[row][col]
                 if piece is None:
-                    print("     ║", end="")  # Espacio en blanco si no hay pieza
+                    print("     ", end="║")  # Espacio en blanco si no hay pieza
                 else:
-                    piece_str = str(piece)  # Obtener la representación en string de la pieza
-                    # Reemplazar el espacio vacío con el str de la pieza, manteniendo alineación
-                    print(f"  {piece_str:^3} ║", end="")  # Centrar la pieza dentro de la celda
+                    print(" ", piece.__str__()," ",  end="║")  # Muestra inicial del tipo y color de la pieza
             print()
-    
-            # Imprimir la línea separadora entre filas (excepto después de la última fila)
-            if row < 7:
-                print("  ╟" + "─────┼" * 7 + "─────╢")
-            else:
-                # Imprimir el borde inferior del tablero
-                print("  ╚" + "═════╧" * 7 + "═════╝")
-    
-        # Imprimir la fila inferior de números de columna
-        print("    ", end="")
-        for col in range(8):
-            print(f"  {col}  ", end="")
-        print()
+            print("    " + "══════" * 8 + "")  # Línea separadora entre filas
+        
         
     # Esta funcion lo que hace es verificar si el movimiento es permitido
     def permited_move(self, from_row, from_col, to_row, to_col):
