@@ -92,90 +92,52 @@ class Cli():
         return False
 
 
+    def welcome_message(self):
+        print("--------------------------------------------------------------------------------------------")
+        print("-------------------------Welcome to Ajedrez By Juan Martin Valverde-------------------------")
+        print("----------------------------Tecnical consultor Copilot and GPT-4----------------------------")
+        print("-------------------------Proyect For computacionI Ing informaticaUM-------------------------")
+        print("--------------------------------------------------------------------------------------------")
 
-#    def show_game_options(self):
-#        print("-------------------------------------Tablero del Ajedrez---------------------------------------")
-#        self.chess.__board__.show_board() 
-#        print("------------------------------------------Opciones---------------------------------------------")
-#        print("Presiona 1 para seguir jugando o tirar la espada al mar")
-#        print("Presiona 2 para cambiar un peon")
-#        print("Presiona 3 para guardar partida")
-#        print("-----------------------------------------------------------------------------------------------")
-#        print("Es el turno de ",self.chess.__turn__)
-#    
-#
-#
-#    def handle_user_input(self, option):
-#        
-#        if option == 1:
-#            try:
-#                from_row, from_col = self.verify_move(self.chess)
-#                to_row, to_col = self.validate_range_to()
-#                print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
-#                self.chess.movement_fits(from_row, from_col,to_row,to_col) 
-#                self.chess.change_pawn(from_row, from_col, to_row, to_col)
-#                self.chess.__board__.show_board() 
-#                print(self.chess.STR_captured_pieces())
-#                if self.chess.verify_winner() is not False:
-#                    print(self.chess.verify_winner())
-#                self.chess.change_turn()
-#                    
-#            except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
-#                print("Error:", e)
-#                print("Proba de nuevo", "sigue siendo el turno de ", self.chess.__turn__)
-#
-#            except Exception as e:
-#                print("error", e)
-#                return "error"
-#
-#            print("Fin del juego")
-#        elif option == 2:
-#          self.handle_option_2()
-#        elif option == 3:
-#          self.handle_option_3()
-#        elif option == 4:
-#            self.handle_option_4()
-#        else:
-#            print("Incorrect Input. Please try again.")
-#            self.show_game_options()
-#            
-#    def handle_option_2(self):
-#        tiles_to_exchange_indices = input("Enter the indices of tiles you want to exchange (comma-separated): ").split(',')
-#        old_tiles_indices = [int(index.strip()) for index in tiles_to_exchange_indices]
-#        exchanged_tiles = self.scrabble.exchange_tiles(old_tiles_indices)
-#        print("Exchanged tiles: ", exchanged_tiles)
-#        self.scrabble.next_turn()
-#
-#    def handle_option_3(self):
-#        print('Okay, exchanging all your tiles')
-#        exchanged_tiles = self.scrabble.exchange_all_tiles()
-#        print("Exchanged tiles: ", exchanged_tiles)
-#        self.scrabble.next_turn()
-#
-#    def handle_option_4(self):
-#        print("Well, passing to the next player...")
-#        self.scrabble.next_turn()
-#
-#
-#    def client(self):
-#        self.welcome_message()
-#        player_count = self.get_player_count()
-#        self.scrabble = ScrabbleGame(total_players=player_count)
-#
-#        while self.scrabble.is_playing():
-#            self.scrabble.next_turn()
-#            self.scrabble.start_game()
-#
-#            while True:
-#                self.show_game_options()
-#                try:
-#                    option = int(input("Choose your Option: "))
-#                    self.handle_user_input(option)
-#                except ValueError:
-#                    print("Invalid input. Please enter a valid number.")
-#                except Exception as e:
-#                    print(f"Error: {e}. Please try again.")
+
+    def main_menu(self): 
+        print("------------------------------------------Opciones---------------------------------------------")
+        print("Presiona 1 para empezar a jugar")
+        print("Presiona 2 para ver un tutorial")
+        print("Presiona 3 para salir")
+        print("-----------------------------------------------------------------------------------------------")
+        
+    
+    def handle_user_input(self, option):
+        
+        if option == 1:
+            self.play()
+        elif option == 3:
+            self.handle_option_3()
+        else:
+            self.handle_option_2()
+                                    
+    def handle_option_2(self):
+        print("aca va el tutorial")
+
+
+    def handle_option_3(self):
+        print("Hasta luego")
+        exit()
+    
+    def client(self):
+        self.welcome_message()
+        while True:
+            self.main_menu()
+            option = int(input("Ingresa una opcion: "))
+            if option == 1:
+                self.handle_user_input(option)
+            elif option == 2:
+                self.handle_option_2()
+            else:
+                print("Opcion invalida")
+                continue
 
 if __name__ == "__main__":
     cli = Cli()
-    cli.play()
+    cli.client()

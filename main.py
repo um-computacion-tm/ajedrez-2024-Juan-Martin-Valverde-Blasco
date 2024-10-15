@@ -1,8 +1,8 @@
 from game.main import Cli
 
 def main():
-    client = Cli()
-    client.play()
+    game = Cli()
+    game.client()
 
 if __name__ == '__main__':
     main()
