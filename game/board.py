@@ -83,14 +83,14 @@ class Board:
             raise NotPieceToMove("No hay una pieza para mover")
         destination = self.__positions__[to_row][to_col]
         if destination is not None and destination.__color__ == piece.__color__:
-            raise NotPermitedMove("Cannot move to a position occupied by a piece with the same color")
+            raise NotPermitedMove("No se puede mover a esta posicion, esta ocupada por otra pieza del mismo equipo")
         if not self.permited_move(from_row, from_col, to_row, to_col):
-            raise NotPermitedMove("The piece cannot be moved in this position")
+            raise NotPermitedMove("No se puede mover a esta posicion")
         self.__positions__[to_row][to_col] = piece
         self.__positions__[from_row][from_col] = None
-        print(f"Moved piece from: ", {from_row}, {from_col},     "to: ", {to_row}, {to_col})
+        print(f"Se movio la pieza desde: ", {from_row}, {from_col},     "hasta: ", {to_row}, {to_col})
 
-
+    #Esta funcion lo que hace es mostrar el tablero
     def show_board(self):
 
         print("    ", end="")
@@ -104,11 +104,11 @@ class Board:
             for col in range(8):
                 piece = self.__positions__[row][col]
                 if piece is None:
-                    print("     ", end="║")  # Espacio en blanco si no hay pieza
+                    print("     ", end="║")
                 else:
-                    print(" ", piece.__str__()," ",  end="║")  # Muestra inicial del tipo y color de la pieza
+                    print(" ", piece.__str__()," ",  end="║")
             print()
-            print("    " + "══════" * 8 + "")  # Línea separadora entre filas
+            print("    " + "══════" * 8 + "")
         
         
     # Esta funcion lo que hace es verificar si el movimiento es permitido
