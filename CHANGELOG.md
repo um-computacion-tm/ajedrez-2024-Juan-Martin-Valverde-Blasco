@@ -330,3 +330,5 @@ ________________________________________________________________________________
 - Board fixed and tested
 - Some test fixed
 - Main menu tested
+- Docker working like it should
+- Raising code cuality from C to A

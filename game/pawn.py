@@ -41,14 +41,17 @@ class Pawn(Piece):
     
     def is_valid_orthogonal_move(self, from_row, from_col, to_row, to_col, board, direction):
         if self.permited_move_orthogonal(from_row, from_col, to_row, to_col, board):
-            if (to_row - from_row) == direction and self.empty_place(board, to_row, to_col):
-                return True
-            if self.init_position_valid(from_row) and self.first_movement(from_row, to_row, direction) and self.empty_place(board, to_row, to_col):
-                return True
+            return self.is_valid_move(from_row, to_row, direction, board, to_col, self.empty_place)
         return False
     
     def is_valid_diagonal_move(self, from_row, from_col, to_row, to_col, board, direction):
         if self.permited_move_diagonal(from_row, from_col, to_row, to_col, board):
-            if (to_row - from_row) == direction and self.enemy_piece_nerby(board, to_row, to_col):
-                return True
-        return False    
+            return self.is_valid_move(from_row, to_row, direction, board, to_col, self.enemy_piece_nerby)
+        return False
+    
+    def is_valid_move(self, from_row, to_row, direction, board, to_col, condition_func):
+        if (to_row - from_row) == direction and condition_func(board, to_row, to_col):
+            return True
+        if self.init_position_valid(from_row) and self.first_movement(from_row, to_row, direction) and condition_func(board, to_row, to_col):
+            return True
+        return False
