@@ -1,11 +1,12 @@
-from game.piece import Piece as piece
+from game.piece import Piece
 
-class Rook(piece):
+
+class Rook(Piece):
     __type__ = "ROOK" 
-    __white_str__  = "♜"
-    __black_str__  = "♖"
-    
-    
-    #Esta funcion lo que hace es el movimiento de la torre utilizando la funciones que tenemos en pice
+    __white_show__ = "♜"
+    __black_show__ = "♖"
+
     def permited_move(self, from_row, from_col, to_row, to_col, board):
         return self.permited_move_orthogonal(from_row, from_col, to_row, to_col, board)
+
+    
