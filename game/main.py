@@ -111,8 +111,14 @@ class Cli():
         else:
             self.handle_option_2()
                                     
+                                    
     def handle_option_2(self):
-        print("aca va el tutorial")
+        self.handle_pawn_moves_and_attacks()
+        self.handle_rook_moves_and_attacks()
+        self.handle_knight_moves_and_attacks()
+        self.handle_bishop_moves_and_attacks()
+        self.handle_queen_moves_and_attacks()
+        self.handle_king_moves_and_attacks()
 
 
     def handle_option_3(self):
@@ -135,6 +141,131 @@ class Cli():
             else:
                 print("Opcion invalida")
                 continue
+            
+            
+    def handle_pawn_moves_and_attacks(self):
+        print(
+            "El movimiento y ataque del peón es el siguiente:\n"
+            "El peón siempre se mueve un solo lugar hacia adelante.\n"
+            "Si es el primer movimiento, puede avanzar dos lugares.\n"
+            "El peón ataca en diagonal hacia adelante.\n"
+            "    0     1     2\n"
+            "  ═══════════════════\n"
+            "4║     ║     ║     ║\n"
+            "  ═══════════════════\n"
+            "5║     ║  ♟  ║  X  ║\n"
+            "  ═══════════════════\n"
+            "6║  M  ║  ♟  ║     ║\n"
+            "  ═══════════════════\n"
+            "7║  ♟  ║     ║     ║\n"
+            "  ═══════════════════\n"
+            "  X marca las posibles casillas de ataque.\n"
+            "  M marca las posibles casillas de movimiento."
+            "\n-----------------------------------------\n")
+
+        
+
+    def handle_rook_moves_and_attacks(self):
+        print(
+            "El movimiento y ataque de la torre es el siguiente:\n"
+            "La torre se mueve en línea recta, horizontal o vertical.\n"
+            "No tiene limitación de distancia.\n"
+            "    0     1     2     3     4\n"
+            "  ═════════════════════════════\n"
+            "0║  ♜  ║  X  ║  X  ║  X  ║  X  ║\n"
+            "  ═════════════════════════════\n"
+            "1║  X  ║     ║     ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "2║  X  ║     ║     ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "3║  X  ║     ║     ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "4║  X  ║     ║     ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "  X marca las posibles casillas de ataque y movimiento."
+            "\n-----------------------------------------\n")
+
+
+    def handle_knight_moves_and_attacks(self):
+        print(
+            "El movimiento y ataque del caballo es el siguiente:\n"
+            "El caballo se mueve en forma de 'L': dos casillas en una dirección y luego una en ángulo recto.\n"
+            "    0     1     2     3     4\n"
+            "  ═════════════════════════════\n"
+            "0║     ║     ║  X  ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "1║     ║  X  ║     ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "2║  X  ║     ║  ♞  ║     ║  X  ║\n"
+            "  ═════════════════════════════\n"
+            "3║     ║  X  ║     ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "4║     ║     ║  X  ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "  X marca las posibles casillas de ataque y movimiento."
+            "\n-----------------------------------------\n")
+
+
+    def handle_bishop_moves_and_attacks(self):
+        print(
+            "El movimiento y ataque del alfil es el siguiente:\n"
+            "El alfil se mueve diagonalmente sin limitación de distancia.\n"
+            "    0     1     2     3     4\n"
+            "  ═════════════════════════════\n"
+            "0║  X  ║     ║     ║     ║  X  ║\n"
+            "  ═════════════════════════════\n"
+            "1║     ║  X  ║     ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "2║     ║     ║  ♝  ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "3║     ║  X  ║     ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "4║  X  ║     ║     ║     ║  X  ║\n"
+            "  ═════════════════════════════\n"
+            "  X marca las posibles casillas de ataque y movimiento."
+            "\n-----------------------------------------\n")
+
+
+    def handle_queen_moves_and_attacks(self):
+        print(
+            "El movimiento y ataque de la reina es el siguiente:\n"
+            "La reina se mueve en todas las direcciones: horizontal, vertical y diagonal.\n"
+            "    0     1     2     3     4\n"
+            "  ═════════════════════════════\n"
+            "0║  X  ║     ║  X  ║     ║  X  ║\n"
+            "  ═════════════════════════════\n"
+            "1║     ║  X  ║  X  ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "2║  X  ║  X  ║  ♛  ║  X  ║  X  ║\n"
+            "  ═════════════════════════════\n"
+            "3║     ║  X  ║  X  ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "4║  X  ║     ║  X  ║     ║  X  ║\n"
+            "  ═════════════════════════════\n"
+            "  X marca las posibles casillas de ataque y movimiento."
+            "\n-----------------------------------------\n")
+
+
+    def handle_king_moves_and_attacks(self):
+        print(
+            "El movimiento y ataque del rey es el siguiente:\n"
+            "El rey se mueve una casilla en cualquier dirección: horizontal, vertical o diagonal.\n"
+            "    0     1     2     3     4\n"
+            "  ═════════════════════════════\n"
+            "0║     ║     ║     ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "1║     ║  X  ║  X  ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "2║     ║  X  ║  ♚  ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "3║     ║  X  ║  X  ║  X  ║     ║\n"
+            "  ═════════════════════════════\n"
+            "4║     ║     ║     ║     ║     ║\n"
+            "  ═════════════════════════════\n"
+            "  X marca las posibles casillas de ataque y movimiento."
+            "\n-----------------------------------------\n")
+
+
             
 if __name__ == "__main__":
     cli = Cli()
