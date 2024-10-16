@@ -1,3 +1,5 @@
+
+
 class InvalidPosition(Exception):
     pass
 
@@ -10,7 +12,8 @@ class NotPermitedMove(Exception):
 class NotPieceToReplace(Exception):
     pass
 
-class IsNotYourColor(Exception) :
+class GameEnded(Exception):
     pass
+
 
 
