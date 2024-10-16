@@ -103,13 +103,14 @@ class Cli():
         
     
     def handle_user_input(self, option):
-        
         if option == 1:
             self.play()
+        elif option == 2:
+            self.handle_option_2()
         elif option == 3:
             self.handle_option_3()
         else:
-            self.handle_option_2()
+            print("Opcion invalida")
                                     
                                     
     def handle_option_2(self):
@@ -127,21 +128,9 @@ class Cli():
     
     def client(self):
         self.welcome_message()
-        while True:
-            self.main_menu()
-            option = int(input("Ingresa una opcion: "))
-
-            if option == 1:
-                self.handle_user_input(option)
-            elif option == 2:
-                self.handle_option_2()
-            elif option == 3:
-                print("Hasta luego")
-                break
-            else:
-                print("Opcion invalida")
-                continue
-            
+        self.main_menu()
+        option = int(input("Ingresa una opcion: "))
+        self.handle_user_input(option)
             
     def handle_pawn_moves_and_attacks(self):
         print(
