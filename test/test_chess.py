@@ -176,38 +176,7 @@ class TestChess(unittest.TestCase):
             self.chess.error_out_of_range(-1, -1)
         self.assertEqual(str(context.exception), "Posicion invalida, tiene que estar entre los valores 0 a 7.")
 
-#    def test_change_pawn_white_pawn_reaches_row_0_with_captured_pieces(self):
-#        self.chess.__board__.pieces_from_white_piece = [Piece("QUEEN", "WHITE")]
-#        try:
-#            self.chess.change_pawn(1, 0, 0, 0)
-#        except NotPieceToReplace:
-#            self.fail("change_pawn() raised NotPieceToReplace unexpectedly!")
-#
-#    def test_change_pawn_black_pawn_reaches_row_7_with_captured_pieces(self):
-#        self.chess.__board__.pieces_from_black_piece = [Piece("QUEEN", "BLACK")]
-#        try:
-#            self.chess.change_pawn(6, 0, 7, 0)
-#        except NotPieceToReplace:
-#            self.fail("change_pawn() raised NotPieceToReplace unexpectedly!")
-#
-#    def test_change_pawn_white_pawn_reaches_row_0_without_captured_pieces(self):
-#        self.chess.__board__.pieces_from_white_piece = []
-#        with self.assertRaises(NotPieceToReplace) as context:
-#            self.chess.change_pawn(1, 0, 0, 0)
-#        self.assertEqual(str(context.exception), "No hay piezas capturadas por las que cambiar al PAWN")
-#
-#    def test_change_pawn_black_pawn_reaches_row_7_without_captured_pieces(self):
-#        self.chess.__board__.pieces_from_black_piece = []
-#        with self.assertRaises(NotPieceToReplace) as context:
-#            self.chess.change_pawn(6, 0, 7, 0)
-#        self.assertEqual(str(context.exception), "No hay piezas capturadas por las que cambiar al PAWN")
-#
-#    def test_change_pawn_no_pawn_at_destination(self):
-#        self.chess.__board__.get_piece = lambda row, col: Piece("ROOK", "WHITE")
-#        result = self.chess.change_pawn(1, 0, 0, 0)
-#        self.assertIsNone(result)
-  
-  
+
     def test_check_right_color_no_piece(self):
         result = self.chess.right_color(2, 2)
         self.assertEqual(result, "La pieza no existe")
@@ -222,3 +191,4 @@ class TestChess(unittest.TestCase):
         result = self.chess.right_color(1, 1)
         self.assertEqual(result, "No podes mover una pieza que no es de tu color")
 
+#COMPLETE

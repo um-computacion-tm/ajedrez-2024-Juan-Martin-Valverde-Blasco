@@ -27,3 +27,5 @@ class TestQueen(unittest.TestCase):
         self.assertEqual(self.board.permited_move(4, 4, 4, 4), True)
 
         self.assertEqual(self.board.permited_move(0, 3, 2, 4), False)
+
+#COMPLETE

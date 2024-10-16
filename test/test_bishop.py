@@ -24,3 +24,5 @@ class TestBishop(unittest.TestCase):
         self.assertEqual(self.board.permited_move(3, 3, 4, 2), True)
         self.assertEqual(self.board.permited_move(3, 3, 5, 5), True)
         self.assertEqual(self.board.permited_move(3, 3, 6, 5), False)
+
+#COMPLETE

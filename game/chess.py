@@ -92,3 +92,5 @@ class Chess:
     def is_king_missing(self, color):
         pieces = self.__board__.pieces_from_black_piece if color == 'BLACK' else self.__board__.pieces_from_white_piece
         return not any(piece.__type__ == 'KING' and piece.__color__ == color for piece in pieces)
+
+#COMPLETE

@@ -39,13 +39,6 @@ class TestMain(unittest.TestCase):
         self.assertEqual(self.cli.verify_color(self.chess, 5, 5), False)
 
 
-#    def test_play_with_empty_board_except_black_queen(self):
-#        self.chess.__board__.__positions__[5][5] = Queen("BLACK")
-#        for col in range(8):
-#            self.chess.__board__.__positions__[1][col] = None
-#            self.chess.__board__.__positions__[0][col] = None
-#        print(self.chess.__board__.get_piece(5, 5))
-#        self.cli.play()
 
 
     @patch('builtins.print')
@@ -64,13 +57,6 @@ class TestMain(unittest.TestCase):
         self.assertIsInstance(self.chess.__board__.get_piece(5, 5), Queen)
         self.assertIsNone(self.cli.play())
 
-
-#    @patch('builtins.print')
-#    @patch('builtins.input', side_effect = [6, 6, 4, 6, "y"])
-#    def test_answer_yes(self, patched_print, mock_input):
-#        self.cli.play()
-#
-#        self.assertEqual(self.cli.chess.__turn__, "BLACK")
 
     def test_welcome_message(self):
         # Capturar la salida de la función welcome_message
@@ -188,3 +174,4 @@ class TestClient(unittest.TestCase):
         # Verificar que se imprimió "Hasta luego" para la opción 3
         mock_print.assert_any_call("Hasta luego")
 
+#COMPLETE

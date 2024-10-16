@@ -149,3 +149,4 @@ class Board:
         else:
             return ({piece.__type__}, {piece.__color__})
         
+        #COMPLETE

@@ -19,3 +19,4 @@ class TestPawn(unittest.TestCase):
 
         self.assertEqual(self.board.permited_move(4, 1, 3, 2), True)
 
+#COMPLETE

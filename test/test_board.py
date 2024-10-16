@@ -129,25 +129,6 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(self.board.piece_to_STR(3, 3), "No piece")
 
 
-#    def test_piece_to_STR_with_piece(self):
-#        # Verificar que devuelve el tipo y color de la pieza correctamente
-#        self.board.__positions__[0][0] = Rook("BLACK")
-#        self.assertEqual(self.board.piece_to_STR(0, 0), ("ROOK", "BLACK"))
-#
-#        self.board.__positions__[7][7] = Queen("WHITE")
-#        self.assertEqual(self.board.piece_to_STR(7, 7), ("QUEEN", "WHITE"))
-
-
-#    def test_piece_to_STR_with_different_pieces(self):
-#        # Verificar que devuelve el tipo y color de diferentes piezas correctamente
-#        self.board.__positions__[1][1] = Knight("BLACK")
-#        self.assertEqual(self.board.piece_to_STR(1, 1), ("KNIGHT", "BLACK"))
-#
-#        self.board.__positions__[6][6] = Bishop("WHITE")
-#        self.assertEqual(self.board.piece_to_STR(6, 6), ("BISHOP", "WHITE"))
-
-
-
 
 class TestBoardMovePiece(unittest.TestCase):
 
@@ -173,3 +154,4 @@ class TestBoardMovePiece(unittest.TestCase):
             self.board.move_piece(0, 0, 0, 1)
 
 
+#COMPLETE

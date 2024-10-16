@@ -15,3 +15,6 @@ class TestRook(unittest.TestCase):
         board = None  
         self.assertFalse(self.rook.permited_move(0, 0, 5, 5, board))
         self.assertFalse(self.rook.permited_move(0, 0, 1, 2, board)) 
+        
+        
+#COMPLETE

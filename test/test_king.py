@@ -21,3 +21,4 @@ class TestKing(unittest.TestCase):
 
         self.assertEqual(self.board.permited_move(4, 4, 2, 4), False)
 
+#COMPLETE
