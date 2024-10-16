@@ -1,18 +1,15 @@
 from game.piece import Piece
 from game.rook import Rook
-from game.pawn import Pawn
 from game.knight import Knight
 from game.bishop import Bishop
 from game.queen import Queen
 from game.king import King
-
-from game.exceptions import NotPermitedMove, NotPieceToMove
-
-#Que hacer con los permited_move, donde los pongo?
-
-
+from game.pawn import Pawn
+from game.exceptions import NotPieceToMove, NotPermitedMove
 
 class Board:
+   
+    #esta funcion inicia el tablero y establece las posiciones de las piezas
     def __init__(self): #Asi inicia el tablero
         self.__positions__ = []
         for _ in range(8):
@@ -20,53 +17,56 @@ class Board:
             for _ in range(8):
                 col.append(None)
             self.__positions__.append(col)
-        # ESte es el mejor lugar para poner la funcion de comer piezas??????????????????????????????????
-        self.pieces_from_white = [] #Las piezas que se comio el NEGRO del BLANCO
-        self.pieces_from_black = [] #Las piezas que se comio el BLANCO del NEGRO
-        self.pieces_from_white_piece = [] #Las piezas que se comio el NEGRO del BLANCO
-        self.pieces_from_black_piece = [] #Las piezas que se comio el BLANCO del NEGRO
+        
+        self.pieces_from_white = [] #las piezas que capturo BLACK
+        
+        self.pieces_from_black = [] #las piezas que capturo WHITE
+        
+        
+        self.pieces_from_white_piece = [] #las piezas que capturo BLACK
+        
+        self.pieces_from_black_piece = [] #las piezas que capturo WHITE
+        
+        
+        self.__positions__[0][0] = Rook("BLACK") #torre negra
+        self.__positions__[0][7] = Rook("BLACK") #torre negra
+        
+        self.__positions__[7][7] = Rook("WHITE") #torre blanca
+        self.__positions__[7][0] = Rook("WHITE") #torre blanca
 
-        #lugares rook
-        self.__positions__[0][0] = Rook("BLACK") #"Rook Black"
-        self.__positions__[0][7] = Rook("BLACK") #"Rook Black"
-        self.__positions__[7][7] = Rook("WHITE") #"Rook White"
-        self.__positions__[7][0] = Rook("WHITE") #"Rook White"
 
-
+        #Areglo para ahorrar el hardcode
         for col in range(8):
-            self.__positions__[1][col] = Pawn("BLACK") #"PawnBlack"
-            self.__positions__[6][col] = Pawn("WHITE") #"PawnWhite"
+            self.__positions__[1][col] = Pawn("BLACK") #peon negro
+        
+            self.__positions__[6][col] = Pawn("WHITE") #peon blanco
+        
+        
+        self.__positions__[0][1] = Knight("BLACK") #caballo negro
+        self.__positions__[0][6] = Knight("BLACK") #caballo negro
+        
+        self.__positions__[7][1] = Knight("WHITE") #caballo blanco
+        self.__positions__[7][6] = Knight("WHITE") #caballo blanco
 
-        #lugares knight
-        self.__positions__[0][1] = Knight("BLACK") #"KnightBlack"
-        self.__positions__[0][6] = Knight("BLACK") #"KnightBlack"
-        self.__positions__[7][1] = Knight("WHITE") #"KnightWhite"
-        self.__positions__[7][6] = Knight("WHITE") #"KnightWhite"
+        
+        self.__positions__[0][2] = Bishop("BLACK") #alfil negro
+        self.__positions__[0][5] = Bishop("BLACK") #alfil negro
 
-        #lugares bushop
-        self.__positions__[0][2] = Bishop("BLACK") #"BishopBlack"
-        self.__positions__[0][5] = Bishop("BLACK") #"BishopBlack"
-        self.__positions__[7][2] = Bishop("WHITE") #"BishopWhite"
-        self.__positions__[7][5] = Bishop("WHITE") #"BishopWhite"
+        self.__positions__[7][2] = Bishop("WHITE") #alfil blanco
+        self.__positions__[7][5] = Bishop("WHITE") #alfil blanco
 
-        #lugares queen
-        self.__positions__[0][3] = Queen("BLACK") #"QueenBlack"
-        self.__positions__[7][3] = Queen("WHITE") #"QueenWhite"
+        
+        self.__positions__[0][3] = Queen("BLACK") #reina negra
 
+        self.__positions__[7][3] = Queen("WHITE") #reina blanca
 
-        #lugares king
-        self.__positions__[0][4] = King("BLACK") #"KingBlack"
-        self.__positions__[7][4] = King("WHITE") #"KingWhite"
     
+        self.__positions__[0][4] = King("BLACK") #rey negro
 
-    def get_piece_for_show(self, row, col):
-        piece = self.__positions__[row][col]
-        
-        if piece is None:
-            return "No piece"
-        else:
-            return ({piece.__type__}, {piece.__color__})
-        
+        self.__positions__[7][4] = King("WHITE") #rey blanco
+
+
+    # Esta funcion lo que hace es obtener las piezas y los equipos
     def get_piece(self, row, col):
         piece = self.__positions__[row][col]
 
@@ -75,60 +75,22 @@ class Board:
         else:
             return piece
     
-    def permited_move(self, from_row, from_col, to_row, to_col):
-        piece = self.__positions__[from_row][from_col]
 
-        piece = self.__positions__[from_row][from_col]
-        if piece is None:
-            return False  # No hay pieza para mover
-        return piece.permited_move(from_row, from_col, to_row, to_col, self)
-
+    # Esta funcion lo que hace es mover las piezas        
     def move_piece(self, from_row, from_col, to_row, to_col):
         piece = self.__positions__[from_row][from_col]
         if piece is None:
-            #self.show_board()
-            raise NotPieceToMove("No piece to move")
-
+            raise NotPieceToMove("No hay una pieza para mover")
         destination = self.__positions__[to_row][to_col]
-
-        # Verificamos si la posición de destino tieneom_row, from_col,to_row,to_col)) una pieza del mismo color
         if destination is not None and destination.__color__ == piece.__color__:
-            #self.show_board()
-            raise NotPermitedMove("Cannot move to a position occupied by a piece of the same color")
-
-        if self.permited_move(from_row, from_col, to_row, to_col) == False:
-            #self.show_board()
-            raise NotPermitedMove("The piece cannot be moved in this position")
-
+            raise NotPermitedMove("No se puede mover a esta posicion, esta ocupada por otra pieza del mismo equipo")
+        if not self.permited_move(from_row, from_col, to_row, to_col):
+            raise NotPermitedMove("No se puede mover a esta posicion")
         self.__positions__[to_row][to_col] = piece
-
         self.__positions__[from_row][from_col] = None
+        print(f"Se movio la pieza desde: ", {from_row}, {from_col},     "hasta: ", {to_row}, {to_col})
 
-        print(f"Moved piece from: ", {from_row}, {from_col}, "to: ", {to_row}, {to_col})
-
-        #self.show_board()
-    
-    def eat_piece(self, from_row, from_col, to_row, to_col):
-
-        piece = self.__positions__[from_row][from_col]
-        destination = self.__positions__[to_row][to_col]
-        if destination is not None:
-            if destination.__color__ != piece.__color__:
-                if piece.__color__ == "WHITE":
-                    self.pieces_from_black.append(destination.show())
-                    self.pieces_from_black_piece.append(destination)
-                    print("Las piezas que BLANCO se comio de NEGRO son: ")
-                    return (self.pieces_from_black)
-                else:
-                    self.pieces_from_white.append(destination.show())
-                    self.pieces_from_white_piece.append(destination)
-                    print("Las piezas que NEGRO se comio de BLANCO son: ")
-                    return (self.pieces_from_white)
-        else:
-            return False
-
-
-
+    #Esta funcion lo que hace es mostrar el tablero
     def show_board(self):
 
         print("    ", end="")
@@ -137,21 +99,53 @@ class Board:
         print() 
 
         for row in range(8):
-            print(f" {row} |", end="")  
+            print(f" {row} ║", end="")  
 
             for col in range(8):
                 piece = self.__positions__[row][col]
                 if piece is None:
-                    print("    ", end=" |")  # Espacio en blanco si no hay pieza
+                    print("     ", end="║")
                 else:
-                    print(" ", piece.show()," ",  end="|")  # Muestra inicial del tipo y color de la pieza
+                    print(" ", piece.__str__()," ",  end="║")
             print()
-            print("    " + "------" * 8 + "")  # Línea separadora entre filas
+            print("    " + "══════" * 8 + "")
+        
+        
+    # Esta funcion lo que hace es verificar si el movimiento es permitido
+    def permited_move(self, from_row, from_col, to_row, to_col):
+        piece = self.__positions__[from_row][from_col]
+
+        piece = self.__positions__[from_row][from_col]
+        if piece is None:
+            return False  # No hay pieza para mover
+        return piece.permited_move(from_row, from_col, to_row, to_col, self)
 
 
+    # Con esta funcion damos vida al sistema de ataque
+    def capture_piece(self, from_row, from_col, to_row, to_col):
+        piece = self.__positions__[from_row][from_col]
+        destination = self.__positions__[to_row][to_col]
+        if destination is not None:
+            if destination.__color__ != piece.__color__:
+                if piece.__color__ == "WHITE":
+                    self.pieces_from_black.append(destination.__str__())
+                    self.pieces_from_black_piece.append(destination)
+                    print("La pieza que blanco capturo es: ")
+                    return (self.pieces_from_black)
+                else:
+                    self.pieces_from_white.append(destination.__str__())
+                    self.pieces_from_white_piece.append(destination)
+                    print("La pieza que negro capturo es: ")
+                    return (self.pieces_from_white)
+        else:
+            return False
 
-board = Board()
-# board.show_board()
-# print(board.get_piece(0,0))
-# print(board.get_piece(7,0))
- 
+    #Esta funcion lo que hace es mostrar con el str la pieza que elejiste en el tablero, en caso de aberte equivocado al elegir la pieza te va a decir que no hay ninguna    
+    def piece_to_STR(self, row, col):
+        piece = self.__positions__[row][col]
+        
+        if piece is None:
+            return "No piece"
+        else:
+            return ({piece.__type__}, {piece.__color__})
+        
