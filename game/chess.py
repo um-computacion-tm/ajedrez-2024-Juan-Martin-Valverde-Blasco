@@ -89,7 +89,12 @@ class Chess:
         # Verificar si el rey blanco ha sido capturado
         elif any(piece.__type__ == 'KING' and piece.__color__ == 'WHITE' for piece in self.__board__.pieces_from_white_piece):
             return "Equipo BLACK gana"
+        elif len(self.__board__.pieces_from_black_piece) == 16:
+              return "WHITE WINS"
+        elif len(self.__board__.pieces_from_white_piece) == 16:
+              return "BLACK WINS"
         else:
             return False
+            
 
 
