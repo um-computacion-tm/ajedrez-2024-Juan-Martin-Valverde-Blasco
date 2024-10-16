@@ -8,3 +8,5 @@ RUN ls
 RUN pip install --no-cache-dir -r requirements.txt
 
 CMD [ "sh", "-c", "coverage run -m unittest && coverage report -m && python -m main" ] 
+
+#COMPLETE

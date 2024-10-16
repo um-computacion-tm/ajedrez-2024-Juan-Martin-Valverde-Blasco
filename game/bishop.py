@@ -14,3 +14,4 @@ class Bishop(Piece):
         else:
             return False
  
+ #COMPLETE

@@ -8,3 +8,5 @@ fi
 codeclimate engines:install
 coverage run -m unittest && coverage report -m
 codeclimate analyze
+
+#COMPLETE

@@ -28,10 +28,4 @@ class TestKnight(unittest.TestCase):
         self.assertEqual(self.board.permited_move(4, 4, 6, 3), True)
         self.assertEqual(self.board.permited_move(4, 4, 3, 5), False)      
 
-#    def test_permited_move_line_77(self): 
-#        self.board.__positions__[2][2] = Knight("BLACK")
-#        self.assertEqual(self.board.__positions__[2][2].__type__, "KNIGHT")
-#        
-#        self.assertEqual(self.board.get_piece(2, 2), ({'KNIGHT'}, {'BLACK'}))
-#        self.assertEqual(self.board.permited_move(2, 2, 4, 3), True)  
-#   
+#COMPLETE

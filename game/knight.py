@@ -13,3 +13,4 @@ class Knight(Piece):
             (1, 2), (1, -2), (-1, 2), (-1, -2)]
         return (to_row - from_row, to_col - from_col) in valid_moves
     
+#COMPLETE
