@@ -80,17 +80,15 @@ class Chess:
          else:
               return "El equipo esta completo"
          
-    #Esta funcion valida las dos posibilidades de ganar, 1 que es capturando al equipo completo y otra que es capturando al rey         
+    #Esta funcion valida la forma de ganar, capturando al rey         
     def verify_winner(self):
-        if any(piece.__type__ == 'KING' and piece.__color__ == 'BLACK' for piece in self.__board__.pieces_from_black_piece):
-            return "Equipo WHITE gana"
-        elif any(piece.__type__ == 'KING' and piece.__color__ == 'WHITE' for piece in self.__board__.pieces_from_white_piece):
+        if self.is_king_missing('BLACK'):
             return "Equipo BLACK gana"
-        elif len(self.__board__.pieces_from_black_piece) == 16:
-            return "WHITE WINS"
-        elif len(self.__board__.pieces_from_white_piece) == 16:
-            return "BLACK WINS"
+        elif self.is_king_missing('WHITE'):
+            return "Equipo WHITE gana"
         else:
             return False
-
-
+    
+    def is_king_missing(self, color):
+        pieces = self.__board__.pieces_from_black_piece if color == 'BLACK' else self.__board__.pieces_from_white_piece
+        return not any(piece.__type__ == 'KING' and piece.__color__ == color for piece in pieces)
