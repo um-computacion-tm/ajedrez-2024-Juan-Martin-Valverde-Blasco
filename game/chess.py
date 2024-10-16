@@ -91,6 +91,6 @@ class Chess:
         elif len(self.__board__.pieces_from_white_piece) == 16:
             return "BLACK WINS"
         else:
-            return "No hay ganador"     
+            return False
 
 
