@@ -35,11 +35,11 @@ class Cli():
                 from_row, from_col = self.verify_move(self.chess)
                 to_row, to_col = self.validate_range_to()
 
-                print(self.chess.__board__.eat_piece(from_row, from_col, to_row, to_col))
-                self.chess.move(from_row, from_col, to_row, to_col) 
-                self.chess.change_pawn_for_other(from_row, from_col, to_row, to_col)
+                print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
+                self.chess.movement_fits(from_row, from_col, to_row, to_col) 
+                self.chess.change_pawn(from_row, from_col, to_row, to_col)
                 self.chess.__board__.show_board() 
-                print(self.chess.show_eaten_pieces())
+                print(self.chess.STR_captured_pieces())
 
                 if self.chess.verify_winner() is not False:
                     print(self.chess.verify_winner())
