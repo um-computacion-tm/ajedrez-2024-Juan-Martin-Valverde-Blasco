@@ -25,54 +25,54 @@ class Cli():
                 
                 
     #Conjuncion de todas las funciones para poder jugar
-def client(self):
-    self.welcome_message()
-    self.main_menu1()
-
-    while True:
-        a = input("Que queres hacer?: ")
-        if a == "1":            
-            while a == "1":
-                self.chess.__board__.show_board() 
-                try:
-                    from_row, from_col = self.verify_move(self.chess)
-                    to_row, to_col = self.validate_range()
-
-                    print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
-                    self.chess.movement_fits(from_row, from_col, to_row, to_col) 
-                    self.chess.change_pawn(from_row, from_col, to_row, to_col)
+    def client(self):
+        self.welcome_message()
+        self.main_menu1()
+    
+        while True:
+            a = input("Que queres hacer?: ")
+            if a == "1":            
+                while a == "1":
                     self.chess.__board__.show_board() 
-                    print(self.chess.STR_captured_pieces())
-
-                    if self.chess.verify_winner() is not False:
-                        print(self.chess.verify_winner())
-                        a = "3"
-                        break
-
-                    self.main_menu2()
-                    a = input("Que quieres hacer ahora?: ")
-                    if a == "1":
-                        self.chess.change_turn()
-                        print("Es turno de: ", self.chess.__turn__)
-                    elif a == "2":
-                        self.show_tutorial()
-                    elif a == "3":
-                        break
-                except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
-                    print("Error:", e)
-                    print("Try again", "It's still ", self.chess.__turn__, "turn")
-                except Exception as e:
-                    print("Error", e)
-                    return "Error"
-
-            print("Game ended")
-        elif a == "2":
-            self.show_tutorial()
-        elif a == "3":
-            print("Game ended")
-            break
-        else:
-            print("Invalid option")
+                    try:
+                        from_row, from_col = self.verify_move(self.chess)
+                        to_row, to_col = self.validate_range()
+    
+                        print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
+                        self.chess.movement_fits(from_row, from_col, to_row, to_col) 
+                        self.chess.change_pawn(from_row, from_col, to_row, to_col)
+                        self.chess.__board__.show_board() 
+                        print(self.chess.STR_captured_pieces())
+    
+                        if self.chess.verify_winner() is not False:
+                            print(self.chess.verify_winner())
+                            a = "3"
+                            break
+                        
+                        self.main_menu2()
+                        a = input("Que quieres hacer ahora?: ")
+                        if a == "1":
+                            self.chess.change_turn()
+                            print("Es turno de: ", self.chess.__turn__)
+                        elif a == "2":
+                            self.show_tutorial()
+                        elif a == "3":
+                            break
+                    except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
+                        print("Error:", e)
+                        print("Try again", "It's still ", self.chess.__turn__, "turn")
+                    except Exception as e:
+                        print("Error", e)
+                        return "Error"
+    
+                print("Game ended")
+            elif a == "2":
+                self.show_tutorial()
+            elif a == "3":
+                print("Game ended")
+                break
+            else:
+                print("Invalid option")
 
 
     #Valida que la posicion a la que te vas a mover este dentro del tablero
