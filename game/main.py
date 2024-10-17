@@ -28,8 +28,10 @@ class Cli():
     def client(self):
         self.welcome_message()
         self.main_menu1()
-
-        while True:
+    
+        game_running = True
+    
+        while game_running:
             a = input("Que queres hacer?: ")
             if a == "1":            
                 while a == "1":
@@ -37,16 +39,17 @@ class Cli():
                     try:
                         from_row, from_col = self.verify_move(self.chess)
                         to_row, to_col = self.validate_range()
-
+    
                         print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
                         self.chess.movement_fits(from_row, from_col, to_row, to_col) 
                         self.chess.change_pawn(from_row, from_col, to_row, to_col)
                         self.chess.__board__.show_board() 
                         print(self.chess.STR_captured_pieces())
-
+    
                         if self.chess.verify_winner() is not False:
                             print(self.chess.verify_winner())
                             a = "3"
+                            game_running = False
                             break
                         
                         self.main_menu2()
@@ -64,14 +67,13 @@ class Cli():
                     except Exception as e:
                         print("Error", e)
                         return "Error"
-
+    
                 print("Game ended")
-                break
             elif a == "2":
                 self.show_tutorial()
             elif a == "3":
                 print("Game ended")
-                break
+                game_running = False
             else:
                 print("Invalid option")
 
