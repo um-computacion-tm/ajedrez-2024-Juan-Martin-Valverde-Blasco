@@ -1,6 +1,6 @@
 from game.chess import Chess
 from game.piece import Piece
-from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace, GameIsOver
+from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace
 
 class Cli():
  
@@ -26,54 +26,63 @@ class Cli():
                 
     #Conjuncion de todas las funciones para poder jugar
     def client(self):
-
-            a = "1"
-
-            while a == "1":
-                self.chess.__board__.show_board() 
-                try:
-                    from_row, from_col = self.verify_move(self.chess)
-
-                    to_row, to_col = self.validate_range_to()
-
-                    print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
-
-                    self.chess.movement_fits(from_row, from_col,to_row,to_col) 
-
-                    self.chess.change_pawn(from_row, from_col, to_row, to_col)
-
+            self.welcome_message()
+            self.main_menu1()
+            
+            a = input("Que queres hacer?: ")
+            if a == "1":            
+                while a == "1":
                     self.chess.__board__.show_board() 
+                    try:
+                        from_row, from_col = self.verify_move(self.chess)
 
-                    print(self.chess.STR_captured_pieces())
+                        to_row, to_col = self.validate_range()
 
-                    if self.chess.verify_winner() is not False:
-                        print(self.chess.verify_winner())
-                        a = "3"
-                        break
-                    self.main_menu()
-                    a = input("Que quieres hacer ahora?: ")
-                    if a == "1":
-                        self.chess.change_turn()
-                        print("Es turno de: ", self.chess.__turn__)
-                    elif a == "2":
-                        self.handle_option_2()
-                    elif a == "3":
-                        break
+                        print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
 
-                except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
-                    print("Error:", e)
-                    print("Try again", "It's still ", self.chess.__turn__, "turn")
+                        self.chess.movement_fits(from_row, from_col,to_row,to_col) 
 
-                except Exception as e:
-                    print("Error", e)
-                    return "Error"
+                        self.chess.change_pawn(from_row, from_col, to_row, to_col)
 
-            print("Game ended")
+                        self.chess.__board__.show_board() 
 
+                        print(self.chess.STR_captured_pieces())
+
+                        if self.chess.verify_winner() is not False:
+                            print(self.chess.verify_winner())
+                            a = "3"
+                            break
+                        self.main_menu2()
+                        a = input("Que quieres hacer ahora?: ")
+                        if a == "1":
+                            self.chess.change_turn()
+                            print("Es turno de: ", self.chess.__turn__)
+                        elif a == "2":
+                            self.handle_option_2()
+                        elif a == "3":
+                            break
+                        
+
+                    except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
+                        print("Error:", e)
+                        print("Try again", "It's still ", self.chess.__turn__, "turn")
+
+                    except Exception as e:
+                        print("Error", e)
+                        return "Error"
+
+                print("Game ended")
+            elif a == "2":
+                self.handle_option_2()
+            elif a == "3":
+                print("Game ended")
+            else:
+                print("Invalid option")
+                self.client()
 
 
     #Valida que la posicion a la que te vas a mover este dentro del tablero
-    def validate_range_to(self):
+    def validate_range(self):
         while True:
             try:
                 to_row = int(input("A fila: "))
@@ -108,10 +117,17 @@ class Cli():
         print("-------------------------Proyect For ComputacionI Ing informaticaUM-------------------------")
         print("--------------------------------------------------------------------------------------------")
 
-
-    def main_menu(self): 
+    def main_menu1(self): 
         print("------------------------------------------Opciones---------------------------------------------")
-        print("Presiona 1 para empezar a jugar")
+        print("Presiona 1 para comenzar a jugar")
+        print("Presiona 2 para ver un tutorial")
+        print("Presiona 3 para salir")
+        print("-----------------------------------------------------------------------------------------------")
+        
+
+    def main_menu2(self): 
+        print("------------------------------------------Opciones---------------------------------------------")
+        print("Presiona 1 para continuar jugando")
         print("Presiona 2 para ver un tutorial")
         print("Presiona 3 para salir")
         print("-----------------------------------------------------------------------------------------------")

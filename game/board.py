@@ -23,9 +23,9 @@ class Board:
         self.pieces_from_black = [] #las piezas que capturo WHITE
         
         
-        self.pieces_from_white_piece = [] #las piezas que capturo BLACK
+        self.pieces_from_white_piece = [] #las piezas que capturo BLACK en instancia
         
-        self.pieces_from_black_piece = [] #las piezas que capturo WHITE
+        self.pieces_from_black_piece = [] #las piezas que capturo WHITE en intancia
         
         
         self.__positions__[0][0] = Rook("BLACK") #torre negra
