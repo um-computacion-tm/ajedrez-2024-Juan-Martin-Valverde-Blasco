@@ -50,12 +50,13 @@ class Cli():
                             break
                         
                         self.main_menu2()
+                        
                         a = input("Que quieres hacer ahora?: ")
                         if a == "1":
                             self.chess.change_turn()
                             print("Es turno de: ", self.chess.__turn__)
                         elif a == "2":
-                            self.show_tutorial()
+                            print("Invalid option")
                         elif a == "3":
                             break
                     except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
@@ -111,6 +112,7 @@ class Cli():
         print("-------------------------Proyect For ComputacionI Ing informaticaUM-------------------------")
         print("--------------------------------------------------------------------------------------------")
 
+
     def main_menu1(self): 
         print("------------------------------------------Opciones---------------------------------------------")
         print("Presiona 1 para comenzar a jugar")
@@ -122,8 +124,8 @@ class Cli():
     def main_menu2(self): 
         print("------------------------------------------Opciones---------------------------------------------")
         print("Presiona 1 para continuar jugando")
-        print("Presiona 2 para ver un tutorial")
-        print("Presiona 3 para salir")
+        print("Boton 2 no tiene funcionalidad")
+        print("Presiona 3 dos veces(por separado) para terminar para salir")
         print("-----------------------------------------------------------------------------------------------")
         
                                                    
@@ -157,7 +159,6 @@ class Cli():
             "\n-----------------------------------------\n")
 
         
-
     def tutorial_rook_moves_and_attacks(self):
         print(
             "El movimiento y ataque de la torre es el siguiente:\n"
