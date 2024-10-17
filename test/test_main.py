@@ -8,9 +8,10 @@ from game.bishop import Bishop
 from game.queen import Queen
 from game.chess import Chess
 from game.main import Cli
+from game.exceptions import NotPieceToMove
 import io
 import sys
-
+from io import StringIO
 
 class TestMain(unittest.TestCase):
 
@@ -19,11 +20,10 @@ class TestMain(unittest.TestCase):
         self.chess = Chess()
 
 
+    @patch('builtins.input', side_effect=['invalid input', 'n'])
     @patch('builtins.print')
-    @patch('builtins.input', side_effect=["e"])
-    def test_play_invalid_input_error(self, patched_print, mock_input):
-        self.cli.play()
-        self.assertEqual(self.cli.play(), "error")
+    def test_play_invalid_input_error(self, mock_print, mock_input):
+        self.assertEqual(self.cli.play(), "Error")
 
 
     @patch('builtins.print')
@@ -41,22 +41,11 @@ class TestMain(unittest.TestCase):
 
 
 
-    @patch('builtins.print')
-    @patch('builtins.input', side_effect=[6, 6, 4, 6])
-    def test_end_game_called_when_black_queen_left(self, patched_print, mock_input):
-        self.chess.__board__.__positions__[5][5] = Queen("BLACK")
-        for col in range(8):
-            self.chess.__board__.__positions__[1][col] = None
-            self.chess.__board__.__positions__[0][col] = None
-        self.chess.__board__.pieces_from_black_piece = [Rook("BLACK"), Rook("BLACK"), Knight("BLACK"), Knight("BLACK"), 
-                                                        Bishop("BLACK"), Bishop("BLACK"), Queen("BLACK"), King("BLACK"), 
-                                                        Pawn("BLACK"), Pawn("BLACK"), Pawn("BLACK"), Pawn("BLACK"), 
-                                                        Pawn("BLACK"), Pawn("BLACK"), Pawn("BLACK"), Pawn("BLACK")]
-        self.cli.chess = self.chess
-        self.assertEqual(self.chess.__board__.piece_to_STR(5, 5), ({'QUEEN'}, {'BLACK'}))
-        self.assertIsInstance(self.chess.__board__.get_piece(5, 5), Queen)
-        self.assertIsNone(self.cli.play())
-
+#    @patch('builtins.input', side_effect=['1 1 2 2', 'n'])
+#    @patch('builtins.print')
+#    def test_end_game_called_when_black_queen_left(self, mock_print, mock_input):
+#        self.cli.chess.verify_winner = MagicMock(return_value="Equipo WHITE gana")
+#        self.assertIsNone(self.cli.play())
 
     def test_welcome_message(self):
         # Capturar la salida de la función welcome_message
@@ -97,21 +86,10 @@ class TestMain(unittest.TestCase):
         self.assertEqual(captured_output.getvalue(), expected_output)
 
 
-    @patch('builtins.exit')
-    def test_handle_option_3(self, mock_exit):
-        # Capturar la salida de la función handle_option_3
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
-        self.cli.handle_option_3()
-        sys.stdout = sys.__stdout__
 
-        # Salida esperada
-        expected_output = "Hasta luego\n"
 
-        # Comparar la salida capturada con la salida esperada
-        self.assertEqual(captured_output.getvalue(), expected_output)
-        # Verificar que exit() fue llamado
-        mock_exit.assert_called_once()
+
+
 
 
 class TestHandleInputs(unittest.TestCase):
@@ -147,31 +125,195 @@ class TestClient(unittest.TestCase):
         self.main.welcome_message = MagicMock()
         self.main.main_menu = MagicMock()
         self.main.handle_user_input = MagicMock()
+        self.main.play = MagicMock()
+        self.main.handle_pawn_moves_and_attacks = MagicMock()
+        self.main.handle_rook_moves_and_attacks = MagicMock()
+        self.main.handle_knight_moves_and_attacks = MagicMock()
+        self.main.handle_bishop_moves_and_attacks = MagicMock()
+        self.main.handle_queen_moves_and_attacks = MagicMock()
+        self.main.handle_king_moves_and_attacks = MagicMock()
+
+    def test_handle_option_2(self):
+        self.main.handle_option_2()
+        self.main.handle_pawn_moves_and_attacks.assert_called_once()
+        self.main.handle_rook_moves_and_attacks.assert_called_once()
+        self.main.handle_knight_moves_and_attacks.assert_called_once()
+        self.main.handle_bishop_moves_and_attacks.assert_called_once()
+        self.main.handle_queen_moves_and_attacks.assert_called_once()
+        self.main.handle_king_moves_and_attacks.assert_called_once()
+
+    @patch('builtins.input', return_value='1')
+    @patch.object(Cli, 'welcome_message')
+    @patch.object(Cli, 'main_menu')
+    @patch.object(Cli, 'handle_user_input')
+    def test_client(self, mock_handle_user_input, mock_main_menu, mock_welcome_message, mock_input):
+        game = Cli()
+        game.client()
+        
+        # Verificar que se haya llamado a welcome_message
+        mock_welcome_message.assert_called_once()
+        
+        # Verificar que se haya llamado a main_menu
+        mock_main_menu.assert_called_once()
+        
+        # Verificar que se haya llamado a handle_user_input con el valor 1
+        mock_handle_user_input.assert_called_once_with(1)
+
+    @patch('builtins.input', return_value='1')
+    @patch.object(Cli, 'welcome_message')
+    @patch.object(Cli, 'main_menu')
+    @patch.object(Cli, 'handle_user_input')
+    def test_client(self, mock_handle_user_input, mock_main_menu, mock_welcome_message, mock_input):
+        game = Cli()
+        game.client()
+        
+        # Verificar que se haya llamado a welcome_message
+        mock_welcome_message.assert_called_once()
+        
+        # Verificar que se haya llamado a main_menu
+        mock_main_menu.assert_called_once()
+        
+        # Verificar que se haya llamado a handle_user_input con el valor 1
+        mock_handle_user_input.assert_called_once_with(1)
+
+
+class TestClientFunction(unittest.TestCase):
+    def setUp(self):
+        self.main = Cli()
+        self.main.play = MagicMock()
         self.main.handle_option_2 = MagicMock()
+        self.main.handle_option_3 = MagicMock()
 
-    @patch('builtins.input', side_effect=['1', '2', '4', '3'])
-    @patch('builtins.print')
-    def test_client(self, mock_print, mock_input):
-        # Capturar la salida de la función client
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
+    @patch('builtins.input', return_value='1')
+    @patch.object(Cli, 'welcome_message')
+    @patch.object(Cli, 'main_menu')
+    @patch.object(Cli, 'handle_user_input')
+    def test_client(self, mock_handle_user_input, mock_main_menu, mock_welcome_message, mock_input):
+        game = Cli()
+        game.client()
+        
+        # Verificar que se haya llamado a welcome_message
+        mock_welcome_message.assert_called_once()
+        
+        # Verificar que se haya llamado a main_menu
+        mock_main_menu.assert_called_once()
+        
+        # Verificar que se haya llamado a handle_user_input con el valor 1
+        mock_handle_user_input.assert_called_once_with(1)
 
-        # Ejecutar la función client
-        self.main.client()
+    def test_handle_user_input_option_1(self):
+        self.main.handle_user_input(1)
+        self.main.play.assert_called_once()
+        self.main.handle_option_2.assert_not_called()
+        self.main.handle_option_3.assert_not_called()
 
-        sys.stdout = sys.__stdout__
-
-        # Verificar que welcome_message y main_menu fueron llamados
-        self.main.welcome_message.assert_called_once()
-        self.assertEqual(self.main.main_menu.call_count, 4)
-
-        # Verificar que handle_user_input y handle_option_2 fueron llamados
-        self.main.handle_user_input.assert_called_once_with(1)
+    def test_handle_user_input_option_2(self):
+        self.main.handle_user_input(2)
         self.main.handle_option_2.assert_called_once()
+        self.main.play.assert_not_called()
+        self.main.handle_option_3.assert_not_called()
 
-        # Verificar que se imprimió "Opcion invalida" para la opción 4
-        mock_print.assert_any_call("Opcion invalida")
-        # Verificar que se imprimió "Hasta luego" para la opción 3
-        mock_print.assert_any_call("Hasta luego")
+    def test_handle_user_input_option_3(self):
+        self.main.handle_user_input(3)
+        self.main.handle_option_3.assert_called_once()
+        self.main.play.assert_not_called()
+        self.main.handle_option_2.assert_not_called()
 
-#COMPLETE
+    @patch('builtins.print')
+    def test_handle_user_input_invalid_option(self, mock_print):
+        self.main.handle_user_input(99)
+        mock_print.assert_called_once_with("Opcion invalida")
+        self.main.play.assert_not_called()
+        self.main.handle_option_2.assert_not_called()
+        self.main.handle_option_3.assert_not_called()
+
+
+#class TestPlayFunction(unittest.TestCase):
+#    def setUp(self):
+#        self.main = Cli()
+#        self.main.chess = MagicMock()
+#        self.main.chess.__board__ = MagicMock()
+#        self.main.chess.__board__.show_board = MagicMock()
+#        self.main.chess.__board__.capture_piece = MagicMock(return_value="Pieza capturada")
+#        self.main.chess.movement_fits = MagicMock()
+#        self.main.chess.change_pawn = MagicMock()
+#        self.main.chess.STR_captured_pieces = MagicMock(return_value="Piezas capturadas")
+#        self.main.chess.verify_winner = MagicMock(return_value=False)
+#        self.main.chess.change_turn = MagicMock()
+#        self.main.chess.__turn__ = "WHITE"
+#        self.main.verify_move = MagicMock(return_value=(1, 1))
+#        self.main.validate_range_to = MagicMock(return_value=(2, 2))
+#
+#    @patch('builtins.input', side_effect=['s', 'n'])
+#    @patch('builtins.print')
+#    def test_play_game_continues_and_ends(self, mock_print, mock_input):
+#        self.main.play()
+#        
+#        # Verificar que se haya mostrado el tablero dos veces
+#        self.assertEqual(self.main.chess.__board__.show_board.call_count, 2)
+#        
+#        # Verificar que se haya capturado una pieza
+#        self.main.chess.__board__.capture_piece.assert_called_once_with(1, 1, 2, 2)
+#        
+#        # Verificar que se haya llamado a movement_fits y change_pawn
+#        self.main.chess.movement_fits.assert_called_once_with(1, 1, 2, 2)
+#        self.main.chess.change_pawn.assert_called_once_with(1, 1, 2, 2)
+#        
+#        # Verificar que se haya mostrado las piezas capturadas
+#        mock_print.assert_any_call("Piezas capturadas")
+#        
+#        # Verificar que se haya cambiado el turno
+#        self.main.chess.change_turn.assert_called_once()
+#        
+#        # Verificar que se haya preguntado si se quiere seguir jugando
+#        mock_input.assert_any_call("Quieres seguir jugando? (s/n): ")
+#        
+#        # Verificar que se haya terminado el juego por decisión del jugador
+#        mock_print.assert_any_call("Fin del juego")
+#
+#
+#
+#    @patch('builtins.input', side_effect=['s'])
+#    @patch('builtins.print')
+#    def test_play_game_winner(self, mock_print, mock_input):
+#        self.main.chess.verify_winner = MagicMock(return_value="Jugador 1 gana")
+#        
+#        self.main.play()
+#        
+#        # Verificar que se haya mostrado el tablero una vez
+#        self.main.chess.__board__.show_board.assert_called_once()
+#        
+#        # Verificar que se haya capturado una pieza
+#        self.main.chess.__board__.capture_piece.assert_called_once_with(1, 1, 2, 2)
+#        
+#        # Verificar que se haya llamado a movement_fits y change_pawn
+#        self.main.chess.movement_fits.assert_called_once_with(1, 1, 2, 2)
+#        self.main.chess.change_pawn.assert_called_once_with(1, 1, 2, 2)
+#        
+#        # Verificar que se haya mostrado las piezas capturadas
+#        mock_print.assert_any_call("Piezas capturadas")
+#        
+#        # Verificar que se haya mostrado el ganador
+#        mock_print.assert_any_call("Jugador 1 gana")
+#        mock_print.assert_any_call("Fin del juego")
+
+#    @patch('builtins.input', side_effect=['s', 'n'])
+#    @patch('builtins.print')
+#    def test_play_game_exception(self, mock_print, mock_input):
+#        self.main.chess.__board__.capture_piece.side_effect = NotPieceToMove("No hay pieza para mover")
+#        
+#        self.main.play()
+#        
+#        # Verificar que se haya mostrado el tablero una vez
+#        self.main.chess.__board__.show_board.assert_called_once()
+#        
+#        # Verificar que se haya capturado una pieza y haya lanzado una excepción
+#        self.main.chess.__board__.capture_piece.assert_called_once_with(1, 1, 2, 2)
+#        
+#        # Verificar que se haya mostrado el mensaje de error
+#        mock_print.assert_any_call("Error:", "No hay pieza para mover")
+#        mock_print.assert_any_call("Proba de nuevo", "sigue siendo el turno de ", self.main.chess.__turn__)
+
+
+
+

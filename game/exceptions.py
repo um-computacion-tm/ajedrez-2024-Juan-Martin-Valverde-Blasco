@@ -13,5 +13,7 @@ class NotPieceToReplace(Exception):
 class IsNotYourColor(Exception) :
     pass
 
+class GameIsOver(Exception):
+    pass
 
 #COMPLETE
