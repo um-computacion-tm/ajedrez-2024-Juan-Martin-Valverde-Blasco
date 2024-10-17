@@ -65,8 +65,8 @@ class Cli():
                     print("Try again", "It's still ", self.chess.__turn__, "turn")
 
                 except Exception as e:
-                    print("error", e)
-                    return "error"
+                    print("Error", e)
+                    return "Error"
 
             print("Game ended")
 
