@@ -1,6 +1,6 @@
 from game.chess import Chess
 from game.piece import Piece
-from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace
+from game.exceptions import InvalidPosition, NotPieceToMove, NotPermitedMove, NotPieceToReplace, GameIsOver
 
 class Cli():
  
@@ -26,35 +26,38 @@ class Cli():
                 
     #Conjuncion de todas las funciones para poder jugar
     def play(self):
-        a = "s"        
+        a = "s"
         while a == "s":
-            self.chess.__board__.show_board() 
+            self.chess.__board__.show_board()
             try:
                 from_row, from_col = self.verify_move(self.chess)
                 to_row, to_col = self.validate_range_to()
                 print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
-                self.chess.movement_fits(from_row, from_col,to_row,to_col) 
+                self.chess.movement_fits(from_row, from_col, to_row, to_col)
                 self.chess.change_pawn(from_row, from_col, to_row, to_col)
-                self.chess.__board__.show_board() 
+                self.chess.__board__.show_board()
                 print(self.chess.STR_captured_pieces())
                 if self.chess.verify_winner() is not False:
                     print(self.chess.verify_winner())
-                    a = "n"
-                    break
+                    raise GameIsOver("Fin del juego")  # Juego terminado sin errores
                 a = input("Quieres seguir jugando? (s/n): ")
                 if a == "s":
                     self.chess.change_turn()
                     print("Es turno de: ", self.chess.__turn__)
-            
+                else:
+                    raise GameIsOver("Fin del juego")  # Juego terminado por decisión del jugador
+
             except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
                 print("Error:", e)
                 print("Proba de nuevo", "sigue siendo el turno de ", self.chess.__turn__)
 
+            except GameIsOver as e:
+                print(e)
+                break
+
             except Exception as e:
-                print("error", e)
-                return "error"
-            
-        print("Fin del juego")
+                print("Error", e)
+                return "Error"
 
 
     #Valida que la posicion a la que te vas a mover este dentro del tablero
@@ -103,13 +106,14 @@ class Cli():
         
     
     def handle_user_input(self, option):
-        
         if option == 1:
             self.play()
+        elif option == 2:
+            self.handle_option_2()
         elif option == 3:
             self.handle_option_3()
         else:
-            self.handle_option_2()
+            print("Opcion invalida")
                                     
                                     
     def handle_option_2(self):
@@ -127,21 +131,10 @@ class Cli():
     
     def client(self):
         self.welcome_message()
-        while True:
-            self.main_menu()
-            option = int(input("Ingresa una opcion: "))
+        self.main_menu()
+        option = int(input("Ingresa una opcion: "))
+        self.handle_user_input(option)
 
-            if option == 1:
-                self.handle_user_input(option)
-            elif option == 2:
-                self.handle_option_2()
-            elif option == 3:
-                print("Hasta luego")
-                break
-            else:
-                print("Opcion invalida")
-                continue
-            
             
     def handle_pawn_moves_and_attacks(self):
         print(
