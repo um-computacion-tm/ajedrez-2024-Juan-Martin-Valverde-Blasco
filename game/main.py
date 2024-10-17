@@ -26,62 +26,54 @@ class Cli():
                 
     #Conjuncion de todas las funciones para poder jugar
     def client(self):
-            self.welcome_message()
-            self.main_menu1()
-
+        self.welcome_message()
+        self.main_menu1()
+    
+        while True:
             a = input("Que queres hacer?: ")
             if a == "1":            
                 while a == "1":
                     self.chess.__board__.show_board() 
                     try:
                         from_row, from_col = self.verify_move(self.chess)
-
                         to_row, to_col = self.validate_range()
-
+    
                         print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
-
-                        self.chess.movement_fits(from_row, from_col,to_row,to_col) 
-
+                        self.chess.movement_fits(from_row, from_col, to_row, to_col) 
                         self.chess.change_pawn(from_row, from_col, to_row, to_col)
-
                         self.chess.__board__.show_board() 
-
                         print(self.chess.STR_captured_pieces())
-
+    
                         if self.chess.verify_winner() is not False:
                             print(self.chess.verify_winner())
                             a = "3"
                             break
+                        
                         self.main_menu2()
                         a = input("Que quieres hacer ahora?: ")
                         if a == "1":
                             self.chess.change_turn()
                             print("Es turno de: ", self.chess.__turn__)
                         elif a == "2":
-                            self.handle_option_2()
-                            self.main_menu2()
+                            self.show_tutorial()
                         elif a == "3":
                             break
-                        
-
                     except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
                         print("Error:", e)
                         print("Try again", "It's still ", self.chess.__turn__, "turn")
-
                     except Exception as e:
                         print("Error", e)
                         return "Error"
-
+    
                 print("Game ended")
             elif a == "2":
-                self.handle_option_2()
-                self.main_menu1()
+                self.show_tutorial()
             elif a == "3":
                 print("Game ended")
+                break
             else:
                 print("Invalid option")
-                self.client()
-
+    
 
     #Valida que la posicion a la que te vas a mover este dentro del tablero
     def validate_range(self):
@@ -135,16 +127,16 @@ class Cli():
         print("-----------------------------------------------------------------------------------------------")
         
                                                    
-    def handle_option_2(self):
-        self.handle_pawn_moves_and_attacks()
-        self.handle_rook_moves_and_attacks()
-        self.handle_knight_moves_and_attacks()
-        self.handle_bishop_moves_and_attacks()
-        self.handle_queen_moves_and_attacks()
-        self.handle_king_moves_and_attacks()
+    def show_tutorial(self):
+        self.tutorial_pawn_moves_and_attacks()
+        self.tutorial_rook_moves_and_attacks()
+        self.tutorial_knight_moves_and_attacks()
+        self.tutorial_bishop_moves_and_attacks()
+        self.tutorial_queen_moves_and_attacks()
+        self.tutorial_king_moves_and_attacks()
 
             
-    def handle_pawn_moves_and_attacks(self):
+    def tutorial_pawn_moves_and_attacks(self):
         print(
             "El movimiento y ataque del peón es el siguiente:\n"
             "El peón siempre se mueve un solo lugar hacia adelante.\n"
@@ -166,7 +158,7 @@ class Cli():
 
         
 
-    def handle_rook_moves_and_attacks(self):
+    def tutorial_rook_moves_and_attacks(self):
         print(
             "El movimiento y ataque de la torre es el siguiente:\n"
             "La torre se mueve en línea recta, horizontal o vertical.\n"
@@ -187,7 +179,7 @@ class Cli():
             "\n-----------------------------------------\n")
 
 
-    def handle_knight_moves_and_attacks(self):
+    def tutorial_knight_moves_and_attacks(self):
         print(
             "El movimiento y ataque del caballo es el siguiente:\n"
             "El caballo se mueve en forma de 'L': dos casillas en una dirección y luego una en ángulo recto.\n"
@@ -207,7 +199,7 @@ class Cli():
             "\n-----------------------------------------\n")
 
 
-    def handle_bishop_moves_and_attacks(self):
+    def tutorial_bishop_moves_and_attacks(self):
         print(
             "El movimiento y ataque del alfil es el siguiente:\n"
             "El alfil se mueve diagonalmente sin limitación de distancia.\n"
@@ -227,7 +219,7 @@ class Cli():
             "\n-----------------------------------------\n")
 
 
-    def handle_queen_moves_and_attacks(self):
+    def tutorial_queen_moves_and_attacks(self):
         print(
             "El movimiento y ataque de la reina es el siguiente:\n"
             "La reina se mueve en todas las direcciones: horizontal, vertical y diagonal.\n"
@@ -247,7 +239,7 @@ class Cli():
             "\n-----------------------------------------\n")
 
 
-    def handle_king_moves_and_attacks(self):
+    def tutorial_king_moves_and_attacks(self):
         print(
             "El movimiento y ataque del rey es el siguiente:\n"
             "El rey se mueve una casilla en cualquier dirección: horizontal, vertical o diagonal.\n"
@@ -264,7 +256,10 @@ class Cli():
             "4║     ║     ║     ║     ║     ║\n"
             "  ═════════════════════════════\n"
             "  X marca las posibles casillas de ataque y movimiento."
-            "\n-----------------------------------------\n")
+            "\n-----------------------------------------\n"
+            "\n---------------Mira Arriba---------------\n"
+            "\n-----------------------------------------\n"
+            )
 
 
             
