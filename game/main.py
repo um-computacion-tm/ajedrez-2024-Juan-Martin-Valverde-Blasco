@@ -28,7 +28,7 @@ class Cli():
     def client(self):
             self.welcome_message()
             self.main_menu1()
-            
+
             a = input("Que queres hacer?: ")
             if a == "1":            
                 while a == "1":
@@ -59,6 +59,7 @@ class Cli():
                             print("Es turno de: ", self.chess.__turn__)
                         elif a == "2":
                             self.handle_option_2()
+                            self.main_menu2()
                         elif a == "3":
                             break
                         
@@ -74,6 +75,7 @@ class Cli():
                 print("Game ended")
             elif a == "2":
                 self.handle_option_2()
+                self.main_menu1()
             elif a == "3":
                 print("Game ended")
             else:
