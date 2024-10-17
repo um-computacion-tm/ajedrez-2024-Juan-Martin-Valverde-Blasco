@@ -25,31 +25,39 @@ class Cli():
                 
                 
     #Conjuncion de todas las funciones para poder jugar
-    def play(self):
-        a = "s"
-        while a == "s":
-            self.chess.__board__.show_board()
+    def client(self):
+        self.welcome_message()
+        a = "1"
+
+        while a == "1":
+            self.chess.__board__.show_board() 
             try:
                 from_row, from_col = self.verify_move(self.chess)
                 to_row, to_col = self.validate_range_to()
-                print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
-                self.chess.movement_fits(from_row, from_col, to_row, to_col)
-                self.chess.change_pawn(from_row, from_col, to_row, to_col)
-                self.chess.__board__.show_board()
-                print(self.chess.STR_captured_pieces())
+
+                print(self.chess.__board__.eat_piece(from_row, from_col, to_row, to_col))
+                self.chess.move(from_row, from_col, to_row, to_col) 
+                self.chess.change_pawn_for_other(from_row, from_col, to_row, to_col)
+                self.chess.__board__.show_board() 
+                print(self.chess.show_eaten_pieces())
+
                 if self.chess.verify_winner() is not False:
                     print(self.chess.verify_winner())
-                    raise GameIsOver("Fin del juego")  # Juego terminado sin errores
-                a = input("Quieres seguir jugando? (s/n): ")
-                if a == "s":
+                    raise GameIsOver("El juego termino con un ganador")
+
+                self.main_menu()
+                a = input("Que quieres hacer ahora?: ")
+                if a == "1":
                     self.chess.change_turn()
                     print("Es turno de: ", self.chess.__turn__)
-                else:
-                    raise GameIsOver("Fin del juego")  # Juego terminado por decisión del jugador
+                elif a == "2":
+                    self.handle_option_2()
+                elif a == "3":
+                    raise GameIsOver("Game ended by player decision")
 
             except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
                 print("Error:", e)
-                print("Proba de nuevo", "sigue siendo el turno de ", self.chess.__turn__)
+                print("Try again", "It's still ", self.chess.__turn__, "turn")
 
             except GameIsOver as e:
                 print(e)
@@ -58,7 +66,6 @@ class Cli():
             except Exception as e:
                 print("Error", e)
                 return "Error"
-
 
     #Valida que la posicion a la que te vas a mover este dentro del tablero
     def validate_range_to(self):
@@ -104,18 +111,7 @@ class Cli():
         print("Presiona 3 para salir")
         print("-----------------------------------------------------------------------------------------------")
         
-    
-    def handle_user_input(self, option):
-        if option == 1:
-            self.play()
-        elif option == 2:
-            self.handle_option_2()
-        elif option == 3:
-            self.handle_option_3()
-        else:
-            print("Opcion invalida")
-                                    
-                                    
+                                                   
     def handle_option_2(self):
         self.handle_pawn_moves_and_attacks()
         self.handle_rook_moves_and_attacks()
@@ -123,17 +119,6 @@ class Cli():
         self.handle_bishop_moves_and_attacks()
         self.handle_queen_moves_and_attacks()
         self.handle_king_moves_and_attacks()
-
-
-    def handle_option_3(self):
-        print("Hasta luego")
-        exit()
-    
-    def client(self):
-        self.welcome_message()
-        self.main_menu()
-        option = int(input("Ingresa una opcion: "))
-        self.handle_user_input(option)
 
             
     def handle_pawn_moves_and_attacks(self):
