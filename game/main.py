@@ -26,46 +26,51 @@ class Cli():
                 
     #Conjuncion de todas las funciones para poder jugar
     def client(self):
-        self.welcome_message()
-        a = "1"
 
-        while a == "1":
-            self.chess.__board__.show_board() 
-            try:
-                from_row, from_col = self.verify_move(self.chess)
-                to_row, to_col = self.validate_range_to()
+            a = "1"
 
-                print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
-                self.chess.movement_fits(from_row, from_col, to_row, to_col) 
-                self.chess.change_pawn(from_row, from_col, to_row, to_col)
+            while a == "1":
                 self.chess.__board__.show_board() 
-                print(self.chess.STR_captured_pieces())
+                try:
+                    from_row, from_col = self.verify_move(self.chess)
 
-                if self.chess.verify_winner() is not False:
-                    print(self.chess.verify_winner())
-                    raise GameIsOver("El juego termino con un ganador")
+                    to_row, to_col = self.validate_range_to()
 
-                self.main_menu()
-                a = input("Que quieres hacer ahora?: ")
-                if a == "1":
-                    self.chess.change_turn()
-                    print("Es turno de: ", self.chess.__turn__)
-                elif a == "2":
-                    self.handle_option_2()
-                elif a == "3":
-                    raise GameIsOver("Game ended by player decision")
+                    print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
 
-            except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
-                print("Error:", e)
-                print("Try again", "It's still ", self.chess.__turn__, "turn")
+                    self.chess.movement_fits(from_row, from_col,to_row,to_col) 
 
-            except GameIsOver as e:
-                print(e)
-                break
+                    self.chess.change_pawn(from_row, from_col, to_row, to_col)
 
-            except Exception as e:
-                print("Error", e)
-                return "Error"
+                    self.chess.__board__.show_board() 
+
+                    print(self.chess.STR_captured_pieces())
+
+                    if self.chess.verify_winner() is not False:
+                        print(self.chess.verify_winner())
+                        a = "3"
+                        break
+                    self.main_menu()
+                    a = input("Que quieres hacer ahora?: ")
+                    if a == "1":
+                        self.chess.change_turn()
+                        print("Es turno de: ", self.chess.__turn__)
+                    elif a == "2":
+                        self.handle_option_2()
+                    elif a == "3":
+                        break
+
+                except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
+                    print("Error:", e)
+                    print("Try again", "It's still ", self.chess.__turn__, "turn")
+
+                except Exception as e:
+                    print("error", e)
+                    return "error"
+
+            print("Game ended")
+
+
 
     #Valida que la posicion a la que te vas a mover este dentro del tablero
     def validate_range_to(self):
