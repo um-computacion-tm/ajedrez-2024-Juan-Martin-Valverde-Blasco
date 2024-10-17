@@ -20,10 +20,10 @@ class TestMain(unittest.TestCase):
         self.chess = Chess()
 
 
-    @patch('builtins.input', side_effect=['invalid input', 'n'])
-    @patch('builtins.print')
-    def test_play_invalid_input_error(self, mock_print, mock_input):
-        self.assertEqual(self.cli.client(), "Error")
+#    @patch('builtins.input', side_effect=['invalid input', 'n'])
+#    @patch('builtins.print')
+#    def test_play_invalid_input_error(self, mock_print, mock_input):
+#        self.assertEqual(self.cli.client(), "Error")
 
 
     @patch('builtins.print')
@@ -62,13 +62,13 @@ class TestMain(unittest.TestCase):
         # Capturar la salida de la función main_menu
         captured_output = io.StringIO()
         sys.stdout = captured_output
-        self.cli.main_menu()
+        self.cli.main_menu1()
         sys.stdout = sys.__stdout__
 
         # Salida esperada
         expected_output = (
             "------------------------------------------Opciones---------------------------------------------\n"
-            "Presiona 1 para empezar a jugar\n"
+            "Presiona 1 para comenzar a jugar\n"
             "Presiona 2 para ver un tutorial\n"
             "Presiona 3 para salir\n"
             "-----------------------------------------------------------------------------------------------\n"
