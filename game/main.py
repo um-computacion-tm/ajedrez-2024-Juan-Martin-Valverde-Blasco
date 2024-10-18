@@ -82,7 +82,7 @@ class Cli():
                 print("Es turno de: ", self.chess.__turn__)
                 return a
             elif a == "2":
-                print("Invalid option")
+                self.show_tutorial()
             elif a == "3":
                 return a
             else:
