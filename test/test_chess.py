@@ -191,4 +191,29 @@ class TestChess(unittest.TestCase):
         result = self.chess.right_color(1, 1)
         self.assertEqual(result, "No podes mover una pieza que no es de tu color")
 
+    def test_verify_winner_returns_false(self):
+        # Mockear el método king_captured para que devuelva False para ambos colores
+        self.chess.king_captured = lambda color: False
+
+        # Llamar a verify_winner y verificar que devuelve False
+        result = self.chess.verify_winner()
+        self.assertFalse(result)
+
+        self.chess.__board__ = MockBoard()
+        self.chess.__board__.get_piece = lambda row, col: MockPiece("PAWN", "WHITE") if row == 0 else MockPiece("PAWN", "BLACK")
+        self.chess.__board__.pieces_from_white_piece = []
+        self.chess.__board__.pieces_from_black_piece = []
+
+
+
+class MockBoard:
+    def get_piece(self, row, col):
+        return None
+
+class MockPiece:
+    def __init__(self, piece_type, color):
+        self.__type__ = piece_type
+        self.__color__ = color
+
+
 #COMPLETE

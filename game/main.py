@@ -37,10 +37,10 @@ class Cli():
                 self.show_tutorial()
                 self.main_menu1()
             elif a == "3":
-                print("Game ended")
+                print("Fin del juego")
                 break
             else:
-                print("Invalid option")
+                print("Opcion invalida")
       
     def play_game(self):
         while True:
@@ -61,12 +61,12 @@ class Cli():
                     break
             except (NotPieceToMove, NotPermitedMove, InvalidPosition, NotPieceToReplace) as e:
                 print("Error:", e)
-                print("Try again", "It's still ", self.chess.__turn__, "turn")
+                print("Trata de nuevo", "Sigue siendo el turno de ", self.chess.__turn__)
             except Exception as e:
                 print("Error", e)
                 return "Error"
 
-        print("Game ended")
+        print("Fin del juego")
 
     def execute_move(self, from_row, from_col, to_row, to_col):
         print(self.chess.__board__.capture_piece(from_row, from_col, to_row, to_col))
@@ -88,7 +88,8 @@ class Cli():
             elif a == "3":
                 return a
             else:
-                print("Invalid option")
+                print("Opcion invalida")
+        
 
 
     #Valida que la posicion a la que te vas a mover este dentro del tablero
@@ -101,7 +102,7 @@ class Cli():
 
                 return to_row, to_col
             except ValueError:
-                print("Invalid input. Please enter a number.")
+                print("Flasheaste, mete un numero.")
             except InvalidPosition as e:
                 print(e)
 
@@ -122,9 +123,9 @@ class Cli():
 
     def welcome_message(self):
         print("--------------------------------------------------------------------------------------------")
-        print("-------------------------Welcome to Ajedrez By Juan Martin Valverde-------------------------")
-        print("----------------------------Tecnical consultor Copilot and GPT-4----------------------------")
-        print("-------------------------Proyect For ComputacionI Ing informaticaUM-------------------------")
+        print("----------------------Bienvenido a mi Ajedrez por Juan Martin Valverde----------------------")
+        print("----------------------------Consultor Tecnico: Copilot and GPT-4----------------------------")
+        print("------------------------Proyecto Para ComputacionI Ing informaticaUM------------------------")
         print("--------------------------------------------------------------------------------------------")
 
 
