@@ -344,5 +344,6 @@ ________________________________________________________________________________
 - Fixing problem whit excecution
 _____________________________________________________________________________________________________________________________________________________
                                                                     ┌───────────────────────┐
-                                                                    │ 17-Octubre 2024 : │ 
+                                                                    │ 17-Octubre 2024 21:45 │ 
                                                                     └───────────────────────┘
+- Play function was working like a celiac stomach procesing bread, i spend almost all this day fixing it and a the same time upgrading it it work like a parkranger stomach now
