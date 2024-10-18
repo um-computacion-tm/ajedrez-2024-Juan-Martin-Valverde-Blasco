@@ -35,6 +35,7 @@ class Cli():
                 self.play_game()
             elif a == "2":
                 self.show_tutorial()
+                self.main_menu1()
             elif a == "3":
                 print("Game ended")
                 break
@@ -83,6 +84,7 @@ class Cli():
                 return a
             elif a == "2":
                 self.show_tutorial()
+                self.main_menu2()
             elif a == "3":
                 return a
             else:
@@ -137,7 +139,7 @@ class Cli():
     def main_menu2(self): 
         print("------------------------------------------Opciones---------------------------------------------")
         print("Presiona 1 para continuar jugando")
-        print("Boton 2 no tiene funcionalidad")
+        print("Presiona 2 para ver un tutorial")
         print("Presiona 3 dos veces(por separado) para terminar para salir")
         print("-----------------------------------------------------------------------------------------------")
         
